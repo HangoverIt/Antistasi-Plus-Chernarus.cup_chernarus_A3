@@ -81,12 +81,12 @@ switch (_convoyType) do
         _typeVehObj = if (_sideX == Occupants) then {vehNATOAmmoTruck} else {vehCSATAmmoTruck};
     };
     case "Fuel":
-	{
-		_textX = format ["A convoy from %1 is about to depart at %2. It will provide fuel to %3. Try to intercept it. Steal or destroy that truck before it reaches it's destination.",_nameOrigin,_displayTime,_nameDest];
-		_taskTitle = "Fuel Convoy";
-		_taskIcon = "refuel";
-		_typeVehObj = if (_sideX == Occupants) then {vehNATOFuelTruck} else {vehCSATFuelTruck};
-	};
+    {
+      _textX = format ["A convoy from %1 is about to depart at %2. It will provide fuel to %3. Try to intercept it. Steal or destroy that truck before it reaches it's destination.",_nameOrigin,_displayTime,_nameDest];
+      _taskTitle = "Fuel Convoy";
+      _taskIcon = "refuel";
+      _typeVehObj = if (_sideX == Occupants) then {vehNATOFuelTruck} else {vehCSATFuelTruck};
+    };
     case "Armor":
     {
         _textX = format ["A convoy from %1 is about to depart at %2. It will reinforce %3 with armored vehicles. Try to intercept it. Steal or destroy that thing before it reaches it's destination.",_nameOrigin,_displayTime,_nameDest];
@@ -262,7 +262,7 @@ if (_convoyType == "Reinforcements") then
     _soldiers append (units _groupEsc);
     _reinforcementsX append (units _groupEsc);
 };
-if ((_convoyType == "Money") or (_convoyType == "Supplies")) then
+if ((_convoyType == "Money") or (_convoyType == "Supplies") or (_convoyType == "Fuel") then
 {
     reportedVehs pushBack _vehObj;
     publicVariable "reportedVehs";
@@ -470,6 +470,38 @@ if (_convoyType == "Money") then
         if (_vehObj distance _posHQ < 50) then
         {
             [true, false, 1200, 5*_bonus, 25, 120, "money"] call _fnc_applyResults;
+            [0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
+            {if (_x distance _vehObj < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
+        };
+    };
+    reportedVehs = reportedVehs - [_vehObj];
+    publicVariable "reportedVehs";
+};
+
+if (_convoyType == "Fuel") then
+{
+    waitUntil {sleep 1; (time > _timeout) or (_vehObj distance _posDest < _arrivalDist) or (not alive _vehObj) or (side group driver _vehObj != _sideX)};
+    if ((time > _timeout) or (_vehObj distance _posDest < _arrivalDist) or (not alive _vehObj)) then
+    {
+        if ((time > _timeout) or (_vehObj distance _posDest < _arrivalDist)) then
+        {
+            [false, true, -1200, -10*_bonus, -5, 60, "fuel"] call _fnc_applyResults;
+        }
+        else
+        {
+            [false, false, 1200, 0, -5, 60, "fuel"] call _fnc_applyResults;
+        };
+    }
+    else
+    {
+        waitUntil {sleep 2; (_vehObj distance _posHQ < 50) or (not alive _vehObj) or (time > _timeout)};
+        if ((not alive _vehObj) or (time > _timeout)) then
+        {
+            [false, false, 1200, 0, -5, 60, "fuel"] call _fnc_applyResults;
+        };
+        if (_vehObj distance _posHQ < 50) then
+        {
+            [true, false, 1200, 5*_bonus, 25, 120, "fuel"] call _fnc_applyResults;
             [0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
             {if (_x distance _vehObj < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
         };
