@@ -42,7 +42,8 @@ if (getNumber (_config >> "hasDriver") > 0 && isNull driver _vehicle) then {
 
 private _fnc_addCrewToTurrets = {
 	params ["_config", ["_path", []]];
-	private _turrets = "getNumber (_x >> 'hasGunner') > 0 && getNumber (_x >> 'dontCreateAI') == 0" configClasses (_config >> "Turrets");
+	//private _turrets = "getNumber (_x >> 'hasGunner') > 0 && getNumber (_x >> 'dontCreateAI') == 0" configClasses (_config >> "Turrets");
+  private _turrets = "getNumber (_x >> 'hasGunner') > 0" configClasses (_config >> "Turrets");
 	{
 		private _turretConfig = _x;
 		private _turretPath = _path + [_forEachIndex];
