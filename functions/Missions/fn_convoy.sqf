@@ -502,7 +502,7 @@ if (_convoyType == "Fuel") then
         if (_vehObj distance _posHQ < 50) then
         {
             [true, false, 1200, 5*_bonus, 25, 120, "fuel"] call _fnc_applyResults;
-            [0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
+            //[0,5000*_bonus] remoteExec ["A3A_fnc_resourcesFIA",2];
             {if (_x distance _vehObj < 500) then {[10*_bonus,_x] call A3A_fnc_playerScoreAdd}} forEach (allPlayers - (entities "HeadlessClient_F"));
         };
     };
