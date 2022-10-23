@@ -262,7 +262,7 @@ if (_convoyType == "Reinforcements") then
     _soldiers append (units _groupEsc);
     _reinforcementsX append (units _groupEsc);
 };
-if ((_convoyType == "Money") or (_convoyType == "Supplies") or (_convoyType == "Fuel") then
+if ((_convoyType == "Money") or (_convoyType == "Supplies") or (_convoyType == "Fuel")) then
 {
     reportedVehs pushBack _vehObj;
     publicVariable "reportedVehs";
