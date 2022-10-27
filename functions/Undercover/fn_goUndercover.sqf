@@ -72,6 +72,7 @@ if (player == leader group player) then
             [_x] spawn A3A_fnc_undercoverAI;
         };
     } forEach units group player;
+    if (group petrovsky == group player) then {[] spawn A3A_fnc_petrovskyUndercover};
 };
 
 private _roadblocks = controlsX select {isOnRoad(getMarkerPos _x)};
