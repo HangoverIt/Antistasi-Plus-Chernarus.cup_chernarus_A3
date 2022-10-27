@@ -693,6 +693,7 @@ class A3A
         class canGoUndercover {};
         class goUndercover {};
         class initUndercover {};
+	class petrovskyUndercover {};
     };
 
     class Utility
