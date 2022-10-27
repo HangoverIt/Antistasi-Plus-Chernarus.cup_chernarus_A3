@@ -20,19 +20,26 @@ removeAllItems _unit;
 removeAllAssignedItems _unit;
 removeAllWeapons _unit;
 removeVest _unit;
-_unit forceAddUniform (selectRandom (A3A_faction_civ getVariable "uniforms"));
 removeHeadgear _unit;
 removeGoggles _unit;
+_unit setUnitLoadout (configFile >> "EmptyLoadout");
+if (_unit == petrovsky) then {
+	_unit forceAddUniform "U_C_FormalSuit_01_tshirt_gray_F"; 
+	_unit addHeadgear "H_Hat_grey"; 
+ 	_unit addGoggles "CUP_G_Beard_Shades_Black"; 
+ 	_unit addItem "ItemRadio"; 
+}else{
+	_unit forceAddUniform (selectRandom (A3A_faction_civ getVariable "uniforms"));
+};
 
-while {(captive _LeaderX) and (captive _unit)} do
-	{
+while {(captive _LeaderX) and (captive _unit)} do {
 	sleep 1;
 	if ((vehicle _unit != _unit) and (not((typeOf vehicle _unit) in undercoverVehicles))) exitWith {};
 	//_base = [_airportsX,player] call BIS_fnc_nearestPosition;
 	//_size = [_base] call A3A_fnc_sizeMarker;
 	//if ((_unit inArea _base) and (not(sidesX getVariable [_base,sideUnknown] == teamPlayer))) exitWith {[_unit,false] remoteExec ["setCaptive"]};
 	if ((primaryWeapon _unit != "") or (secondaryWeapon _unit != "") or (handgunWeapon _unit != "")) exitWith {};
-	};
+};
 
 //_unit removeAllEventHandlers "FIRED";
 if (!captive _unit) then {_unit groupChat "Shit, they have spotted me!"} else {[_unit,false] remoteExec ["setCaptive",0,_unit]; _unit setCaptive false};
