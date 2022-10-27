@@ -43,6 +43,8 @@ petrovsky enableAI "AUTOTARGET";
 [respawnTeamPlayer, 0, teamPlayer] call A3A_fnc_setMarkerAlphaForSide;
 [respawnTeamPlayer, 0, civilian] call A3A_fnc_setMarkerAlphaForSide;
 
+if (captive player) then {[] spawn A3A_fnc_petrovskyUndercover};
+
 private _garrison = garrison getVariable ["Synd_HQ", []];
 private _posHQ = getMarkerPos "Synd_HQ";
 
