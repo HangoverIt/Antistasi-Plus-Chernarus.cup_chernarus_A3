@@ -62,28 +62,27 @@ if (_crewManIndex != -1) then {
     _crewMan lookAt (_crewMan getRelPos [200, _dirveh]);
 };
 
-		if (sunOrMoon < 1) then {
-	_pos = [_positionX, 8, _dirveh + 220] call BIS_Fnc_relPos;
-	private _lamp = createVehicle ["Land_LampStreet_small_F", _pos, [], 0, "CAN_COLLIDE"];
+private _lamps = [];
+if (sunOrMoon < 1) then {
+	_veh setPilotLight true;
+
+	_pos = _positionX getPos [8, _dirveh + 45] ;
+	_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
 	_lamp setDir _dirveh;
-	};
-
-	_pos = [_positionX, -3.7, _dirveh + 270] call BIS_Fnc_relPos;
-	_barrier = createVehicle ["Land_BarGate_F", _positionX, [], 0, "CAN_COLLIDE"];
-	_barrier setDir _dirveh;
-	_barrier setPos _pos;
-	_barrier allowDamage false;
-
-	_nul = [_barrier] SPAWN {while {true} do { 
-		private _vehList = [];    
- 		waitUntil {sleep 0.1; _vehList = (getposATL (_this select 0)) nearEntities [["Car", "Motorcycle", "Tank", "TrackedAPC", "WheeledAPC"], 60]; 
-		count (_vehList select {(side _x isEqualTo independent or side _x isEqualTo civilian)}) > 1};
-		(_this select 0) animate ["Door_1_rot", 1]; 
-
-		waitUntil {sleep 1; count ((getposATL (_this select 0)) nearEntities [["Car", "Motorcycle", "Tank", "TrackedAPC", "WheeledAPC"], 60] select {(side _x isEqualTo independent or side _x isEqualTo civilian)}) == 1};    
-		(_this select 0) animate ["Door_1_rot", 0];     
-		};
-	};
+	_lamps pushBack _lamp ;
+	_pos = _positionX getPos [8, _dirveh + 135] ;
+	_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+	_lamp setDir _dirveh;
+	_lamps pushBack _lamp ;
+	_pos = _positionX getPos [8, _dirveh + 225] ;
+	_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+	_lamp setDir _dirveh;
+	_lamps pushBack _lamp ;
+	_pos = _positionX getPos [8, _dirveh + 315] ;
+	_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+	_lamp setDir _dirveh;
+	_lamps pushBack _lamp ;
+};
 
 waitUntil {
 	sleep 1; 
@@ -106,11 +105,7 @@ private _outpLoadoutDespawn = [];
 { if (alive _x) then { _loadoutEnd = getUnitLoadout _x; _outpLoadoutDespawn append [_loadoutEnd]; deleteVehicle _x }; } forEach units _groupX;
 SDKgarrLoadouts setVariable [_markerX + "_loadouts", _outpLoadoutDespawn, true];
 
-deleteVehicle _barricade;
-deleteVehicle _lamp;
-deleteVehicle _barrier;
-
-
+{deleteVehicle _x} foreach _lamps;
 
 if (!isNull _veh) then { 
     deleteVehicle _veh;
