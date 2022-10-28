@@ -39,7 +39,7 @@ if (_isControl) then {
 			if ((random 10 > (tierWar + difficultyCoef)) and (!([_markerX] call A3A_fnc_isFrontline))) then
 				{
 				_isFIA = true;
-				}
+				};
 			};
 		};
 
@@ -210,11 +210,25 @@ if (_isControl) then {
 			};
 		};
 		
-			if (sunOrMoon < 1) then {
-		_pos = [_positionX, 8, _dirveh + 220] call BIS_Fnc_relPos;
-		private _lamp = createVehicle ["Land_LampStreet_small_F", _pos, [], 0, "CAN_COLLIDE"];
-		_lamp setDir _dirveh;
-		_vehiclesX pushBack _lamp;
+		if (sunOrMoon < 1) then {
+			_veh setPilotLight true;
+			
+			_pos = _positionX getPos [8, _dirveh + 45] ;
+			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+			_lamp setDir _dirveh;
+			_vehiclesX pushBack _lamp;
+			_pos = _positionX getPos [8, _dirveh + 135] ;
+			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+			_lamp setDir _dirveh;
+			_vehiclesX pushBack _lamp ;
+			_pos = _positionX getPos [8, _dirveh + 225] ;
+			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+			_lamp setDir _dirveh;
+			_vehiclesX pushBack _lamp ;
+			_pos = _positionX getPos [8, _dirveh + 315] ;
+			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+			_lamp setDir _dirveh;
+			_vehiclesX pushBack _lamp ;
 		};
 	}	
 	else {
@@ -250,10 +264,24 @@ if (_isControl) then {
 		};
 	
 		if (sunOrMoon < 1) then {
-		_pos = [_positionX, 8, _dirveh + 220] call BIS_Fnc_relPos;
-		private _lamp = createVehicle ["Land_LampStreet_small_F", _pos, [], 0, "CAN_COLLIDE"];
-		_lamp setDir _dirveh;
-		_vehiclesX pushBack _lamp;
+			_veh setPilotLight true;
+			
+			_pos = _positionX getPos [8, _dirveh + 45] ;
+			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+			_lamp setDir _dirveh;
+			_vehiclesX pushBack _lamp;
+			_pos = _positionX getPos [8, _dirveh + 135] ;
+			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+			_lamp setDir _dirveh;
+			_vehiclesX pushBack _lamp ;
+			_pos = _positionX getPos [8, _dirveh + 225] ;
+			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+			_lamp setDir _dirveh;
+			_vehiclesX pushBack _lamp ;
+			_pos = _positionX getPos [8, _dirveh + 315] ;
+			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+			_lamp setDir _dirveh;
+			_vehiclesX pushBack _lamp ;
 		};
 	};
 }
