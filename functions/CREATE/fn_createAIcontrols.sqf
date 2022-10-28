@@ -22,31 +22,23 @@ _leave = false;
 _isControl = if (isOnRoad _positionX) then {true} else {false};
 
 if (_isControl) then {
-	if (gameMode != 4) then
-		{
-		if (_sideX == Occupants) then
-			{
-			if ((random 10 > (tierWar + difficultyCoef)) and (!([_markerX] call A3A_fnc_isFrontline))) then
-				{
+	if (gameMode != 4) then{
+		if (_sideX == Occupants) then{
+			if ((random 10 > (tierWar + difficultyCoef)) and (!([_markerX] call A3A_fnc_isFrontline))) then{
 				_isFIA = true;
-				};
-			};
-		}
-	else
-		{
-		if (_sideX == Invaders) then
-			{
-			if ((random 10 > (tierWar + difficultyCoef)) and (!([_markerX] call A3A_fnc_isFrontline))) then
-				{
-				_isFIA = true;
-				};
 			};
 		};
+	}else{
+		if (_sideX == Invaders) then{
+			if ((random 10 > (tierWar + difficultyCoef)) and (!([_markerX] call A3A_fnc_isFrontline))) then{
+				_isFIA = true;
+			};
+		};
+	};
 
 	// Attempt to find nearby road with two connected roads
 	_radiusX = 20;
-	while {_radiusX < 100} do
-	{
+	while {_radiusX < 100} do {
 		_roads = _positionX nearRoads _radiusX;
 		_roads = _roads select { count (roadsConnectedTo _x) == 2 };
 		if (count _roads > 0) exitWith {};
@@ -66,172 +58,148 @@ if (_isControl) then {
 	if (!_isFIA) then {
 		
 		if (tierWar > 7 && (random 10) > 5) then {
+			_groupE = grpNull;
+			_pos = [_positionX, 8, _dirveh + 270] call BIS_Fnc_relPos; 
+			_bunker = "Land_BagBunker_Tower_F" createVehicle _pos; 
+			_bunker setDir (_dirveh + 180); 
+			_bunker setVectorUp surfaceNormal position _bunker;
+			_pos = getPosATL _bunker;
+			_typeVehMG = if (_sideX == Occupants) then {selectRandom NATOMG} else {selectRandom CSATMG};
+			_typeVehAT = if (_sideX == Occupants) then {staticATOccupants} else {staticATInvaders};
+			_vehMG = _typeVehMG createVehicle _pos;
+			_vehMG setDir _dirveh;
+			_zOffset = [0, 0, 2.7];
+			_posMG = (_bunker getRelPos [2.5,195]) vectorAdd _zOffset;
+			_vehMG setPos _posMG;
+			_vehiclesX pushBack _vehMG;
 
-		_groupE = grpNull;
-		_pos = [_positionX, 8, _dirveh + 270] call BIS_Fnc_relPos; 
- 		_bunker = "Land_BagBunker_Tower_F" createVehicle _pos; 
-  		_bunker setDir (_dirveh + 180); 
-  		_bunker setVectorUp surfaceNormal position _bunker;
-  		_pos = getPosATL _bunker;
-  		_typeVehMG = if (_sideX == Occupants) then {selectRandom NATOMG} else {selectRandom CSATMG};
-  		_typeVehAT = if (_sideX == Occupants) then {staticATOccupants} else {staticATInvaders};
-  		_vehMG = _typeVehMG createVehicle _pos;
-  		_vehMG setDir _dirveh;
-  		_zOffset = [0, 0, 2.7];
-  		_posMG = (_bunker getRelPos [2.5,195]) vectorAdd _zOffset;
-  		_vehMG setPos _posMG;
-  		_vehiclesX pushBack _vehMG;
+			_vehAT = _typeVehAT createVehicle _pos;
+			_vehAT setDir (_dirveh + 180);
+			_posAT = (_bunker getRelPos [2.4,0]) vectorAdd _zOffset;
+			_vehAT setPos _posAT;
+			_vehiclesX pushBack _vehAT;
 
-		_vehAT = _typeVehAT createVehicle _pos;
-		_vehAT setDir (_dirveh + 180);
-		_posAT = (_bunker getRelPos [2.4,0]) vectorAdd _zOffset;
-		_vehAT setPos _posAT;
-		_vehiclesX pushBack _vehAT;
-
-		_groupE = createGroup _sideX;
-		_typeUnit = if (_sideX == Occupants) then {
-			staticCrewOccupants call SCRT_fnc_unit_selectInfantryTier
-		} else {
-			staticCrewInvaders call SCRT_fnc_unit_selectInfantryTier
-		};
-		_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
-		_unit moveInGunner _vehMG;
-		_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
-		_unit moveInGunner _vehAT;
-
-		_pos = [_positionX, 8, _dirveh + 90] call BIS_Fnc_relPos; 
- 		_bunker = "Land_BagBunker_Tower_F" createVehicle _pos; 
-  		_bunker setDir _dirveh; 
-  		_bunker setVectorUp surfaceNormal position _bunker;
-  		_pos = getPosATL _bunker;
-  		_vehMG = _typeVehMG createVehicle _pos;
-  		_vehMG setDir (_dirveh + 180);
-  		_zOffset = [0, 0, 2.7];
-  		_posMG = (_bunker getRelPos [2.5,195]) vectorAdd _zOffset;
-  		_vehMG setPos _posMG;
-  		_vehiclesX pushBack _vehMG;
-
-		_vehAT = _typeVehAT createVehicle _pos;
-		_vehAT setDir _dirveh;
-		_posAT = (_bunker getRelPos [2.4,0]) vectorAdd _zOffset;
-		_vehAT setPos _posAT;
-		_vehiclesX pushBack _vehAT;
-
-		_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
-		_unit moveInGunner _vehMG;
-		_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
-		_unit moveInGunner _vehAT;
-		sleep 1;
-		
-		_pos = [getPos _bunker, 6, getDir _bunker] call BIS_fnc_relPos;
-		_typeVehX = if (_sideX == Occupants) then {NATOFlag} else {CSATFlag};
-		_veh = createVehicle [_typeVehX, _pos, [],0, "NONE"];
-		_vehiclesX pushBack _veh;
-		_veh setPosATL _pos;
-		_veh setDir _dirVeh;
-		sleep 1;
-
-		{ [_x, _sideX] call A3A_fnc_AIVEHinit } forEach _vehiclesX;
-		private _mid = [_sideX, "SQUAD"] call SCRT_fnc_unit_getGroupSet;
-		_typeGroup = selectRandom _mid;
-		_groupX = [_positionX,_sideX, _typeGroup, true] call A3A_fnc_spawnGroup;
-		if !(isNull _groupX) then {
-				{[_x] join _groupX} forEach units _groupE;
-				deleteGroup _groupE;
-				if (random 10 < 2.5) then {
-				_dog = [_groupX, "Fin_random_F",_positionX,[],0,"FORM"] call A3A_fnc_createUnit;
-				[_dog,_groupX] spawn A3A_fnc_guardDog;
+			_groupE = createGroup _sideX;
+			_typeUnit = if (_sideX == Occupants) then {
+				staticCrewOccupants call SCRT_fnc_unit_selectInfantryTier
+			} else {
+				staticCrewInvaders call SCRT_fnc_unit_selectInfantryTier
 			};
-			_nul = [leader _groupX, _markerX, "SAFE","SPAWNED","NOVEH2","NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
-			// Forced non-spawner as they're very static.
-			{[_x,"",false] call A3A_fnc_NATOinit; _soldiers pushBack _x} forEach units _groupX;
-		};
-		
-	} else {	
-		
-		_groupE = grpNull;
-		_pos = [_positionX, 7, _dirveh + 270] call BIS_Fnc_relPos;
-		_bunker = smallBunker createVehicle _pos;
-		_vehiclesX pushBack _bunker;
-		_bunker setDir (_dirveh + 180);
-		_bunker setVectorUp surfaceNormal position _bunker;
-		_pos = getPosATL _bunker;
-		_typeVehX = if (_sideX == Occupants) then {selectRandom NATOMG} else {selectRandom CSATMG};
-		_veh = _typeVehX createVehicle _positionX;
-		_vehiclesX pushBack _veh;
-		_veh setPosATL _pos;
-		_veh setDir _dirVeh;
+			_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
+			_unit moveInGunner _vehMG;
+			_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
+			_unit moveInGunner _vehAT;
 
-		_groupE = createGroup _sideX;
-		_typeUnit = if (_sideX == Occupants) then {
-			staticCrewOccupants call SCRT_fnc_unit_selectInfantryTier
-		} else {
-			staticCrewInvaders call SCRT_fnc_unit_selectInfantryTier
-		};
-		_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
-		_unit moveInGunner _veh;
-		sleep 1;
-		_pos = [_positionX, 8, _dirveh + 90] call BIS_Fnc_relPos;
-		_bunker = smallBunker createVehicle _pos;
-		_vehiclesX pushBack _bunker;
-		_bunker setDir _dirveh;
-		_bunker setVectorUp surfaceNormal position _bunker;
-		_pos = getPosATL _bunker;
-		_veh = _typeVehX createVehicle _positionX;
-		_vehiclesX pushBack _veh;
-		_veh setPosATL _pos;
-		_veh setDir (_dirVeh + 180);
-		_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
-		_unit moveInGunner _veh;
-		sleep 1;
-		
-		_pos = [getPos _bunker, 6, getDir _bunker] call BIS_fnc_relPos;
-		_typeVehX = if (_sideX == Occupants) then {NATOFlag} else {CSATFlag};
-		_veh = createVehicle [_typeVehX, _pos, [],0, "NONE"];
-		_vehiclesX pushBack _veh;
-		_veh setPosATL _pos;
-		_veh setDir _dirVeh;
-		sleep 1;
+			_pos = [_positionX, 8, _dirveh + 90] call BIS_Fnc_relPos; 
+			_bunker = "Land_BagBunker_Tower_F" createVehicle _pos; 
+			_bunker setDir _dirveh; 
+			_bunker setVectorUp surfaceNormal position _bunker;
+			_pos = getPosATL _bunker;
+			_vehMG = _typeVehMG createVehicle _pos;
+			_vehMG setDir (_dirveh + 180);
+			_zOffset = [0, 0, 2.7];
+			_posMG = (_bunker getRelPos [2.5,195]) vectorAdd _zOffset;
+			_vehMG setPos _posMG;
+			_vehiclesX pushBack _vehMG;
 
-		{ [_x, _sideX] call A3A_fnc_AIVEHinit } forEach _vehiclesX;
-		private _mid = [_sideX, "MID"] call SCRT_fnc_unit_getGroupSet;
-		_typeGroup = selectRandom _mid;
-		_groupX = [_positionX,_sideX, _typeGroup, true] call A3A_fnc_spawnGroup;
-		if !(isNull _groupX) then {
-				{[_x] join _groupX} forEach units _groupE;
-				deleteGroup _groupE;
-				if (random 10 < 2.5) then {
-				_dog = [_groupX, "Fin_random_F",_positionX,[],0,"FORM"] call A3A_fnc_createUnit;
-				[_dog,_groupX] spawn A3A_fnc_guardDog;
-			};
-			_nul = [leader _groupX, _markerX, "SAFE","SPAWNED","NOVEH2","NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
-			// Forced non-spawner as they're very static.
-			{[_x,"",false] call A3A_fnc_NATOinit; _soldiers pushBack _x} forEach units _groupX;
-			};
-		};
-		
-		if (sunOrMoon < 1) then {
-			_veh setPilotLight true;
+			_vehAT = _typeVehAT createVehicle _pos;
+			_vehAT setDir _dirveh;
+			_posAT = (_bunker getRelPos [2.4,0]) vectorAdd _zOffset;
+			_vehAT setPos _posAT;
+			_vehiclesX pushBack _vehAT;
+
+			_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
+			_unit moveInGunner _vehMG;
+			_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
+			_unit moveInGunner _vehAT;
+			sleep 1;
 			
-			_pos = _positionX getPos [8, _dirveh + 45] ;
-			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
-			_lamp setDir _dirveh;
-			_vehiclesX pushBack _lamp;
-			_pos = _positionX getPos [8, _dirveh + 135] ;
-			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
-			_lamp setDir _dirveh;
-			_vehiclesX pushBack _lamp ;
-			_pos = _positionX getPos [8, _dirveh + 225] ;
-			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
-			_lamp setDir _dirveh;
-			_vehiclesX pushBack _lamp ;
-			_pos = _positionX getPos [8, _dirveh + 315] ;
-			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
-			_lamp setDir _dirveh;
-			_vehiclesX pushBack _lamp ;
+			_pos = [getPos _bunker, 6, getDir _bunker] call BIS_fnc_relPos;
+			_typeVehX = if (_sideX == Occupants) then {NATOFlag} else {CSATFlag};
+			_veh = createVehicle [_typeVehX, _pos, [],0, "NONE"];
+			_vehiclesX pushBack _veh;
+			_veh setPosATL _pos;
+			_veh setDir _dirVeh;
+			sleep 1;
+
+			{ [_x, _sideX] call A3A_fnc_AIVEHinit } forEach _vehiclesX;
+			private _mid = [_sideX, "SQUAD"] call SCRT_fnc_unit_getGroupSet;
+			_typeGroup = selectRandom _mid;
+			_groupX = [_positionX,_sideX, _typeGroup, true] call A3A_fnc_spawnGroup;
+			if !(isNull _groupX) then {
+				{[_x] join _groupX} forEach units _groupE;
+				deleteGroup _groupE;
+				if (random 10 < 2.5) then {
+					_dog = [_groupX, "Fin_random_F",_positionX,[],0,"FORM"] call A3A_fnc_createUnit;
+					[_dog,_groupX] spawn A3A_fnc_guardDog;
+				};
+				_nul = [leader _groupX, _markerX, "SAFE","SPAWNED","NOVEH2","NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
+				// Forced non-spawner as they're very static.
+				{[_x,"",false] call A3A_fnc_NATOinit; _soldiers pushBack _x} forEach units _groupX;
+			};
+		
+		} else {	
+			_groupE = grpNull;
+			_pos = [_positionX, 7, _dirveh + 270] call BIS_Fnc_relPos;
+			_bunker = smallBunker createVehicle _pos;
+			_vehiclesX pushBack _bunker;
+			_bunker setDir (_dirveh + 180);
+			_bunker setVectorUp surfaceNormal position _bunker;
+			_pos = getPosATL _bunker;
+			_typeVehX = if (_sideX == Occupants) then {selectRandom NATOMG} else {selectRandom CSATMG};
+			_veh = _typeVehX createVehicle _positionX;
+			_vehiclesX pushBack _veh;
+			_veh setPosATL _pos;
+			_veh setDir _dirVeh;
+
+			_groupE = createGroup _sideX;
+			_typeUnit = if (_sideX == Occupants) then {
+				staticCrewOccupants call SCRT_fnc_unit_selectInfantryTier
+			} else {
+				staticCrewInvaders call SCRT_fnc_unit_selectInfantryTier
+			};
+			_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
+			_unit moveInGunner _veh;
+			sleep 1;
+			_pos = [_positionX, 8, _dirveh + 90] call BIS_Fnc_relPos;
+			_bunker = smallBunker createVehicle _pos;
+			_vehiclesX pushBack _bunker;
+			_bunker setDir _dirveh;
+			_bunker setVectorUp surfaceNormal position _bunker;
+			_pos = getPosATL _bunker;
+			_veh = _typeVehX createVehicle _positionX;
+			_vehiclesX pushBack _veh;
+			_veh setPosATL _pos;
+			_veh setDir (_dirVeh + 180);
+			_unit = [_groupE, _typeUnit, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
+			_unit moveInGunner _veh;
+			sleep 1;
+		
+			_pos = [getPos _bunker, 6, getDir _bunker] call BIS_fnc_relPos;
+			_typeVehX = if (_sideX == Occupants) then {NATOFlag} else {CSATFlag};
+			_veh = createVehicle [_typeVehX, _pos, [],0, "NONE"];
+			_vehiclesX pushBack _veh;
+			_veh setPosATL _pos;
+			_veh setDir _dirVeh;
+			sleep 1;
+
+			{ [_x, _sideX] call A3A_fnc_AIVEHinit } forEach _vehiclesX;
+			private _mid = [_sideX, "MID"] call SCRT_fnc_unit_getGroupSet;
+			_typeGroup = selectRandom _mid;
+			_groupX = [_positionX,_sideX, _typeGroup, true] call A3A_fnc_spawnGroup;
+			if !(isNull _groupX) then {
+				{[_x] join _groupX} forEach units _groupE;
+				deleteGroup _groupE;
+				if (random 10 < 2.5) then {
+					_dog = [_groupX, "Fin_random_F",_positionX,[],0,"FORM"] call A3A_fnc_createUnit;
+					[_dog,_groupX] spawn A3A_fnc_guardDog;
+				};
+				_nul = [leader _groupX, _markerX, "SAFE","SPAWNED","NOVEH2","NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
+				// Forced non-spawner as they're very static.
+				{[_x,"",false] call A3A_fnc_NATOinit; _soldiers pushBack _x} forEach units _groupX;
+			};
 		};
-	}	
-	else {
+	} else {
 		_typeVehX = if(random 10 < (tierWar + (difficultyCoef / 2))) then {
 			if (_sideX == Occupants) then {selectRandom vehFIAAPC} else {selectRandom vehWAMAPC};
 		} else {
@@ -262,75 +230,69 @@ if (_isControl) then {
 			_groupX setFormDir _dirveh;
 			_unit doWatch (_veh getRelPos [200, 5]);
 		};
-	
-		if (sunOrMoon < 1) then {
-			_veh setPilotLight true;
-			
-			_pos = _positionX getPos [8, _dirveh + 45] ;
-			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
-			_lamp setDir _dirveh;
-			_vehiclesX pushBack _lamp;
-			_pos = _positionX getPos [8, _dirveh + 135] ;
-			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
-			_lamp setDir _dirveh;
-			_vehiclesX pushBack _lamp ;
-			_pos = _positionX getPos [8, _dirveh + 225] ;
-			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
-			_lamp setDir _dirveh;
-			_vehiclesX pushBack _lamp ;
-			_pos = _positionX getPos [8, _dirveh + 315] ;
-			_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
-			_lamp setDir _dirveh;
-			_vehiclesX pushBack _lamp ;
-		};
 	};
-}
-else
-	{
+	// Set night time additional lights
+	if (sunOrMoon < 1) then {
+		_veh setPilotLight true;
+		
+		_pos = _positionX getPos [8, _dirveh + 45] ;
+		_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+		_lamp setDir _dirveh;
+		_vehiclesX pushBack _lamp;
+		_pos = _positionX getPos [8, _dirveh + 135] ;
+		_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+		_lamp setDir _dirveh;
+		_vehiclesX pushBack _lamp ;
+		_pos = _positionX getPos [8, _dirveh + 225] ;
+		_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+		_lamp setDir _dirveh;
+		_vehiclesX pushBack _lamp ;
+		_pos = _positionX getPos [8, _dirveh + 315] ;
+		_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
+		_lamp setDir _dirveh;
+		_vehiclesX pushBack _lamp ;
+	};
+} else { // _isFIA
 	_markersX = markersX select {(getMarkerPos _x distance _positionX < distanceSPWN) and (sidesX getVariable [_x,sideUnknown] == teamPlayer)};
 	_markersX = _markersX - ["Synd_HQ"] - watchpostsFIA - roadblocksFIA - aapostsFIA - atpostsFIA - mortarpostsFIA - hmgpostsFIA;
 	_frontierX = if (count _markersX > 0) then {true} else {false};
-	if (_frontierX) then
-		{
+	if (_frontierX) then {
 		_cfg = CSATSpecOp;
-		if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then
-			{
+		if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then{
 			_cfg = NATOSpecOp;
 			_sideX = Occupants;
-			};
+		};
 		_size = [_markerX] call A3A_fnc_sizeMarker;
-		if ({if (_x inArea _markerX) exitWith {1}} count allMines == 0) then
-			{
-			    diag_log format ["%1: [Antistasi]: Server | Creating a Minefield at %1", _markerX];
-				private _mines = ([A3A_faction_inv,A3A_faction_occ] select (_sideX == Occupants)) getVariable "minefieldAPERS";
-				private _revealTo = [Invaders,Occupants] select (_sideX == Occupants);
-				for "_i" from 1 to 45 do {
-					_mineX = createMine [ selectRandom _mines ,_positionX,[],_size];
-					_revealTo revealMine _mineX;
-				};
+		if ({if (_x inArea _markerX) exitWith {1}} count allMines == 0) then {
+			diag_log format ["%1: [Antistasi]: Server | Creating a Minefield at %1", _markerX];
+			private _mines = ([A3A_faction_inv,A3A_faction_occ] select (_sideX == Occupants)) getVariable "minefieldAPERS";
+			private _revealTo = [Invaders,Occupants] select (_sideX == Occupants);
+			for "_i" from 1 to 45 do {
+				_mineX = createMine [ selectRandom _mines ,_positionX,[],_size];
+				_revealTo revealMine _mineX;
 			};
+		};
 		_groupX = [_positionX,_sideX, _cfg] call A3A_fnc_spawnGroup;
 		_nul = [leader _groupX, _markerX, "SAFE","SPAWNED","RANDOM","NOVEH2","NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
 
-		    sleep 1;
-		    {_soldiers pushBack _x} forEach units _groupX;
-		    _typeVehX = if (_sideX == Occupants) then {vehNATOUAVSmall} else {vehCSATUAVSmall};
-		    if (_typeVehX != "not_supported") then {
-                _uav = createVehicle [_typeVehX, _positionX, [], 0, "FLY"];
-                [_sideX, _uav] call A3A_fnc_createVehicleCrew;
-                _vehiclesX pushBack _uav;
-                _groupUAV = group (crew _uav select 1);
-                {[_x] joinSilent _groupX; _pilots pushBack _x} forEach units _groupUAV;
-                deleteGroup _groupUAV;
-            };
+		sleep 1;
+		{_soldiers pushBack _x} forEach units _groupX;
+		_typeVehX = if (_sideX == Occupants) then {vehNATOUAVSmall} else {vehCSATUAVSmall};
+		if (_typeVehX != "not_supported") then {
+			_uav = createVehicle [_typeVehX, _positionX, [], 0, "FLY"];
+			[_sideX, _uav] call A3A_fnc_createVehicleCrew;
+			_vehiclesX pushBack _uav;
+			_groupUAV = group (crew _uav select 1);
+			{[_x] joinSilent _groupX; _pilots pushBack _x} forEach units _groupUAV;
+			deleteGroup _groupUAV;
+		};
 
 		{[_x,""] call A3A_fnc_NATOinit} forEach units _groupX;
-	}
-	else
-		{
+	} else{
 		_leave = true;
-		};
 	};
+};
+
 if (_leave) exitWith {};
 
 { _x setVariable ["originalPos", getPos _x] } forEach _vehiclesX;

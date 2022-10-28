@@ -39,6 +39,7 @@ while {(captive _LeaderX) and (captive _unit)} do {
 	//_size = [_base] call A3A_fnc_sizeMarker;
 	//if ((_unit inArea _base) and (not(sidesX getVariable [_base,sideUnknown] == teamPlayer))) exitWith {[_unit,false] remoteExec ["setCaptive"]};
 	if ((primaryWeapon _unit != "") or (secondaryWeapon _unit != "") or (handgunWeapon _unit != "")) exitWith {};
+	if (_unit == petrovsky && leader _unit == petrovsky) exitWith{}; // if petrovsky has left commander group then base has been built and he can leave undercover
 };
 
 //_unit removeAllEventHandlers "FIRED";
