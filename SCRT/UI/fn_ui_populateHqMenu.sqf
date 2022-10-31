@@ -51,6 +51,10 @@ lbSetCurSel [2758, 0];
 private _fiaTrainingText = format ["FIA Skill Level: %1", skillFIA];
 ((findDisplay 60000) displayCtrl 3102) ctrlSetText _fiaTrainingText;
 
+private _costs = 1000 + (1.5*(skillFIA *750));
+private _fiaTrainingCostText = format ["%1: $%2",localize "$STR_antistasi_dialogs_hq_button_train_ai_tooltip", _costs];
+((findDisplay 60000) displayCtrl 3103) ctrlSetTooltip  _fiaTrainingCostText;
+
 //hiding reroll button if conditions are not met
 if (!(isTraderQuestCompleted || (!(isNil 'isTraderQuestAssigned') && {isTraderQuestAssigned}))) then {
 	((findDisplay 60000) displayCtrl 6014) ctrlShow false;

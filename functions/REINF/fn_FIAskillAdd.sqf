@@ -46,4 +46,7 @@ private _display = findDisplay 60000;
 if !(str (_display) == "no display") then {
     private _title = _display displayCtrl 3102;
     _title ctrlSetText format ["FIA Skill Level: %1", skillFIA];
+	
+	private _fiaTrainingCostText = format ["%1: $%2",localize "$STR_antistasi_dialogs_hq_button_train_ai_tooltip", _costs];
+	((findDisplay 60000) displayCtrl 3103) ctrlSetTooltip  _fiaTrainingCostText;
 };
