@@ -233,6 +233,48 @@ if (_isControl) then {
 	};
 	// Set night time additional lights
 	if (sunOrMoon < 1) then {
+		_fn_flare = {
+			params["_unit", "_grp"] ;
+			_secs = 50 ;
+			_launched = false ;
+			_flare = objNull ;
+			_flarelight = objNull ;
+			while {true} do {
+				if (isNull _grp) exitWith {} ;
+				if (count ((units _grp) select {alive _x}) <= 0) exitWith {} ;
+				if (!_launched) then {
+					{
+						if (_x isKindOf "Man" || count (crew _x) > 0) then {
+							if ((_grp knowsAbout _x) > 0.7) exitWith {
+								// Fire flare
+								diag_log format["Roadblock %1 knows about %2, launch illumination flare", _unit, _x] ;
+								_flare = "F_40mm_White" createvehicle ((_unit) ModelToWorld [0,20,150]); 
+								_flare setVelocity [0,0,-8];
+								_flarelight = "#lightpoint" createVehicle (getPosASL _flare);
+								_flarelight attachTo [_flare, [0, 0, 0]];
+								_flarelight setLightColor [1, 1, 1];
+								_flarelight setLightBrightness 13.0;
+								//_flarelight setLightAmbient [1, 1, 1];
+								//_flarelight setLightIntensity 10000;
+								_flarelight setLightUseFlare true;
+								//_flarelight setLightFlareSize 10;
+								//_flarelight setLightFlareMaxDistance 600;
+								//_flarelight setLightDayLight true;
+								//_flarelight setLightAttenuation [4, 0, 0, 0.2, 1000, 2000];
+								_launched = true;
+							};
+						};
+					}forEach ((nearestObjects[_unit, ["Man", "Car", "Tank"], 100, false]) select {alive _x && !(side _grp == side _x)});
+				}else{				
+					sleep 0.1;
+					if !(alive _flare) then {
+						deleteVehicle _flarelight;
+						_secs = _secs - 1;
+					};
+					if (_secs <= 0) then {_launched = false ;_secs=(random 80) + 80;};
+				};
+			};
+		};
 		_veh setPilotLight true;
 		
 		_pos = _positionX getPos [8, _dirveh + 45] ;
@@ -251,6 +293,7 @@ if (_isControl) then {
 		_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
 		_lamp setDir _dirveh;
 		_vehiclesX pushBack _lamp ;
+		[_veh, _groupX] spawn _fn_flare;
 	};
 } else { // _isFIA
 	_markersX = markersX select {(getMarkerPos _x distance _positionX < distanceSPWN) and (sidesX getVariable [_x,sideUnknown] == teamPlayer)};

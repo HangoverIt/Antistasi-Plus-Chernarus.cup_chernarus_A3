@@ -209,7 +209,7 @@ distanceXs = [] spawn A3A_fnc_distance;
 [] execVM "JB_Missions\Explosives_Expert\ExplosivesExpert1.sqf";
 [] execVM "JB_Missions\Explosives_Expert\IEDMaker.sqf";
 [] execVM "JB_Missions\NATO_Sea_Mission\NATOSeaMission.sqf";
-[] execVM "JB_Missions\T34_Mission\T34Mission.sqf";
+//[] execVM "JB_Missions\T34_Mission\T34Mission.sqf";
 [] execVM "JB_Missions\hunterShop.sqf";
 [] execVM "JB_Missions\hunterWeaps.sqf";
 
