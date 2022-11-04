@@ -235,28 +235,35 @@ if (_isControl) then {
 	if (sunOrMoon < 1) then {
 		_fn_flare = {
 			params["_unit", "_grp"] ;
-			_secs = 50 ;
-			_launched = false ;
-			_flare = objNull ;
-			_flarelight = objNull ;
+			private _secs = 50 ;
+			private _launched = false ;
+			private _flare = objNull ;
+			private _flarelight = objNull ;
+			private _roadblockpos = getPos _unit ;
+			private _flaretypes = [["F_40mm_White",[1,1,1]], ["F_40mm_Red", [1,0,0]], ["F_40mm_Yellow", [1,1,0]], ["F_40mm_Green", [0,1,0]]] ;
+			private _useflare = selectRandom _flaretypes ;
 			while {true} do {
 				if (isNull _grp) exitWith {} ;
 				if (count ((units _grp) select {alive _x}) <= 0) exitWith {} ;
+				if (isNull _unit) exitWith {};
+				if (!alive _unit) exitWith {} ;
 				if (!_launched) then {
 					{
 						if (_x isKindOf "Man" || count (crew _x) > 0) then {
-							if ((_grp knowsAbout _x) > 0.7) exitWith {
+							if ((_grp knowsAbout _x) > 0.7 || (side _x == civilian && _x distance _roadblockpos < 25)) exitWith {
 								// Fire flare
-								diag_log format["Roadblock %1 knows about %2, launch illumination flare", _unit, _x] ;
-								_flare = "F_40mm_White" createvehicle ((_unit) ModelToWorld [0,20,150]); 
+								_useflare = selectRandom _flaretypes ;
+								diag_log format["Roadblock %1 knows about %2, launch illumination flare %3", _unit, _x, _useflare#0] ;
+
+								_flare = (_useflare#0) createvehicle (_roadblockpos vectorAdd [(random 30)-15,(random 30)-15,200]); 
 								_flare setVelocity [0,0,-8];
 								_flarelight = "#lightpoint" createVehicle (getPosASL _flare);
 								_flarelight attachTo [_flare, [0, 0, 0]];
-								_flarelight setLightColor [1, 1, 1];
+								_flarelight setLightColor _useflare#1;
 								_flarelight setLightBrightness 13.0;
+								_flarelight setLightUseFlare true;
 								//_flarelight setLightAmbient [1, 1, 1];
 								//_flarelight setLightIntensity 10000;
-								_flarelight setLightUseFlare true;
 								//_flarelight setLightFlareSize 10;
 								//_flarelight setLightFlareMaxDistance 600;
 								//_flarelight setLightDayLight true;
