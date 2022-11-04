@@ -16,6 +16,7 @@
 #define VEH_MOVE 300
 #define VEH_PATROL 400
 #define VEH_POSTAMBUSH 500
+#define FAST_JETS 600
 
 if(!isServer) exitWith {};
 
@@ -48,7 +49,8 @@ while {true} do {
             POLICE, 0.2,
             VEH_MOVE, 0.2, 
             VEH_PATROL, 0.2,
-            VEH_POSTAMBUSH, 0.2
+            VEH_POSTAMBUSH, 0.2,
+			FAST_JETS, 0.2
         ];
 
         switch (_eventType) do {
@@ -66,6 +68,9 @@ while {true} do {
             };
             case (VEH_POSTAMBUSH): {
                 [[], "SCRT_fnc_encounter_postAmbush"] call A3A_fnc_scheduler;
+            };
+			case (FAST_JETS): {
+                [[], "SCRT_fnc_encounter_fastJets"] call A3A_fnc_scheduler;
             };
         };
     } else {
