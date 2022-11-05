@@ -79,7 +79,7 @@ if (outpostType == "ROADBLOCK") then {
 if (outpostType == "WATCHPOST") then {
             _garrison append groupsSDKSniper;
 };
-
+diag_log format["DEBUG: Calling A3A_fnc_reorgLoadoutSquad with _garrison = %1", _garrison] ;
 _fullSquadGear = _garrison call A3A_fnc_reorgLoadoutSquad;
 
 	_emptyList = [];
