@@ -235,11 +235,12 @@ if (_isControl) then {
 	if (sunOrMoon < 1) then {
 		_fn_flare = {
 			params["_unit", "_grp"] ;
-			private _secs = 50 ;
+			private _secs = 80 ;
 			private _launched = false ;
 			private _flare = objNull ;
 			private _flarelight = objNull ;
 			private _roadblockpos = getPos _unit ;
+			private _flarepos = [] ;
 			private _flaretypes = [["F_40mm_White",[1,1,1]], ["F_40mm_Red", [1,0,0]], ["F_40mm_Yellow", [1,1,0]], ["F_40mm_Green", [0,1,0]]] ;
 			private _useflare = selectRandom _flaretypes ;
 			while {true} do {
@@ -254,28 +255,18 @@ if (_isControl) then {
 								// Fire flare
 								_useflare = selectRandom _flaretypes ;
 								diag_log format["Roadblock %1 knows about %2, launch illumination flare %3", _unit, _x, _useflare#0] ;
-
-								_flare = (_useflare#0) createvehicle (_roadblockpos vectorAdd [(random 30)-15,(random 30)-15,200]); 
-								_flare setVelocity [0,0,-8];
-								_flarelight = "#lightpoint" createVehicle (getPosASL _flare);
-								_flarelight attachTo [_flare, [0, 0, 0]];
-								_flarelight setLightColor _useflare#1;
-								_flarelight setLightBrightness 13.0;
-								_flarelight setLightUseFlare true;
-								//_flarelight setLightAmbient [1, 1, 1];
-								//_flarelight setLightIntensity 10000;
-								//_flarelight setLightFlareSize 10;
-								//_flarelight setLightFlareMaxDistance 600;
-								//_flarelight setLightDayLight true;
-								//_flarelight setLightAttenuation [4, 0, 0, 0.2, 1000, 2000];
+								
+								_flarepos = _roadblockpos vectorAdd [(random 30)-15,(random 30)-15,200];
+								[_flarepos, _useflare#0, _useflare#1] remoteExec ["SCRT_fnc_effect_flare",-2]; // run on clients for visuals
+								_flare = ([_flarepos, _useflare#0, _useflare#1] call SCRT_fnc_effect_flare) ; // run locally for server to get flare object
+								
 								_launched = true;
 							};
 						};
-					}forEach ((nearestObjects[_unit, ["Man", "Car", "Tank"], 100, false]) select {alive _x && !(side _grp == side _x)});
+					}forEach ((nearestObjects[_roadblockpos, ["Man", "Car", "Tank"], 100, false]) select {alive _x && !(side _grp == side _x)});
 				}else{				
 					sleep 0.1;
 					if !(alive _flare) then {
-						deleteVehicle _flarelight;
 						_secs = _secs - 1;
 					};
 					if (_secs <= 0) then {_launched = false ;_secs=(random 80) + 80;};

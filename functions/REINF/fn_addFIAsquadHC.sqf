@@ -85,7 +85,7 @@ if (_typeGroup in [SDKMGStatic, vehSDKAT, staticAAteamPlayer, SDKMortar, vehSDKL
 if (_typeGroup in [groupsSDKAT, groupsSDKSniper, groupsSDKCrew, groupsSDKmid, groupsSDKSquad, groupsSDKSquadEng, groupsSDKSquadSupp, groupsSDKSentry]) then {
 	_squad = +_typeGroup;
 };
-diag_log format["DEBUG: Calling A3A_fnc_reorgLoadoutSquad with _squad = %1", _squad] ;
+
 _fullSquadGear = _squad call A3A_fnc_reorgLoadoutSquad;
 
 	_emptyList = [];
