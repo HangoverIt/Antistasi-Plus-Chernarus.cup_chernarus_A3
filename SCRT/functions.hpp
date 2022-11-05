@@ -14,6 +14,7 @@ class SCRT
         class effect_createBurningDebrisEffect {};
         class effect_createGasEffect {};
         class effect_createSmallExplosionEffect {};
+		class effect_flare {};
 	};
 
     class Encounter 
