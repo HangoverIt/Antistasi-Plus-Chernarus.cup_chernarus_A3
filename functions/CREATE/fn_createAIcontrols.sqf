@@ -199,7 +199,7 @@ if (_isControl) then {
 				{[_x,"",false] call A3A_fnc_NATOinit; _soldiers pushBack _x} forEach units _groupX;
 			};
 		};
-	} else {
+	} else { // isFIA
 		_typeVehX = if(random 10 < (tierWar + (difficultyCoef / 2))) then {
 			if (_sideX == Occupants) then {selectRandom vehFIAAPC} else {selectRandom vehWAMAPC};
 		} else {
@@ -293,22 +293,23 @@ if (_isControl) then {
 		_vehiclesX pushBack _lamp ;
 		[_veh, _groupX] spawn _fn_flare;
 	};
-} else { // _isFIA
+} else { // not isControl (marker not on a road)
 	_markersX = markersX select {(getMarkerPos _x distance _positionX < distanceSPWN) and (sidesX getVariable [_x,sideUnknown] == teamPlayer)};
-	_markersX = _markersX - ["Synd_HQ"] - watchpostsFIA - roadblocksFIA - aapostsFIA - atpostsFIA - mortarpostsFIA - hmgpostsFIA;
+	_markersX = _markersX - ["Synd_HQ"] - watchpostsFIA - roadblocksFIA - aapostsFIA - atpostsFIA - mortarpostsFIA - hmgpostsFIA - citiesX;
 	_frontierX = if (count _markersX > 0) then {true} else {false};
 	if (_frontierX) then {
 		_cfg = CSATSpecOp;
+		_sideX = Invaders ;
 		if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then{
 			_cfg = NATOSpecOp;
 			_sideX = Occupants;
 		};
 		_size = [_markerX] call A3A_fnc_sizeMarker;
-		if ({if (_x inArea _markerX) exitWith {1}} count allMines == 0) then {
+		if ({if (_x inArea _markerX) exitWith {1}} count allMines == 0 && (random 2) < 1) then {
 			diag_log format ["%1: [Antistasi]: Server | Creating a Minefield at %1", _markerX];
 			private _mines = ([A3A_faction_inv,A3A_faction_occ] select (_sideX == Occupants)) getVariable "minefieldAPERS";
 			private _revealTo = [Invaders,Occupants] select (_sideX == Occupants);
-			for "_i" from 1 to 45 do {
+			for "_i" from 1 to 20 do {
 				_mineX = createMine [ selectRandom _mines ,_positionX,[],_size];
 				_revealTo revealMine _mineX;
 			};
