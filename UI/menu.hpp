@@ -133,6 +133,14 @@ class garrisonRecruit: SimpleMenuBig
 			y = 0.486 * safezoneH + safezoneY;
 			action = "[SDKSniper] spawn A3A_fnc_garrisonAdd";
 		};
+		class engineerButton: SimpleButton
+		{
+			idc = 111;
+			text = $STR_antistasi_dialogs_garrison_spawn_engineer_text;
+			x = 0.477 * safezoneW + safezoneX;
+			y = 0.584 * safezoneH + safezoneY;
+			action = "[SDKEng] spawn A3A_fnc_garrisonAdd";
+		};
 	};
 };
 

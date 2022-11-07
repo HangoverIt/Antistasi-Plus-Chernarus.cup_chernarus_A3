@@ -1562,6 +1562,10 @@
         <Chinesesimp>招募精准射手</Chinesesimp>
         <Korean>지정사수 모집</Korean>
       </Key>
+      <Key ID="STR_antistasi_dialogs_garrison_spawn_engineer_text">
+        <Original>Recruit Engineer</Original>
+        <English>Recruit Engineer</English>
+      </Key>
       <Key ID="STR_antistasi_dialogs_garrison_spawn_at_text">
         <Original>Recruit AT</Original>
         <English>Recruit AT</English>
