@@ -237,6 +237,9 @@ private _fullSquadGear = [];
 		30
 	] spawn SCRT_fnc_ui_showMessage;
 } else {
+
+    diag_log "is this the right5 dialog";
+    
 	positionXGarr = _site;
 	["Garrison", format ["Info%1",[_site] call A3A_fnc_garrisonInfo]] call A3A_fnc_customHint;
 	createDialog "garrisonRecruit";
@@ -260,5 +263,7 @@ private _fullSquadGear = [];
 		_ChildControl  ctrlSetTooltip format ["Cost: %1%2",server getVariable SDKGL, currencySymbol];
 		_ChildControl = _display displayCtrl 110;
 		_ChildControl  ctrlSetTooltip format ["Cost: %1%2",server getVariable SDKSniper, currencySymbol];
+		_ChildControl = _display displayCtrl 111;
+		_ChildControl  ctrlSetTooltip format ["Cost: %1%2",server getVariable SDKEng, currencySymbol];
 	};
 };

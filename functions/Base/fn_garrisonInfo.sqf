@@ -14,6 +14,7 @@ _textX = format [
     {_x == staticCrewTeamPlayer} count _garrison, 
     {_x == SDKMil} count _garrison, 
     {_x == SDKMG} count _garrison,
+    {_x == SDKEng} count _garrison,
     {_x == SDKMedic} count _garrison,
     {_x == SDKGL} count _garrison,
     {_x == SDKSniper} count _garrison,
