@@ -11,12 +11,10 @@ private _groupX = [_positionX, teamPlayer, groupsSDKSniper] call A3A_fnc_spawnGr
 _groupX setBehaviour "STEALTH";
 _groupX setCombatMode "GREEN";
 // JB limited gear code
-private _num = 0;
 {
 	[_x,_markerX] spawn A3A_fnc_FIAinitBases; //
-	private _loadout = _garrLoadouts select _num;
+	private _loadout = _garrLoadouts select _forEachIndex;
 	_x setUnitLoadout _loadout;
-	_num = _num +1
 } forEach units _groupX;
 
 private _campfire = createVehicle ["Land_Campfire_F", _positionX];

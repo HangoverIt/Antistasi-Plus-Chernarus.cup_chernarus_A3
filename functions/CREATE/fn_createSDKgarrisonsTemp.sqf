@@ -46,7 +46,7 @@ if (_typeX isEqualType "") then
 			{
 			private _groupX = group _unit;
 			if ((_unit getVariable "unitType") == staticCrewTeamPlayer) then {deleteVehicle (vehicle _unit)};
-			_loadoutEnd = getUnitLoadout _unit; _garrLoadoutDespawn append [_loadoutEnd]; deleteVehicle _unit;
+			_loadoutEnd = getUnitLoadout _unit; _garrLoadoutDespawn pushBack _loadoutEnd; deleteVehicle _unit;
 			SDKgarrLoadouts setVariable [_markerX + "_loadouts", _garrLoadoutDespawn, true];
 			if (count units _groupX == 0) then {deleteGroup _groupX};
 			};
