@@ -192,11 +192,12 @@ if (isServer) then {
 
 	_num = 0;
 	{
-		_loadoutMarker = ((garrisonLoadouts select _num) select 0);
-		_loadout = ((garrisonLoadouts select _num) select 1);
+		_loadoutMarker = (_x select 0);
+		_loadout = (_x select 1);
+		if (isNil "_loadout") then {_loadout = [];}; // Fix up any corruption of the save data
 		SDKgarrLoadouts setVariable [_loadoutMarker, _loadout, true];
-		_num = _num + 1;
 	} foreach garrisonLoadouts;
+	diag_log format["DEBUG: Created %1 garrison loadouts with content %2", count garrisonLoadouts, garrisonLoadouts] ;
 
     //Load state of testing timer
     ["testingTimerIsActive"] call A3A_fnc_getStatVariable;

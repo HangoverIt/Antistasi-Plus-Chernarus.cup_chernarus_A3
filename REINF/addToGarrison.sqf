@@ -84,7 +84,7 @@ _noBorrar = false;
 private _garrLoadouts = [];
 _garrLoadouts = (SDKgarrLoadouts getVariable [_nearX + "_loadouts",[]]);
 
-{ if (alive _x) then { _addedLoadout = getUnitLoadout _x; _garrLoadouts append [_addedLoadout]; deleteVehicle _x }; } forEach _unitsX;
+{ if (alive _x) then { _addedLoadout = getUnitLoadout _x; _garrLoadouts append [_addedLoadout] }; } forEach _unitsX;
 SDKgarrLoadouts setVariable [_nearX + "_loadouts", _garrLoadouts, true];
 //
 

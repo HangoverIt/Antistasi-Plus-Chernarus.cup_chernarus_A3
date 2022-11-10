@@ -67,10 +67,8 @@ _staticsX = staticsToSave select {_x distance2D _positionX < _size};
 _garrison = [];
 _garrison = _garrison + (garrison getVariable [_markerX,[]]);
 
-TestVar1 = _garrison;
-
-private _garrLoadouts = [];
-_garrLoadouts = _garrLoadouts + (SDKgarrLoadouts getVariable [_markerX + "_loadouts",[]]);
+private _garrLoadouts = SDKgarrLoadouts getVariable [_markerX + "_loadouts",[]];
+diag_log format["DEBUG: Retrieved %1 loadouts for spwaned garrison %2", count _garrLoadouts, _markerX] ;
 
 // Don't create these unless required
 private _groupStatics = grpNull;
@@ -104,9 +102,12 @@ private _groupMortars = grpNull;
 	[_unit,_markerX] call A3A_fnc_FIAinitBases;
 	
 	_unit setUnitLoadout (configFile >> "EmptyLoadout");
-	private _loadout = _garrLoadouts select _index;
-	_unit setUnitLoadout _loadout;
-	
+	if (_index < (count _garrLoadouts -1)) then {
+		private _loadout = _garrLoadouts select _index;
+		if (!isNil "_loadout") then {
+			_unit setUnitLoadout _loadout;
+		};
+	};
 	_soldiers pushBack _unit;
 	_garrison deleteAT _index;
 	
@@ -130,10 +131,10 @@ _indexedGarr = _indexedGarr call A3A_fnc_SDKGarrisonReorg;
 
 _loadoudIndex = [];
 _garrison = [];
-	{
+{
 	_loadoudIndex pushBack (_x select 0);
 	_garrison pushBack (_x select 1)
-	} foreach _indexedGarr;
+} foreach _indexedGarr;
 	
 TestVar2 = _garrison;
 
@@ -156,8 +157,12 @@ while {(spawner getVariable _markerX != 2) and (_countUnits < _totalUnits)} do
 	[_unit,_markerX] call A3A_fnc_FIAinitBases;
 	
 	private _unitIndex = _loadoudIndex select _countUnits;
-	private _loadout = _garrLoadouts select _unitIndex;
-	_unit SetUnitLoadout _loadout;
+	if (_unitIndex < (count _garrLoadouts -1)) then {
+		private _loadout = _garrLoadouts select _unitIndex;
+		if (!isNil "_loadout") then {
+			_unit setUnitLoadout _loadout;
+		};
+	};
 	
 	if (randomizeRebelLoadoutUniforms) then {
 		private _uniforms = A3A_faction_reb getVariable "uniforms";
@@ -198,8 +203,9 @@ for "_i" from 0 to (count _groups) - 1 do
 waitUntil {sleep 1; (spawner getVariable _markerX == 2)};
 
 private _garrLoadoutDespawn = [];
-{ if (alive _x) then { _loadoutEnd = getUnitLoadout _x; _garrLoadoutDespawn append [_loadoutEnd]; deleteVehicle _x }; } forEach _soldiers;
+{ if (alive _x) then { _loadoutEnd = getUnitLoadout _x; _garrLoadoutDespawn pushBack _loadoutEnd; deleteVehicle _x }; } forEach _soldiers;
 SDKgarrLoadouts setVariable [_markerX + "_loadouts", _garrLoadoutDespawn, true];
+diag_log format["DEBUG: Saved %1 loadouts to garrison %2 on despawn", count _garrLoadoutDespawn, _markerX] ;
 
 {deleteVehicle _x} forEach _civs;
 
