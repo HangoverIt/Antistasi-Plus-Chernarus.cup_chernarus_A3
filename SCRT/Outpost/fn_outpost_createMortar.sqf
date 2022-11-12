@@ -28,16 +28,11 @@ _truckX = vehSDKLightUnarmed createVehicle _pos;
 _groupX addVehicle _truckX;
 
 // JB limited gear code
-private _garrLoadouts = [];
-SDKgarrLoadouts setVariable [_marker + "_loadouts", _garrLoadouts, true];
-
-{
-    [_x] call A3A_fnc_FIAinit;
-    private _loadout = getUnitLoadout _x;
-	_garrLoadouts append [_loadout];    
-} forEach units _groupX;
-
-SDKgarrLoadouts setVariable [_marker + "_loadouts", _garrLoadouts, true];
+// HangoverIt does this need to happen here - better to set when despwaning
+//private _garrLoadouts = [];
+//[_marker] call clearGarrisonLoadout ;
+//_garrLoadouts = [_garrLoadouts, units _groupX] call addGarrisonLoadout ;
+//[_marker, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout ;
 //
 
 leader _groupX setBehaviour "SAFE";
@@ -69,6 +64,13 @@ if ({(alive _x) and (_x distance _position < 10)} count units _groupX > 0) then 
 	sidesX setVariable [_marker,teamPlayer,true];
 	markersX = markersX + [_marker];
 	publicVariable "markersX";
+	
+	// HangoverIt - capture garrison before despawn
+	private _garrLoadouts = [];
+	[_marker] call A3A_fnc_clearGarrisonLoadout ;
+	_garrLoadouts = [_garrLoadouts, units _groupX, false] call A3A_fnc_addGarrisonLoadout ;
+	[_marker, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout ;
+	
 	spawner setVariable [_marker,2,true];
 	[_taskId, "outpostTask", "SUCCEEDED"] call A3A_fnc_taskSetState;
 	_nul = [-5,5,_position] remoteExec ["A3A_fnc_citySupportChange",2];

@@ -81,11 +81,10 @@ private _unitTypes = _unitsX apply { _x getVariable "unitType" };
 _noBorrar = false;
 
 //JB limited items 
-private _garrLoadouts = [];
-_garrLoadouts = (SDKgarrLoadouts getVariable [_nearX + "_loadouts",[]]);
-
-{ if (alive _x) then { _addedLoadout = getUnitLoadout _x; _garrLoadouts append [_addedLoadout] }; } forEach _unitsX;
-SDKgarrLoadouts setVariable [_nearX + "_loadouts", _garrLoadouts, true];
+// HangoverIt - remove this as the garrison needs updating on despawn. If done prior then this is lost
+//private _garrLoadouts = [_nearX] call A3A_fnc_fetchGarrisonLoadout ;
+//[_garrLoadouts, _unitsX] call A3A_fnc_addGarrisonLoadout ;
+//[_nearX, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout ;
 //
 
 if (spawner getVariable _nearX != 2) then
@@ -125,20 +124,23 @@ if (spawner getVariable _nearX != 2) then
 
 	waitUntil {sleep 1; (spawner getVariable _nearX == 2 or !(sidesX getVariable [_nearX,sideUnknown] == teamPlayer))};
 	if (!(sidesX getVariable [_nearX,sideUnknown] == teamPlayer)) exitWith {_noBorrar = true};
+}else{ // Garrison is not spawned 
+	// Additional units loadout added to location if not spawned
+	private _garrLoadouts = [_nearX] call A3A_fnc_fetchGarrisonLoadout ;
+	{
+		_garrLoadouts = [_garrLoadouts, _x] call A3A_fnc_addGarrisonLoadout;
+	} forEach _unitsX;
+	[_nearX, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout ;
 };
 
-if (!_noBorrar) then
+if (!_noBorrar) then {
 	{
-	{
-	if (alive _x) then
-		{
-		deleteVehicle _x
+		if (alive _x) then {
+			deleteVehicle _x
 		};
 	} forEach _unitsX;
 	deleteGroup _groupX;
-	}
-else
-	{
+}else{
 	//añadir el groupX al HC y quitarles variables
 	{
 	if (alive _x) then
