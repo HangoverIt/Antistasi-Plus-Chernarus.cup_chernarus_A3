@@ -16,7 +16,7 @@ _garrison = if (!_watchpostFIA) then {
 };
 //JB code
 
-private _garrLoadouts = (SDKgarrLoadouts getVariable [_site + "_loadouts",[]]);
+private _garrLoadouts = [_site] call A3A_fnc_fetchGarrisonLoadout ;
 
 if (_typeX == "rem") then {
 	if ((count _garrison == 0) and {!(_watchpostFIA) || !(_roadblockFIA) || !(_aapostFIA) || !(_atpostFIA)}) exitWith {
@@ -112,25 +112,26 @@ if (_typeX == "rem") then {
 	_allTriple = [];
 
 	{ 
-		_x params ["_primary", "_secondary", "_handgun", "_uniform", "_vest", "_backpack", "_headgear", "_facewear", "_binocular", "_items"];
+		_loadout = _x select 1 ;
+		_loadout params ["_primary", "_secondary", "_handgun", "_uniform", "_vest", "_backpack", "_headgear", "_facewear", "_binocular", "_items"];
 		
 		_loadoutArray = _primary + _secondary + _handgun + _binocular;
 		_loadoutArray append _items;
 		_loadoutArray pushBack _headgear;
 		_loadoutArray pushBack _facewear;
-		if !(count _uniform == 0) then { _loadoutArray pushBack (_uniform select 0); _loadoutArray append (_uniform select 1) };
-		if !(count _vest == 0) then { _loadoutArray pushBack (_vest select 0); _loadoutArray append (_vest select 1) };
-		if !(count _backpack == 0) then { _loadoutArray pushBack (_backpack select 0); _loadoutArray append (_backpack select 1) };
+		if (count _uniform > 0) then { _loadoutArray pushBack (_uniform select 0); _loadoutArray append (_uniform select 1) };
+		if (count _vest > 0) then { _loadoutArray pushBack (_vest select 0); _loadoutArray append (_vest select 1) };
+		if (count _backpack > 0) then { _loadoutArray pushBack (_backpack select 0); _loadoutArray append (_backpack select 1) };
 		
 		for "_i" from count _loadoutArray -1 to 0 step -1 do{
-			if (_x isEqualTo []) then {_loadoutArray deleteAt _i} ;
+			if ((_loadoutArray select _i) isEqualTo []) then {_loadoutArray deleteAt _i} ;
 		};
 		
 		_loadoutArray = _loadoutArray - [""];
 		
 		{
-		if (count _x == 2) then { _doubleArray pushBack _x };
-		if (count _x == 3) then { _tripleArray pushBack _x }
+			if (count _x == 2) then { _doubleArray pushBack _x };
+			if (count _x == 3) then { _tripleArray pushBack _x };
 		} forEach _loadoutArray;
 		
 		_singleArray = _loadoutArray - _doubleArray - _tripleArray;
@@ -151,21 +152,26 @@ if (_typeX == "rem") then {
 
 	_allTripleCons = [];	
 	{
-		_allTripleCons append [[(_x select 0),(_x select 1) * (_x select 2)]]
+		_allTripleCons append [[(_x select 0),(_x select 1) * (_x select 2)]] ;
 	} foreach _allTriple;
 
 	//consolidate all
 
 	_allCons = _allSingleCons + _allDouble + _allTripleCons;
+	
+	//for "_i" from count _allCons -1 to 0 step -1 do {
+	//	if ((_allCons select _i) isEqualTo []) then {_allCons deleteAt _i} ;
+	//};
 
 	private _fullSquadGear = [];   
 	{ 
-		_fullSquadGear = [_fullSquadGear, (_x select 0),(_x select 1)] call BIS_fnc_addToPairs 
+		_fullSquadGear = [_fullSquadGear, (_x select 0),(_x select 1)] call BIS_fnc_addToPairs ;
+		if (isNil "_allTripleCons") then {diag_log format["ERROR: cannot create squad gear list for _allCons %1", _allCons];};
 	} foreach _allCons;
 
 	{ [_x select 0 call jn_fnc_arsenal_itemType, _x select 0, _x select 1]call jn_fnc_arsenal_addItem } forEach _fullSquadGear;
-	SDKgarrLoadouts setVariable [_site + "_loadouts",nil,true];
-	// JB code end
+	[_site, true] call A3A_fnc_clearGarrisonLoadout ;
+
 
 	switch (true) do {
 		case (_watchpostFIA): {

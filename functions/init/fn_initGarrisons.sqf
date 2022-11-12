@@ -102,7 +102,7 @@ _fnc_initGarrison =
 		};
 		_garrison resize _garrNum;
 		garrison setVariable [_marker, _garrison, true];
-		SDKgarrLoadouts setVariable [_marker + "_loadouts", [], true];		//JB Loadouts
+		[_marker] call A3A_clearGarrisonLoadout ;
 
 	} forEach _markerArray;
 };

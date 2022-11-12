@@ -103,12 +103,27 @@ publicVariable "introDone";
 //JB limited weapons
 private ["_loadoutMarkers","_garrisonLoadouts"];
 
-_loadoutMarkers = [];
 _garrisonLoadouts = [];
 _loadoutMarkers = allVariables SDKgarrLoadouts;
 {	
-_garrisonLoadouts pushback [_x, SDKgarrLoadouts getVariable _x];
+	// Save any active (spawned) units at a marker, who are also rebels
+	diag_log format ["SAVEDEBUG: _x is %1", _x] ;
+	if (_x select [0,4] != "cba_") then {
+		if ((sidesX getVariable [_x,sideUnknown]) == teamPlayer) then {
+			
+			_garrisonData = [] ;
+			if (spawner getVariable _x == 2) then { // if despawned then save stored loadout
+				_garrisonData = [_x] call A3A_fnc_fetchGarrisonLoadout ;
+			}else{ // spawned
+				_thisMarker = _x ;
+				_mkrUnits = allunits select { (_x getVariable ["markerX", ""]) == _thisMarker; };
+				_garrisonData = [_garrisonData, _mkrUnits, false] call A3A_fnc_addGarrisonLoadout ;
+			};
+			_garrisonLoadouts pushback [_x, _garrisonData];
+		};
+	};
 } foreach _loadoutMarkers;	
+diag_log format["SAVEDEBUG: writing garrison loadout %1", _garrisonLoadouts] ;
 ["garrisonLoadouts",_garrisonLoadouts] call A3A_fnc_setStatVariable;
 
 //Save aggression values

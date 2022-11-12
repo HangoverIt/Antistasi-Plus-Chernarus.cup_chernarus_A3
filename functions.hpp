@@ -372,6 +372,13 @@ class A3A
         //added by JB for limited gear
         class reorgLoadoutUnit {};
         class reorgLoadoutSquad {};
+		// HangoverIt - functions for limited gear
+		class addTypeGarrisonLoadout {};
+		class addGarrisonLoadout {};
+		class fetchGarrisonLoadout {};
+		class storeGarrisonLoadout {};
+		class clearGarrisonLoadout {};
+		class assignGarrisonLoadout {};
     };
 
     class Logistics

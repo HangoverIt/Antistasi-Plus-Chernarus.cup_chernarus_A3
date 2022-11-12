@@ -83,10 +83,6 @@ if (count _cannotAllocateList > 0) exitWith {
 	["Garrison", format ["The following gear has run too low for you to recruit this unit: <t color='#ffff00'>%1", _strings], "FAIL"] call SCRT_fnc_ui_showDynamicTextMessage;
 };
 
-_garrLoadouts = (SDKgarrLoadouts getVariable [_markerX + "_loadouts",[]]);
-_garrLoadouts pushBack _loadout;	
-SDKgarrLoadouts setVariable [_markerX + "_loadouts", _garrLoadouts, true];
-
 { 
 	_arsenalIndex = (_x select 0) call jn_fnc_arsenal_itemType;
 	if (_arsenalIndex >= 0) then {
@@ -107,5 +103,10 @@ if (sidesX getVariable [_markerX,sideUnknown] == teamPlayer) then {
 
 	if (spawner getVariable _markerX != 2) then {
 		[_markerX,_typeX] remoteExec ["A3A_fnc_createSDKGarrisonsTemp",2];
+	}else{
+		// HangoverIt - add loadout if garrison isn't spawned
+		private _garrLoadouts = [_markerX] call A3A_fnc_fetchGarrisonLoadout ;
+		_garrLoadouts = [_garrLoadouts, _typeX, _loadout] call A3A_fnc_addTypeGarrisonLoadout;
+		[_markerX, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout ;
 	};
 };

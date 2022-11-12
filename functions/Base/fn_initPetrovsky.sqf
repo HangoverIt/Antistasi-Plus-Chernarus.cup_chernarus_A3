@@ -110,7 +110,7 @@ petrovsky addMPEventHandler ["mpkilled",
 		{
 			_nul = [] spawn {
 				garrison setVariable ["Synd_HQ",[],true];
-				SDKgarrLoadouts setVariable ["Synd_HQ_loadouts",[],true]; //JB Loadouts
+				["Synd_HQ"] call A3A_fnc_clearGarrisonLoadout ;
 				_hrT = server getVariable "hr";
 				_resourcesFIAT = server getVariable "resourcesFIA";
 				[-1*(round(_hrT*0.9)),-1*(round(_resourcesFIAT*0.9))] remoteExec ["A3A_fnc_resourcesFIA",2];
