@@ -38,6 +38,7 @@ class A3A
         class addHC {};
         class addTimeForIdle {};
         class aggressionUpdateLoop {};
+        class findMineFields {};
         class AILoadInfo {};
         class airspaceControl {};
         class rebelAttack {};

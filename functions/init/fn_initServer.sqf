@@ -202,6 +202,7 @@ distanceXs = [] spawn A3A_fnc_distance;
 [] spawn A3A_fnc_resourcecheck;
 [] call A3A_fnc_initSupportCooldowns;
 [] spawn A3A_fnc_aggressionUpdateLoop;
+[] spawn A3A_fnc_findMineFields;
 [] execVM "Scripts\fn_advancedTowingInit.sqf";
 
 //Start JB Missions. Is there a better place?
