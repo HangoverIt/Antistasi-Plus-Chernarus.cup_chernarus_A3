@@ -67,5 +67,4 @@ while {true} do{
 			}; 
 		} ;
     }forEach(_markers - watchpostsFIA - roadblocksFIA - aapostsFIA - atpostsFIA - mortarpostsFIA - hmgpostsFIA);
-
 };
