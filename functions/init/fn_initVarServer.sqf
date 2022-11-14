@@ -565,6 +565,7 @@ if(A3A_hasCup) then {
 	ONLY_DECLARE_SERVER_VAR_FROM_VARIABLE(_x);
 } forEach _templateVariables;
 
+// Run from common init instead
 call compile preProcessFileLineNumbers "Templates\selector.sqf";
 //Set SDKFlagTexture on FlagX
 if (local flagX) then { flagX setFlagTexture SDKFlagTexture } else { [flagX, SDKFlagTexture] remoteExec ["setFlagTexture", owner flagX] };
