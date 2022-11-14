@@ -245,16 +245,16 @@ if (_isControl) then {
 			private _useflare = selectRandom _flaretypes ;
 			while {true} do {
 				if (isNull _grp) exitWith {} ;
-				if (count ((units _grp) select {alive _x}) <= 0) exitWith {} ;
+				if (count ((units _grp) select {alive _x && !(_x getVariable ["incapacitated",false])}) <= 2) exitWith {} ; // Stop firing if numbers too low
 				if (isNull _unit) exitWith {};
-				if (!alive _unit) exitWith {} ;
+				if (!alive _unit) exitWith {};
 				if (!_launched) then {
 					{
 						if (_x isKindOf "Man" || count (crew _x) > 0) then {
 							if ((_grp knowsAbout _x) > 0.7 || (side _x == civilian && _x distance _roadblockpos < 25)) exitWith {
 								// Fire flare
 								_useflare = selectRandom _flaretypes ;
-								diag_log format["Roadblock %1 knows about %2, launch illumination flare %3", _unit, _x, _useflare#0] ;
+								diag_log format["DEBUG: Roadblock %1 knows about %2, launch illumination flare %3", _unit, _x, _useflare#0] ;
 								
 								_flarepos = _roadblockpos vectorAdd [(random 30)-15,(random 30)-15,200];
 								[_flarepos, _useflare#0, _useflare#1] remoteExec ["SCRT_fnc_effect_flare",-2]; // run on clients for visuals
@@ -325,8 +325,12 @@ if (_isControl) then {
 			[_sideX, _uav] call A3A_fnc_createVehicleCrew;
 			_vehiclesX pushBack _uav;
 			_groupUAV = group (crew _uav select 1);
-			{[_x] joinSilent _groupX; _pilots pushBack _x} forEach units _groupUAV;
-			deleteGroup _groupUAV;
+			if (!isNil "_groupUAV") then {
+				if (!isNull _groupUAV) then {
+					{[_x] joinSilent _groupX; _pilots pushBack _x} forEach units _groupUAV;
+					deleteGroup _groupUAV;
+				};
+			};
 		};
 
 		{[_x,""] call A3A_fnc_NATOinit} forEach units _groupX;

@@ -6,6 +6,7 @@
 // Params
 //   1. garrison data
 //   2. Array of units to save at location
+//   3. Optional - flag to also delete unit after adding to garrison
 //
 // Returns updated garrisonData
 //
