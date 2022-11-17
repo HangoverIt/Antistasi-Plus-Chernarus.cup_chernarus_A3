@@ -21,6 +21,7 @@ if (isServer) then {
 	["antennas"] call A3A_fnc_getStatVariable;
 	["hr"] call A3A_fnc_getStatVariable;
 	["dateX"] call A3A_fnc_getStatVariable;
+    ["DateSinceLastMineCheck"] call A3A_fnc_getStatVariable; publicVariable "DateSinceLastMineCheck";    
 	["weather"] call A3A_fnc_getStatVariable;
 	["prestigeOPFOR"] call A3A_fnc_getStatVariable;
 	["prestigeBLUFOR"] call A3A_fnc_getStatVariable;
