@@ -327,7 +327,12 @@ _militaryLoadoutData setVariable ["ATLaunchers", [
 	["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_PG7VR_M", "CUP_PG7VR_M", "CUP_PG7VL_M"], [], ""]
 	]];
 _militaryLoadoutData setVariable ["lightATLaunchers", ["CUP_launch_RPG26"]];
-_militaryLoadoutData setVariable ["missileATLaunchers", []]; 
+_militaryLoadoutData setVariable ["missileATLaunchers", [
+	["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_PG7VL_M", "CUP_PG7VL_M", "CUP_PG7VM_M"], [], ""],
+	["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_PG7VL_M", "CUP_PG7VL_M", "CUP_OG7_M"], [], ""],
+	["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_PG7VL_M", "CUP_TBG7V_M", "CUP_OG7_M"], [], ""],
+	["CUP_launch_RPG7V", "", "", "CUP_optic_PGO7V3", ["CUP_PG7VR_M", "CUP_PG7VR_M", "CUP_PG7VL_M"], [], ""]
+]];   
 _militaryLoadoutData setVariable ["AALaunchers", [
 	["CUP_launch_9K32Strela", "", "", "", ["CUP_Strela_2_M"], [], ""]	
 	]];
@@ -461,7 +466,11 @@ _militiaLoadoutData setVariable ["ATLaunchers", [
 ]];  
 _militiaLoadoutData setVariable ["lightATLaunchers", ["CUP_launch_RPG18"]];
 
-//need missile launchers
+_militiaLoadoutData setVariable ["missileATLaunchers", [
+	["CUP_launch_RPG7V", "", "", "", ["CUP_PG7V_M", "CUP_PG7V_M", "CUP_OG7_M"], [], ""],
+	["CUP_launch_RPG7V", "", "", "", ["CUP_PG7V_M", "CUP_PG7V_M", "CUP_PG7VL_M"], [], ""],
+	["CUP_launch_RPG7V", "", "", "", ["CUP_PG7V_M", "CUP_OG7_M", "CUP_OG7_M"], [], ""]
+]];  
 
 _militiaLoadoutData setVariable ["AALaunchers", []];
 
