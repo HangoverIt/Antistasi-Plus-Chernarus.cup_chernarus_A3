@@ -10,6 +10,8 @@ flagX allowDamage false;
 vehicleBox allowDamage false;
 mapX allowDamage false;
 teamPlayer = side group petrovsky; 				// moved here because it must be initialized before accessing any saved vars
+DateSinceLastMineCheck = [date select 0, 1, 1, 0, 0];
+//garrison setVariable ["DateSinceLastMineCheck", [date select 0, 1, 1, 0, 0], true];
 
 //Disable VN music
 if (isClass (configFile/"CfgVehicles"/"vn_module_dynamicradiomusic_disable")) then {
