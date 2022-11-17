@@ -461,6 +461,8 @@ _militiaLoadoutData setVariable ["ATLaunchers", [
 ]];  
 _militiaLoadoutData setVariable ["lightATLaunchers", ["CUP_launch_RPG18"]];
 
+//need missile launchers
+
 _militiaLoadoutData setVariable ["AALaunchers", []];
 
 _militiaLoadoutData setVariable ["NVGs", []];
