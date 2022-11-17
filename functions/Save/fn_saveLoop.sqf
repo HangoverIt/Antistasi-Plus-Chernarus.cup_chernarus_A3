@@ -67,6 +67,7 @@ private _antennasDeadPositions = [];
 ["datesSinceLastBaseMineChecks", datesSinceLastBaseMineChecks] call A3A_fnc_setStatVariable;
 diag_log format ["save: datesSinceLastBaseMineChecks = %1", datesSinceLastBaseMineChecks]; 
 
+
 ["skillFIA", skillFIA] call A3A_fnc_setStatVariable;
 ["destroyedSites", destroyedSites] call A3A_fnc_setStatVariable;
 ["distanceSPWN", distanceSPWN] call A3A_fnc_setStatVariable;		// backwards compatibility

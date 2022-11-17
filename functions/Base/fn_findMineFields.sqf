@@ -14,6 +14,7 @@ private _mineCheckIntervalAsNumber = dateToNumber [(date select 0), 1, 1, 0, 2];
 
 while {true} do
 {
+<<<<<<< HEAD
     // run this every 2 minutes to ensure there is a large enough time gap between runs for 
     // dateToNumber to register a difference in the interval. this should avoid an intermittent
     // issue of mines being found instantly
