@@ -62,6 +62,12 @@ private _antennasDeadPositions = [];
 ["mrkCSAT", (markersX - controlsX) select {sidesX getVariable [_x,sideUnknown] == Invaders}] call A3A_fnc_setStatVariable;
 ["posHQ", [getMarkerPos respawnTeamPlayer,[getDir boxX,getPos boxX],[getDir mapX,getPos mapX],getPos flagX,[getDir vehicleBox,getPos vehicleBox]]] call A3A_fnc_setStatVariable;
 ["dateX", date] call A3A_fnc_setStatVariable;
+
+// MB save the date since the last check for mines around HQ
+private _dateLastMineCheck = garrison getVariable "DateSinceLastMineCheck";
+["DateSinceLastMineCheck", DateSinceLastMineCheck] call A3A_fnc_setStatVariable;
+
+
 ["skillFIA", skillFIA] call A3A_fnc_setStatVariable;
 ["destroyedSites", destroyedSites] call A3A_fnc_setStatVariable;
 ["distanceSPWN", distanceSPWN] call A3A_fnc_setStatVariable;		// backwards compatibility

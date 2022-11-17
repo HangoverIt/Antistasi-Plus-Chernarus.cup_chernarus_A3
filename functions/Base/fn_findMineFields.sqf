@@ -5,6 +5,8 @@ more work on this to come
 
 while {true} do
 {
+    sleep 10; // run this every minute
+
     // leave all this in so we can expand the code to cover all bases in the future
     // as well as check for a mine detector (perhaps to improve chance of detection)
     // I had problems working out how to get garrison details such as if the garrison
@@ -28,13 +30,23 @@ while {true} do
     
     // Simple code to reveal mines in a 1 km radius when an engineer is in the base
     // only works for the HQ
-    sleep 86,400; // 86,400 secs is a 24 hour period
-
+    private _lastCheckAsNumber = dateToNumber DateSinceLastMineCheck;
+    
+    private _currentDateAsNumber = dateToNumber date;
+    // check every day of game time, the dateToNumber function starts from month 1, day 1 so we set the day to 2 to get one day as an interval
+    // This will only work as long as the year doesn't change, should be easy to adapt to take year into account though, if needed
+    private _mineCheckIntervalAsNumber = dateToNumber [(date select 0), 1, 2, 0, 0];
+    
     private _garrison = garrison getVariable ["Synd_HQ", []];
     private _posHQ = getMarkerPos "Synd_HQ";
 
-    if(_garrison find SDKEng > -1) then
+    if(_garrison find SDKEng > -1 && _currentDateAsNumber > (_lastCheckAsNumber + _mineCheckIntervalAsNumber)) then
     {
+        diag_log "Checking for mines around HQ";
+
+        DateSinceLastMineCheck = date;
+        publicVariable "DateSinceLastMineCheck";
+        
         // seems to detect most kinds of mines and explosives
         _minesX = allmines select {(_x distance _posHQ) < 1000};
 
