@@ -43,8 +43,8 @@ if (getNumber (_config >> "hasDriver") > 0 && isNull driver _vehicle) then {
 private _fnc_addCrewToTurrets = {
 	params ["_config", ["_path", []]];
 	private _turrets = "getNumber (_x >> 'hasGunner') > 0 && getNumber (_x >> 'dontCreateAI') == 0" configClasses (_config >> "Turrets");
-	if (_type == "CUP_O_UAZ_MG_RU") then {
-		// this vehicle has an issue where the gunner position is not labelled as an ai position
+	if (_type in ["CUP_O_UAZ_MG_RU", "CUP_B_UAZ_AA_CDF", "CUP_B_UAZ_MG_CDF", "CUP_B_UAZ_METIS_ACR"]) then {
+		// these vehicles have an issue where the gunner position is not labelled as an ai position
 		// Change query to omit 'dontCreateAI' check
 		_turrets = "getNumber (_x >> 'hasGunner') > 0" configClasses (_config >> "Turrets");
 	};
