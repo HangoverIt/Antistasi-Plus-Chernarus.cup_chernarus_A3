@@ -161,7 +161,8 @@ private _processFIAMarker = {
             if (_occupants inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
                 || { _invaders inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
                 || { _players inAreaArray [_position, distanceSPWN2, distanceSPWN2] isNotEqualTo []
-                || { _marker in forcedSpawn } }}) exitWith {};
+				|| { _squadMembers inAreaArray [_position, distanceSPWN2, distanceSPWN2] isNotEqualTo []
+                || { _marker in forcedSpawn } }}}) exitWith {};
 
             // DISABLE marker
             spawner setVariable [_marker, DISABLED, true];
@@ -182,7 +183,8 @@ private _processFIAMarker = {
             if (_occupants inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
                 || { _invaders inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo []
                 || { _players inAreaArray [_position, distanceSPWN2, distanceSPWN2] isNotEqualTo []
-                || { _marker in forcedSpawn } }})
+				|| { _squadMembers inAreaArray [_position, distanceSPWN2, distanceSPWN2] isNotEqualTo []
+                || { _marker in forcedSpawn } }}})
             then
             {
                 // ENABLE this marker
@@ -202,7 +204,8 @@ private _processFIAMarker = {
                 // then exit (marker still DISABLED)
                 if (_occupants inAreaArray [_position, distanceSPWN1, distanceSPWN1] isNotEqualTo []
                     || { _invaders inAreaArray [_position, distanceSPWN1, distanceSPWN1] isNotEqualTo []
-                    || { _players inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo [] }})
+					|| { _squadMembers inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo [] 
+                    || { _players inAreaArray [_position, distanceSPWN, distanceSPWN] isNotEqualTo [] }}})
                 exitWith {};
 
                 // DESPAWN this marker
@@ -219,7 +222,8 @@ private _processFIAMarker = {
             if (_occupants inAreaArray [_position, distanceSPWN, distanceSPWN] isEqualTo []
                 && { _invaders inAreaArray [_position, distanceSPWN, distanceSPWN] isEqualTo []
                 && { _players inAreaArray [_position, distanceSPWN2, distanceSPWN2] isEqualTo []
-                && { !(_marker in forcedSpawn) } }}) exitWith {};
+				&& { _squadMembers inAreaArray [_position, distanceSPWN2, distanceSPWN2] isEqualTo []
+                && { !(_marker in forcedSpawn) } }}}) exitWith {};
 
             // ENABLED this marker
             spawner setVariable [_marker, ENABLED, true];
@@ -420,6 +424,7 @@ private _teamplayer = [];
 private _occupants = [];
 private _invaders = [];
 private _players = [];
+private _squadMembers = [];
 
 private ["_markers", "_marker", "_position"];
 
@@ -436,6 +441,7 @@ do
         _occupants = [];
         _invaders = [];
         _teamplayer = [];
+		_squadMembers = [] ;
 
         _spawners = allunits select { _x getVariable ["spawner", false]; };
 
@@ -452,6 +458,13 @@ do
         // This array is used to spawn civilians in cities and rebel garrisons, so ignore remote controlled units
         _players = allPlayers - entities "HeadlessClient_F";
         _players = _players select { _x getVariable ["owner",objNull] == _x };
+		
+		// HangoverIt - add AI team members to _squadMembers list so FIA locations are also spawned when they enter the spawn area
+		{
+			if (leader _x == _x) then {
+				_squadMembers append (units _x select {alive _x}) ;
+			};
+		}forEach _players ;
     };
 
     {
