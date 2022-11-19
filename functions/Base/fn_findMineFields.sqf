@@ -5,7 +5,10 @@ more work on this to come
 
 while {true} do
 {
-    sleep 10; // run this every minute
+    // run this every 2 minutes to ensure there is a large enough time gap between runs for 
+    // dateToNumber to register a difference n the interval. this should avoid an intermittent
+    // issue of mines being found instantly
+    sleep 120; 
 
     // leave all this in so we can expand the code to cover all bases in the future
     // as well as check for a mine detector (perhaps to improve chance of detection)
@@ -35,7 +38,7 @@ while {true} do
     private _currentDateAsNumber = dateToNumber date;
     // check every day of game time, the dateToNumber function starts from month 1, day 1 so we set the day to 2 to get one day as an interval
     // This will only work as long as the year doesn't change, should be easy to adapt to take year into account though, if needed
-    private _mineCheckIntervalAsNumber = dateToNumber [(date select 0), 1, 2, 0, 0];
+    private _mineCheckIntervalAsNumber = dateToNumber [(date select 0), 1, 1, 0, 2];   // [(date select 0), 1, 2, 0, 0]
     
     private _garrison = garrison getVariable ["Synd_HQ", []];
     private _posHQ = getMarkerPos "Synd_HQ";
