@@ -8,7 +8,7 @@ _size = [_siteX] call A3A_fnc_sizeMarker;
 _positionX = getMarkerPos _siteX;
 _estatic = if (_siteX in roadblocksFIA) then {"Technicals"} else {"Statics"};
 _textX = format [
-    "<br/>Garrison men: %1<br/><br/>Squad Leaders: %2<br/>%11: %3<br/>Riflemen: %4<br/>Autoriflemen: %5<br/>Engineer: %6<br/>Medics: %7<br/>Grenadiers: %8<br/>Marksmen: %9<br/>AT Men: %10<br/>Static Weap: %11", 
+    "<br/>Garrison men: %1<br/><br/>Squad Leaders: %2<br/>%12: %3<br/>Riflemen: %4<br/>Autoriflemen: %5<br/>Engineer: %6<br/>Medics: %7<br/>Grenadiers: %8<br/>Marksmen: %9<br/>AT Men: %10<br/>Static Weap: %11", 
     count _garrison, 
     {_x == SDKSL} count _garrison, 
     {_x == staticCrewTeamPlayer} count _garrison, 
