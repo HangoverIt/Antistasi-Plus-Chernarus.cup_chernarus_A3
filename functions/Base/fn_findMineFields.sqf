@@ -1,5 +1,4 @@
 /*
-<<<<<<< HEAD
 MB If an engineer is in the garrison reveal mines within a 1km radius of the base every 24 hours
 more work on this to come
 HangoverIt - updated 25th Nov 2022
@@ -12,16 +11,13 @@ waitUntil {sleep 1; placementDone};
 // This will only work as long as the year doesn't change, should be easy to adapt to take year into account though, if needed
 private _mineCheckIntervalAsNumber = dateToNumber [(date select 0), 1, 1, 0, 2];   // [(date select 0), 1, 2, 0, 0]
 
-while {true} do
-{
-<<<<<<< HEAD
+while {true} do{
     // run this every 2 minutes to ensure there is a large enough time gap between runs for 
     // dateToNumber to register a difference in the interval. this should avoid an intermittent
     // issue of mines being found instantly
     diag_log "MINECHECK: starting mine check";
     sleep 300;
     // Simple code to reveal mines in a 1 km radius when an engineer is in the base
-
     // find all our bases
     private _markers = markersX select { sidesX getVariable [_x, sideUnknown] == teamPlayer};
 
