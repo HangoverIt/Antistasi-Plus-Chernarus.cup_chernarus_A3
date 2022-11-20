@@ -26,7 +26,8 @@ private _specialVarLoads = [
 	"bombRuns","wurzelGarrison","aggressionOccupants", "aggressionInvaders", "attackCountdownInvaders", "testingTimerIsActive",
 	"traderDiscount", "supportPoints", "isTraderQuestCompleted", "traderPosition", "areOccupantsDefeated", "areInvadersDefeated",
 	"rebelLoadouts", "randomizeRebelLoadoutUniforms", 
-	"version", "HR_Garage"
+	"version", "HR_Garage",
+	"garrisonLoadouts"
 ];
 
 private _varName = _this select 0;
@@ -494,7 +495,31 @@ if (_varName in _specialVarLoads) then {
         diag_log format ["Rebel Loadouts: %1", str _varvalue];
         rebelLoadouts = _varvalue;  publicVariable "rebelLoadouts";
     };
+	
+	if(_varname == 'garrisonLoadouts') then {
+		//JB limited weapons, load garrison loadouts
 
+		diag_log format["LOADDEBUG: reading garrison loadout %1", _varValue] ;
+		{
+			_location = (_x#0) ;
+			diag_log format["LOADDEBUG: processing location %1", _location] ;
+			if (count _location >= 9) then {
+				_suffix = (_x#0) select [(count _location) - 9, 9];
+				if (_suffix == "_loadouts") then {
+					_location = _location select [0, (count _location) - 9] ;//strip suffix
+					diag_log format["LOADDEBUG: stripping _loadouts suffix to %1", _location] ;
+				};
+			};
+			if (_location select [0,4] != "cba_") then {
+				if !(_x#1 isEqualTo []) then {
+					diag_log format["LOADDEBUG: attempting to call storeGarrisonLoadout for location %1, data %2", _location, _x#1] ;
+					[_location, _x#1] call A3A_fnc_storeGarrisonLoadout ; // upgrade any old save data
+				};
+			};
+		} foreach _varValue;
+		diag_log format["LOADDEBUG: Created %1 garrison loadouts with content %2", count _varValue, _varValue] ;
+	};
 } else {
+	diag_log format ["LOADDEBUG: Loading custom save variable %1 with value %2", _varName, _varValue];
 	call compile format ["%1 = %2",_varName,_varValue];
 };
