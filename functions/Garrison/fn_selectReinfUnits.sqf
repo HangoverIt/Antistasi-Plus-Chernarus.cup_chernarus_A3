@@ -81,19 +81,15 @@ while {_currentUnitCount < (_maxUnitSend - 2) && {_maxCargoSpaceNeeded+_maxVehic
         };
     };
 
-    //No suitable vehicle found, usign different vehicle to reinforce
+    //No suitable vehicle found, using different vehicle to reinforce
     if(_currentSelected == "") then
     {
         //Calculate the amount of units that we still need to send against the amount of units we still have available after substracting driver and vehicle
         //Save whatever number is smaller
+		diag_log format ["DEBUG: calculating needed cargo space for new vehicle request. _maxCargoSpaceNeeded %1, _maxUnitSend %2, _currentUnitCount %3", _maxCargoSpaceNeeded, _maxUnitSend, _currentUnitCount] ;
         private _neededCargoSpace = _maxCargoSpaceNeeded min (_maxUnitSend - _currentUnitCount - 2);
 
-        if(_neededCargoSpace == 0) then
-        {
-            [1, "_neededCargoSpace is 0, something went really wrong!", _fileName] call A3A_fnc_log;
-        }
-        else
-        {
+        if(_neededCargoSpace > 0) then {
             [4, format ["No reinf vehicle found, selecting not needed transport vehicle, needs space for %1 passengers", _neededCargoSpace], _fileName] call A3A_fnc_log;
             if (_isAir) then
             {
