@@ -7,7 +7,7 @@ _unit = _units select 0;
 private _face = face _unit;
 private _voice = speaker player;
 
-if (_unit == Miller) exitWith {["Control Unit", "You cannot control Miller."] call A3A_fnc_customHint;};
+if (_unit == petrovsky) exitWith {["Control Unit", "You cannot control Petrovsky."] call A3A_fnc_customHint;};
 if (captive player) exitWith {["Control Unit", "You cannot control AI while undercover."] call A3A_fnc_customHint;};
 if (player != leader group player) exitWith {["Control Unit", "You cannot control AI if you are not the squad leader."] call A3A_fnc_customHint;};
 if (isPlayer _unit) exitWith {["Control Unit", "You cannot control another player."] call A3A_fnc_customHint;};
