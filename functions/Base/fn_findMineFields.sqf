@@ -19,7 +19,14 @@ while {true} do
     // This will only work as long as the year doesn't change, should be easy to adapt to take year into account though, if needed
     private _mineCheckIntervalAsNumber = dateToNumber [(date select 0), 1, 1, 0, 2];   // [(date select 0), 1, 2, 0, 0]
 
+
+    // {(getMarkerPos _x) distance2D (getMarkerPos "Synd_HQ") < 5000}
+    // diag_log "try to get nearest enemy position";
+    // diag_log (markersX select { (sidesX getVariable [_x, sideUnknown] != teamPlayer) && (getMarkerPos _x distance2D getMarkerPos "Synd_HQ" < 2000)});    //([markersX, player] call BIS_fnc_nearestPosition);
+    // diag_log "end this bit";
+    
     // find all our bases
+    // (markersX - watchpostsFIA - roadblocksFIA - aapostsFIA - atpostsFIA - mortarpostsFIA - hmgpostsFIA) select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
     private _markers = markersX select { sidesX getVariable [_x, sideUnknown] == teamPlayer};
     {
         private _markerPos = getMarkerPos _x;
