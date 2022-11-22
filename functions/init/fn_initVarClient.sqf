@@ -5,8 +5,6 @@ scriptName "initVarClient.sqf";
 private _fileName = "initVarClient.sqf";
 [2,"initVarClient started",_fileName] call A3A_fnc_log;
 
-call compile preProcessFileLineNumbers "Templates\selector.sqf"; // Stop headless clients having issues with assumed global vars
-
 //Is music enabled
 musicON = false;
 
