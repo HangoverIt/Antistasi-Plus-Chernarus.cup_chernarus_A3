@@ -230,8 +230,15 @@ if(_type == "reinforce") then
   {
 
     _selectedBase = [_possibleBases, _destination] call BIS_fnc_nearestPosition;
-    //Found base to reinforce, selecting units now
-    _units = [_selectedBase, _destination] call A3A_fnc_selectReinfUnits;
+	// HangoverIt - check if there's a route to the destination. If not then try using air units
+	private _route = [getMarkerPos _selectedBase, _destinationPos] call A3A_fnc_findPath;
+	//Found base to reinforce, selecting units now
+	if (_route isEqualTo []) then {
+		diag_log format ["CreateAIAction[%1]: Unable to find route, attempting air reinforcement", _convoyID];
+		_units = [_selectedBase, _destination, true] call A3A_fnc_selectReinfUnits;
+	}else{
+		_units = [_selectedBase, _destination] call A3A_fnc_selectReinfUnits;
+	};
 
     if(_units isEqualTo []) then
     {

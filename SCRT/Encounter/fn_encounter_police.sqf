@@ -4,7 +4,13 @@ private _fileName = "fn_encounter_police";
 private _vehicles = [];
 private _groups = [];
 
-private _allPlayers = (call BIS_fnc_listPlayers) select {side _x == teamPlayer};
+private _allPlayers = (call BIS_fnc_listPlayers) select {side _x == teamPlayer || side _x == civilian};
+if (_allPlayers isEqualTo []) exitWith {
+	// No players
+	[2, format ["No players found from BIS_fnc_listPlayers %1. Aborting Police Car Event.",(call BIS_fnc_listPlayers)], _filename] call A3A_fnc_log;
+	isEventInProgress = false;
+    publicVariableServer "isEventInProgress";
+};
 private _player = selectRandom _allPlayers;
 private _side = if (gameMode == 4) then {Invaders} else {Occupants};
 

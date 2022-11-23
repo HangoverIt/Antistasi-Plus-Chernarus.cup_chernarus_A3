@@ -6,7 +6,7 @@ private _positionX = getMarkerPos _markerX;
 private _radiusX = 1;
 private _garrison = garrison getVariable [_markerX, []];
 // JB limited gear code
-private _garrLoadouts = (SDKgarrLoadouts getVariable [_markerX + "_loadouts",[]]);
+private _garrLoadouts = [_markerX] call A3A_fnc_fetchGarrisonLoadout ;
 //
 private _veh = objNull;
 private _road = objNull;
@@ -41,13 +41,10 @@ _pos = [_positionX, 9, _dirveh + 45] call BIS_Fnc_relPos;
 _groupX = [_pos, teamPlayer, _garrison,true,false] call A3A_fnc_spawnGroup;
 private _groupXUnits = units _groupX;
 // JB limited gear code
-private _num = 0;
 {
-    [_x,_markerX] spawn A3A_fnc_FIAinitBases; //
-    private _loadout = _garrLoadouts select _num;
-	_x setUnitLoadout _loadout;
-	_num = _num +1
-} forEach _groupXUnits;
+	[_x,_markerX] spawn A3A_fnc_FIAinitBases;
+	[_x, _garrLoadouts] call A3A_fnc_assignGarrisonLoadout ;
+}forEach _groupXUnits ;
 
 sleep 1;
 _groupX setFormation "STAG COLUMN";
@@ -101,9 +98,14 @@ if ({alive _x} count units _groupX == 0) then {
 
 waitUntil {sleep 1; (spawner getVariable _markerX == 2) or (!(_markerX in roadblocksFIA))};
 
+// HangoverIt - ensure still an owned outpost. Clear and set all loadouts according to alive soldiers
 private _outpLoadoutDespawn = [];
-{ if (alive _x) then { _loadoutEnd = getUnitLoadout _x; _outpLoadoutDespawn append [_loadoutEnd]; deleteVehicle _x }; } forEach units _groupX;
-SDKgarrLoadouts setVariable [_markerX + "_loadouts", _outpLoadoutDespawn, true];
+if (_markerX in roadblocksFIA) then {
+	_mkrUnits = allunits select { (_x getVariable ["markerX", ""]) == _markerX; };
+	_outpLoadoutDespawn = [_markerX] call A3A_fnc_fetchGarrisonLoadout ; // Fetch any other saved data (from other despawn routines)
+	_outpLoadoutDespawn = [_outpLoadoutDespawn, _mkrUnits] call A3A_fnc_addGarrisonLoadout ;
+	[_markerX, _outpLoadoutDespawn] call A3A_fnc_storeGarrisonLoadout;
+};
 
 {deleteVehicle _x} foreach _lamps;
 

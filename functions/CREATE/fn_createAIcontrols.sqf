@@ -199,7 +199,7 @@ if (_isControl) then {
 				{[_x,"",false] call A3A_fnc_NATOinit; _soldiers pushBack _x} forEach units _groupX;
 			};
 		};
-	} else {
+	} else { // isFIA
 		_typeVehX = if(random 10 < (tierWar + (difficultyCoef / 2))) then {
 			if (_sideX == Occupants) then {selectRandom vehFIAAPC} else {selectRandom vehWAMAPC};
 		} else {
@@ -233,6 +233,46 @@ if (_isControl) then {
 	};
 	// Set night time additional lights
 	if (sunOrMoon < 1) then {
+		_fn_flare = {
+			params["_unit", "_grp"] ;
+			private _secs = 80 ;
+			private _launched = false ;
+			private _flare = objNull ;
+			private _flarelight = objNull ;
+			private _roadblockpos = getPos _unit ;
+			private _flarepos = [] ;
+			private _flaretypes = [["F_40mm_White",[1,1,1]], ["F_40mm_Red", [1,0,0]], ["F_40mm_Yellow", [1,1,0]], ["F_40mm_Green", [0,1,0]]] ;
+			private _useflare = selectRandom _flaretypes ;
+			while {true} do {
+				if (isNull _grp) exitWith {} ;
+				if (count ((units _grp) select {alive _x && !(_x getVariable ["incapacitated",false])}) <= 2) exitWith {} ; // Stop firing if numbers too low
+				if (isNull _unit) exitWith {};
+				if (!alive _unit) exitWith {};
+				if (!_launched) then {
+					{
+						if (_x isKindOf "Man" || count (crew _x) > 0) then {
+							if ((_grp knowsAbout _x) > 0.7 || (side _x == civilian && _x distance _roadblockpos < 25)) exitWith {
+								// Fire flare
+								_useflare = selectRandom _flaretypes ;
+								diag_log format["DEBUG: Roadblock %1 knows about %2, launch illumination flare %3", _unit, _x, _useflare#0] ;
+								
+								_flarepos = _roadblockpos vectorAdd [(random 30)-15,(random 30)-15,200];
+								[_flarepos, _useflare#0, _useflare#1] remoteExec ["SCRT_fnc_effect_flare",-2]; // run on clients for visuals
+								_flare = ([_flarepos, _useflare#0, _useflare#1] call SCRT_fnc_effect_flare) ; // run locally for server to get flare object
+								
+								_launched = true;
+							};
+						};
+					}forEach ((nearestObjects[_roadblockpos, ["Man", "Car", "Tank"], 100, false]) select {alive _x && !(side _grp == side _x)});
+				}else{				
+					sleep 0.1;
+					if !(alive _flare) then {
+						_secs = _secs - 1;
+					};
+					if (_secs <= 0) then {_launched = false ;_secs=(random 80) + 80;};
+				};
+			};
+		};
 		_veh setPilotLight true;
 		
 		_pos = _positionX getPos [8, _dirveh + 45] ;
@@ -251,23 +291,25 @@ if (_isControl) then {
 		_lamp = createVehicle ["RoadCone_L_F", _pos, [], 0, "CAN_COLLIDE"];
 		_lamp setDir _dirveh;
 		_vehiclesX pushBack _lamp ;
+		[_veh, _groupX] spawn _fn_flare;
 	};
-} else { // _isFIA
+} else { // not isControl (marker not on a road)
 	_markersX = markersX select {(getMarkerPos _x distance _positionX < distanceSPWN) and (sidesX getVariable [_x,sideUnknown] == teamPlayer)};
-	_markersX = _markersX - ["Synd_HQ"] - watchpostsFIA - roadblocksFIA - aapostsFIA - atpostsFIA - mortarpostsFIA - hmgpostsFIA;
+	_markersX = _markersX - ["Synd_HQ"] - watchpostsFIA - roadblocksFIA - aapostsFIA - atpostsFIA - mortarpostsFIA - hmgpostsFIA - citiesX;
 	_frontierX = if (count _markersX > 0) then {true} else {false};
 	if (_frontierX) then {
 		_cfg = CSATSpecOp;
+		_sideX = Invaders ;
 		if (sidesX getVariable [_markerX,sideUnknown] == Occupants) then{
 			_cfg = NATOSpecOp;
 			_sideX = Occupants;
 		};
 		_size = [_markerX] call A3A_fnc_sizeMarker;
-		if ({if (_x inArea _markerX) exitWith {1}} count allMines == 0) then {
+		if ({if (_x inArea _markerX) exitWith {1}} count allMines == 0 && (random 2) < 1) then {
 			diag_log format ["%1: [Antistasi]: Server | Creating a Minefield at %1", _markerX];
 			private _mines = ([A3A_faction_inv,A3A_faction_occ] select (_sideX == Occupants)) getVariable "minefieldAPERS";
 			private _revealTo = [Invaders,Occupants] select (_sideX == Occupants);
-			for "_i" from 1 to 45 do {
+			for "_i" from 1 to 20 do {
 				_mineX = createMine [ selectRandom _mines ,_positionX,[],_size];
 				_revealTo revealMine _mineX;
 			};
@@ -283,8 +325,12 @@ if (_isControl) then {
 			[_sideX, _uav] call A3A_fnc_createVehicleCrew;
 			_vehiclesX pushBack _uav;
 			_groupUAV = group (crew _uav select 1);
-			{[_x] joinSilent _groupX; _pilots pushBack _x} forEach units _groupUAV;
-			deleteGroup _groupUAV;
+			if (!isNil "_groupUAV") then {
+				if (!isNull _groupUAV) then {
+					{[_x] joinSilent _groupX; _pilots pushBack _x} forEach units _groupUAV;
+					deleteGroup _groupUAV;
+				};
+			};
 		};
 
 		{[_x,""] call A3A_fnc_NATOinit} forEach units _groupX;

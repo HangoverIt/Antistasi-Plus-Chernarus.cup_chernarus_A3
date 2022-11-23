@@ -30,7 +30,7 @@ _lootActionID = [_vehicle,
 	{if (_caller distance (_caller findNearestEnemy _caller) < 100) then {["Gather Scattered Loot", "You cannot gather loot while there are enemy units within 100m of your position."] call A3A_fnc_customHint};
 	if (captive _caller) then {["Gather Scattered Loot", "You cannot loot whilst you are undercover."] call A3A_fnc_customHint}},
 	[],
-	3,
+	8,
 	5,
 	false,
 	false

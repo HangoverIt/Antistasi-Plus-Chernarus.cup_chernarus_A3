@@ -74,7 +74,7 @@ try {
 	[_trader, _target] call HALs_store_fnc_addActionTrader;
 	true
 } catch {
-	[_exception] call HALs_fnc_log;
+	[_exception select 0] call HALs_fnc_log;
 	[_exception select 0] call BIS_fnc_error;
 	false
 };

@@ -1,36 +1,44 @@
 /*
  * Name:	fn_reorgLoadoutSquad
- * Date:	12/09/2022
- * Version: 1.0
- * Author:  JB
+ * Date:	05/11/2022
+ * Version: 1.1
+ * Author:  JB/AH
  *
  * Description:
  * converts loadout into usable array
  *
  * Parameter(s):
- * _PARAM1 (TYPE): DESCRIPTION.
- * _PARAM2 (TYPE): DESCRIPTION.
+ * _PARAM1 (Array): Array of unit types
  *
  * Returns:
  * %RETURNS%
  */
 
+private ["_garrison", "_loadout", "_primary", "_secondary", "_handgun", "_uniform", "_backpack", "_headgear", "_facewear", "_binocular", "_items"];
 
+_garrison = _this;
 
-	private ["_garrison", "_loadout", "_primary", "_secondary", "_handgun", "_uniform", "_backpack", "_headgear", "_facewear", "_binocular", "_items"];
+_singleArray = [];
+_doubleArray = [];
+_tripleArray = [];
 
-	_garrison = _this;
-	
-	_singleArray = [];
-	_doubleArray = [];
-	_tripleArray = [];
-	
-	_allSingle = []; 
-	_allDouble = [];
-	_allTriple = [];
+_allSingle = []; 
+_allDouble = [];
+_allTriple = [];
+
+_loadout = [] ;
 
 { 
 	_loadout = rebelLoadouts get _x; 
+	if (isNil "_loadout") then {
+		// use another defined as backup
+		private _keys = keys rebelLoadouts;
+		if (_keys isEqualTo []) then {
+			_loadout = [] call A3A_fnc_loadout_createBase;
+		}else{
+			_loadout = rebelLoadouts get (_keys select 0) ;
+		};
+	};
 	
 	_primary = _loadout select 0;
 	_secondary = _loadout select 1;
@@ -88,9 +96,9 @@ _allTripleCons = [];
 _allCons = _allSingleCons + _allDouble + _allTripleCons;
 
 _fullSquadGear = [];   
- 	{ 
- 	_fullSquadGear = [_fullSquadGear, (_x select 0),(_x select 1)] call BIS_fnc_addToPairs 
- 	} foreach _allCons;
+{ 
+	_fullSquadGear = [_fullSquadGear, (_x select 0),(_x select 1)] call BIS_fnc_addToPairs 
+} foreach _allCons;
  	
- 	_fullSquadGear;
+_fullSquadGear;
 

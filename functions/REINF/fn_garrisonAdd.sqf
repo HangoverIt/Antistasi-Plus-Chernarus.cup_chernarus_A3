@@ -1,4 +1,4 @@
-private ["_hr","_resourcesFIA","_typeX","_costs","_markerX","_garrison","_positionX","_unit","_groupX","_veh","_pos","_loadout"];
+private ["_hr","_resourcesFIA","_typeX","_costs","_markerX","_garrison","_positionX","_unit","_groupX","_veh","_pos","_loadout", "_arsenalIndex"];
 
 _hr = server getVariable "hr";
 
@@ -56,36 +56,39 @@ _loadout = rebelLoadouts get _typeX;
 
 _fullUnitGear = _loadout call A3A_fnc_reorgLoadoutUnit;
 
-	_emptyList = [];
-	{
-	private "_number";
-	_number = [jna_dataList select (_x select 0 call jn_fnc_arsenal_itemType), _x select 0]call jn_fnc_arsenal_itemCount; 
-	if (_number < ((2 * ((_x select 1) + 1))) && !(_number == -1)) then { _emptyList pushBack (_x select 0) }
-	} forEach _fullUnitGear;
-	
-	if (count _emptyList > 0) exitWith {
-		
-		private _weaps = [];
-		private _mags = [];
-		private _strings = [];
-		
-		{
-			_weaps = getText (configFile >> "CfgWeapons" >> _x >> "displayName");
-			_strings pushBack _weaps;
-			_mags = getText (configFile >> "CfgMagazines" >> _x >> "displayName");
-			_strings pushBack _mags;
-		} forEach _emptyList;
-		
-		_strings = _strings - [""];
-		
-		["Garrison", format ["The following gear has run too low for you to recruit this unit: <t color='#ffff00'>%1", _strings], "FAIL"] call SCRT_fnc_ui_showDynamicTextMessage;
+_cannotAllocateList = [];
+{
+	_arsenalIndex = (_x select 0) call jn_fnc_arsenal_itemType;
+	if (_arsenalIndex >= 0) then {
+		private _number = [jna_dataList select (_arsenalIndex), _x select 0] call jn_fnc_arsenal_itemCount; 
+		if (_number < ((2 * ((_x select 1) + 1))) && (_number != -1)) then { _cannotAllocateList pushBack (_x select 0) };
 	};
+} forEach _fullUnitGear;
 
-	_garrLoadouts = (SDKgarrLoadouts getVariable [_markerX + "_loadouts",[]]);
-	_garrLoadouts append [_loadout];	
-	SDKgarrLoadouts setVariable [_markerX + "_loadouts", _garrLoadouts, true];
+if (count _cannotAllocateList > 0) exitWith {
+	
+	private _weaps = [];
+	private _mags = [];
+	private _strings = [];
+	
+	{
+		_weaps = getText (configFile >> "CfgWeapons" >> _x >> "displayName");
+		_strings pushBack _weaps;
+		_mags = getText (configFile >> "CfgMagazines" >> _x >> "displayName");
+		_strings pushBack _mags;
+	} forEach _cannotAllocateList;
+	
+	_strings = _strings - [""];
+	
+	["Garrison", format ["The following gear has run too low for you to recruit this unit: <t color='#ffff00'>%1", _strings], "FAIL"] call SCRT_fnc_ui_showDynamicTextMessage;
+};
 
-	{ [_x select 0 call jn_fnc_arsenal_itemType, _x select 0, _x select 1]call jn_fnc_arsenal_removeItem } forEach _fullUnitGear;
+{ 
+	_arsenalIndex = (_x select 0) call jn_fnc_arsenal_itemType;
+	if (_arsenalIndex >= 0) then {
+		[_x select 0 call jn_fnc_arsenal_itemType, _x select 0, _x select 1] call jn_fnc_arsenal_removeItem ;
+	};
+} forEach _fullUnitGear;
 //
 
 [-1,-_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
@@ -100,5 +103,10 @@ if (sidesX getVariable [_markerX,sideUnknown] == teamPlayer) then {
 
 	if (spawner getVariable _markerX != 2) then {
 		[_markerX,_typeX] remoteExec ["A3A_fnc_createSDKGarrisonsTemp",2];
+	}else{
+		// HangoverIt - add loadout if garrison isn't spawned
+		private _garrLoadouts = [_markerX] call A3A_fnc_fetchGarrisonLoadout ;
+		_garrLoadouts = [_garrLoadouts, _typeX, _loadout] call A3A_fnc_addTypeGarrisonLoadout;
+		[_markerX, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout ;
 	};
 };

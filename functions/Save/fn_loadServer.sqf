@@ -186,19 +186,7 @@ if (isServer) then {
 		diag_log "WurzelGarrison found, loading it!";
 		["wurzelGarrison"] call A3A_fnc_getStatVariable;
 	};
-
-	//JB limited weapons, load garrison loadouts
-	private _loadoutMarker = [];
-	private _loadout = [];
-
-	_num = 0;
-	{
-		_loadoutMarker = ((garrisonLoadouts select _num) select 0);
-		_loadout = ((garrisonLoadouts select _num) select 1);
-		SDKgarrLoadouts setVariable [_loadoutMarker, _loadout, true];
-		_num = _num + 1;
-	} foreach garrisonLoadouts;
-
+	
     //Load state of testing timer
     ["testingTimerIsActive"] call A3A_fnc_getStatVariable;
 

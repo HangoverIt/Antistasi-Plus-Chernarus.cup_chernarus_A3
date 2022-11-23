@@ -130,15 +130,35 @@ while {true} do {
 	if (count _roads > 1) exitWith {};
 	_radiusX = _radiusX + 50;
 };
-private _roadE = _roads select 1;
-private _roadR = _roads select 0;
+private _roadpos = (getRoadInfo(_roads select 0)) select 6;
+//private _roadR = _roads select 0;
 sleep 1;
 
+private _route = [_roadpos, _destinationPosition] call A3A_fnc_findPath;
+_route = _route apply { _x select 0 };			// reduce to position array
+if (_route isEqualTo []) then { 
+	[1, format ["AS Ambush mission does not have route!"], _filename, true] call A3A_fnc_log;
+	_route = [_roadpos, _destinationPosition] ;
+}else{
+	_state = [];
+	_state = [_route, 40, _state] call A3A_fnc_findPosOnRoute;
+	_route = _route select [_state#2, count _route]; // Trim route down to start 40 m ahead
+};
+private _pathState = [];			// Set the scope so that state is preserved between findPosOnRoute calls
+
 //spawning escort
-private _escortVehicleData = [position _roadE, 0, _escortVehicleClass, _sideX] call A3A_fnc_spawnVehicle;
+_pathState = [_route, [20, 0] select (count _pathState == 0), _pathState] call A3A_fnc_findPosOnRoute; // Find location down route
+while {true} do {
+	// make sure there are no other vehicles within 10m
+	if (count (ASLtoAGL (_pathState#0) nearEntities 10) == 0) exitWith {};
+	_pathState = [_route, 10, _pathState] call A3A_fnc_findPosOnRoute;
+};
+private _escortVehicleData = [ASLtoAGL (_pathState#0) vectorAdd [0,0,0.5], 0, _escortVehicleClass, _sideX] call A3A_fnc_spawnVehicle;
 private _escortVeh = _escortVehicleData select 0;
+private _vecUp = (_pathState#1) vectorCrossProduct [0,0,1] vectorCrossProduct (_pathState#1);       // correct pitch angle
+_escortVeh setVectorDirAndUp [_pathState#1, _vecUp];
 _escortVeh limitSpeed 35;
-[_escortVeh, "Officer Convoy"] spawn A3A_fnc_inmuneConvoy;
+[_escortVeh, "Officer Convoy", false] spawn A3A_fnc_inmuneConvoy;
 private _escortVehCrew = crew _escortVeh;
 {[_x] call A3A_fnc_NATOinit} forEach _escortVehCrew;
 [_escortVeh, _sideX] call A3A_fnc_AIVEHinit;
@@ -147,20 +167,28 @@ _groups pushBack _escortVehicleGroup;
 _vehicles pushBack _escortVeh;
 
 //spawning escort inf
-private _groupX = [position _roadE, _sideX, _infantrySquadArray] call A3A_fnc_spawnGroup;
+private _groupX = [_roadpos, _sideX, _infantrySquadArray] call A3A_fnc_spawnGroup;
 {
     _x assignAsCargo _escortVeh; 
-    // _x moveInCargo _escortVeh; 
     [_x] join _escortVehicleGroup; 
     [_x] call A3A_fnc_NATOinit;
+    _x moveInCargo _escortVeh; 
 } forEach units _groupX;
 deleteGroup _groupX;
 
 //officer and his vehicle
-private _officerVehicleData = [position _roadR, 0, _officerVehicleClass, _sideX] call A3A_fnc_spawnVehicle;
+_pathState = [_route, [20, 0] select (count _pathState == 0), _pathState] call A3A_fnc_findPosOnRoute; // Find location down route
+while {true} do {
+	// make sure there are no other vehicles within 10m
+	if (count (ASLtoAGL (_pathState#0) nearEntities 10) == 0) exitWith {};
+	_pathState = [_route, 10, _pathState] call A3A_fnc_findPosOnRoute;
+};
+private _officerVehicleData = [ASLtoAGL (_pathState#0) vectorAdd [0,0,0.5], 0, _officerVehicleClass, _sideX] call A3A_fnc_spawnVehicle;
 private _officerVeh = _officerVehicleData select 0;
+_vecUp = (_pathState#1) vectorCrossProduct [0,0,1] vectorCrossProduct (_pathState#1);       // correct pitch angle
+_officerVeh setVectorDirAndUp [_pathState#1, _vecUp];
 _officerVeh limitSpeed 35;
-[_officerVeh, "Officer Convoy"] spawn A3A_fnc_inmuneConvoy;
+[_officerVeh, "Officer Convoy", false] spawn A3A_fnc_inmuneConvoy;
 private _officerVehCrew = crew _officerVeh;
 {[_x] call A3A_fnc_NATOinit} forEach _officerVehCrew;
 [_officerVeh, _sideX] call A3A_fnc_AIVEHinit;
@@ -169,7 +197,7 @@ _groups pushBack _officerVehicleGroup;
 _vehicles pushBack _officerVeh;
 
 private _groupOfficer = createGroup _sideX;
-private _officer =  [_groupOfficer, _officerClass, position _roadR, [], 0, "NONE"] call A3A_fnc_createUnit;
+private _officer =  [_groupOfficer, _officerClass, _roadpos, [], 0, "NONE"] call A3A_fnc_createUnit;
 _officer allowDamage false;
 
 [_officer] join _officerVehicleGroup; 
@@ -181,6 +209,17 @@ sleep 2;
 _officer allowDamage true;
 _officer assignAsCargo _officerVeh; 
 _officer moveInCargo _officerVeh; 
+sleep 1;
+if !(_officer in crew _officerVeh) then {
+	// All seats are full, remove someone from crew and replace with officer
+	// crew list is ordered with cargo last so should be ok to assume we remove the last
+	// person to replace with officer. If this is wrong then, meh, he's just become a gunner or commander
+	_lastCrewMember = (crew _officerVeh) select ((count crew _officerVeh) - 1);
+	[_lastCrewMember] orderGetIn false ;
+	unassignVehicle _lastCrewMember ;
+	deleteVehicle _lastCrewMember ;
+	_officer moveInAny _officerVeh ;
+};
 
 [3, "Waiting for starting convoy movement...", _filename] call A3A_fnc_log;
 waitUntil {
@@ -192,21 +231,16 @@ waitUntil {
 
 [3, "Setting things in motion...", _filename] call A3A_fnc_log;
 
-if (alive _officer) then {
-    private _officerWP = _officerVehicleGroup addWaypoint [_destinationPosition, 5];
-    _officerWP setWaypointType "MOVE";
-    _officerWP setWaypointBehaviour "SAFE";
-    [3, format ["Officer Vehicle Waypoint: %1", str _destinationPosition], _filename] call A3A_fnc_log;
-};
-
-sleep 5;
-
-if ((units _escortVehicleGroup) findIf {alive _x} != -1) then {
-    private _escortWP = _escortVehicleGroup addWaypoint [_destinationPosition, 5];
-    _escortWP setWaypointType "MOVE";
-    _escortWP setWaypointBehaviour "SAFE";
-    [3, format ["Escort Vehicle Waypoint: %1", str _destinationPosition], _filename] call A3A_fnc_log;
-};
+_route = _route select [_pathState#2, count _route];        // remove navpoints that we already passed while spawning
+// This array is used to share remaining convoy vehicles between threads
+private _convoyVehicles = +_vehicles; // make copy of vehicle array
+reverse _convoyVehicles;
+{
+    (driver _x) stop false;
+    [_x, _route, _convoyVehicles, 30, _x == _officerVeh] spawn A3A_fnc_vehicleConvoyTravel;
+    sleep 3;
+} forEach _convoyVehicles;
+[3, format ["Officer and Escort Vehicle Waypoint: %1", str _destinationPosition], _filename] call A3A_fnc_log;
 
 waitUntil {
 	sleep 1;

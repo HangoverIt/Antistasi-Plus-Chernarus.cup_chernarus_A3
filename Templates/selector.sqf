@@ -15,6 +15,7 @@ private _filename = "selector.sqf";
 private _aridMaps = ["altis", "takistan"];
 
 tropicalMaps = ["tanoa", "cam_lao_nam", "vn_khe_sanh", "rhspkl"]; //global because used by QRF code
+publicVariable "tropicalMaps"; // HangoverIT - this needs pushing to HCs over network otherwise QRF fails
 
 private _temperateMaps = ["panthera3", "enoch", "vt7", "cup_chernarus_a3", "napf", "abramia", "taviana", "gm_weferlingen_summer", "blud_vidda"];
 //Mod selector

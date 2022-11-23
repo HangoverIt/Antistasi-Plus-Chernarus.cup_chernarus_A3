@@ -67,10 +67,8 @@ _staticsX = staticsToSave select {_x distance2D _positionX < _size};
 _garrison = [];
 _garrison = _garrison + (garrison getVariable [_markerX,[]]);
 
-TestVar1 = _garrison;
-
-private _garrLoadouts = [];
-_garrLoadouts = _garrLoadouts + (SDKgarrLoadouts getVariable [_markerX + "_loadouts",[]]);
+private _garrLoadouts = [_markerX] call A3A_fnc_fetchGarrisonLoadout;
+diag_log format["DEBUG: Retrieved %1 loadouts for spawned garrison %2", count _garrLoadouts, _markerX] ;
 
 // Don't create these unless required
 private _groupStatics = grpNull;
@@ -103,39 +101,15 @@ private _groupMortars = grpNull;
 	};
 	[_unit,_markerX] call A3A_fnc_FIAinitBases;
 	
-	_unit setUnitLoadout (configFile >> "EmptyLoadout");
-	private _loadout = _garrLoadouts select _index;
-	_unit setUnitLoadout _loadout;
-	
+	[_unit, _garrLoadouts] call A3A_fnc_assignGarrisonLoadout ;
 	_soldiers pushBack _unit;
 	_garrison deleteAT _index;
-	
-	_garrLoadouts deleteAT _index;
 	
 } forEach _staticsX;
 
 
 // Make 8-man groups out of the remainder of the garrison
-
-//JB Create indexed array
-
-private _indexedGarr = [];
-private _num = 0;
-{
-_indexedGarr append [[_num, _x]];
-_num = _num + 1;
-} foreach _garrison;
-
-_indexedGarr = _indexedGarr call A3A_fnc_SDKGarrisonReorg;
-
-_loadoudIndex = [];
-_garrison = [];
-	{
-	_loadoudIndex pushBack (_x select 0);
-	_garrison pushBack (_x select 1)
-	} foreach _indexedGarr;
-	
-TestVar2 = _garrison;
+_garrison = _garrison call A3A_fnc_garrisonReorg;
 
 private _totalUnits = count _garrison;
 private _countUnits = 0;
@@ -155,33 +129,13 @@ while {(spawner getVariable _markerX != 2) and (_countUnits < _totalUnits)} do
 	if (_typeX == SDKSL) then {_groupX selectLeader _unit};
 	[_unit,_markerX] call A3A_fnc_FIAinitBases;
 	
-	private _unitIndex = _loadoudIndex select _countUnits;
-	private _loadout = _garrLoadouts select _unitIndex;
-	_unit SetUnitLoadout _loadout;
-	
-	if (randomizeRebelLoadoutUniforms) then {
-		private _uniforms = A3A_faction_reb getVariable "uniforms";
-		private _uniformItems = uniformItems _unit;
-
-		_unit forceAddUniform (selectRandom _uniforms);
-		{_unit addItemToUniform _x} forEach _uniformItems;
-
-		private _headgear = headgear _unit;
-
-		//if it isn't a helmet - randomize
-		if !(_headgear in allArmoredHeadgear) then {
-			_unit addHeadgear (selectRandom (A3A_faction_reb getVariable "headgear"));
-		};
-	};
+	[_unit, _garrLoadouts] call A3A_fnc_assignGarrisonLoadout ;
 	
 	_soldiers pushBack _unit;
 	_countUnits = _countUnits + 1;
 	_countGroup = _countGroup + 1;
-	
 	sleep 0.5;
 };
-
-TestVar3 = _soldiers;
 
 for "_i" from 0 to (count _groups) - 1 do
 {
@@ -195,11 +149,14 @@ for "_i" from 0 to (count _groups) - 1 do
 		_nul = [leader _groupX, _markerX, "SAFE","SPAWNED","RANDOM","NOVEH2","NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
 	};
 };
+[_markerX] call A3A_fnc_clearGarrisonLoadout ; // All spawned, clear record
 waitUntil {sleep 1; (spawner getVariable _markerX == 2)};
 
-private _garrLoadoutDespawn = [];
-{ if (alive _x) then { _loadoutEnd = getUnitLoadout _x; _garrLoadoutDespawn append [_loadoutEnd]; deleteVehicle _x }; } forEach _soldiers;
-SDKgarrLoadouts setVariable [_markerX + "_loadouts", _garrLoadoutDespawn, true];
+_mkrUnits = allunits select { (_x getVariable ["markerX", ""]) == _markerX; };
+
+_garrLoadouts = [_markerX] call A3A_fnc_fetchGarrisonLoadout ; // Fetch any other saved data (from other despawn routines)
+_garrLoadouts = [_garrLoadouts, _mkrUnits] call A3A_fnc_addGarrisonLoadout ;
+[_markerX, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout;
 
 {deleteVehicle _x} forEach _civs;
 

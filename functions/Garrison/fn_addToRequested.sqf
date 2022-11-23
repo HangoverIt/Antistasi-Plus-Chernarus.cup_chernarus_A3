@@ -60,7 +60,7 @@ if(_unitType != 0) then
 else
 {
     //Setting vehicle
-    _element set [0, _unit];
+    _reqElement set [0, _unit];
     _garElement set [0, ""];
 };
 

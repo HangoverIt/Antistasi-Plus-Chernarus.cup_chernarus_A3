@@ -21,7 +21,7 @@ garrison setVariable [format ["%1_over", _marker], [], true];
 garrison setVariable [format ["%1_requested", _marker], [], true];
 garrison setVariable [format ["%1_statics", _marker], [], true];
 
-SDKgarrLoadouts setVariable [_marker + "_loadouts", [], true];
+[_marker] call A3A_clearGarrisonLoadout ;
 
 if(_winner != teamPlayer) then
 {

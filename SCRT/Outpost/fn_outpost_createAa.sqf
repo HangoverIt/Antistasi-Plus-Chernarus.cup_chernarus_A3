@@ -27,19 +27,6 @@ _pos = position _road findEmptyPosition [1,30,"B_G_Van_01_transport_F"];
 _truckX = vehSDKLightUnarmed createVehicle _pos;
 _groupX addVehicle _truckX;
 
-// JB limited gear code
-private _garrLoadouts = [];
-SDKgarrLoadouts setVariable [_marker + "_loadouts", _garrLoadouts, true];
-
-{
-    [_x] call A3A_fnc_FIAinit;
-    private _loadout = getUnitLoadout _x;
-	_garrLoadouts append [_loadout];    
-} forEach units _groupX;
-
-SDKgarrLoadouts setVariable [_marker + "_loadouts", _garrLoadouts, true];
-//
-
 leader _groupX setBehaviour "SAFE";
 (units _groupX) orderGetIn true;
 theBoss hcSetGroup [_groupX];
@@ -69,6 +56,14 @@ if ({(alive _x) and (_x distance _position < 10)} count units _groupX > 0) then 
 	sidesX setVariable [_marker,teamPlayer,true];
 	markersX = markersX + [_marker];
 	publicVariable "markersX";
+	
+	// JB limited gear code
+	private _garrLoadouts = [];
+	[_marker] call A3A_fnc_clearGarrisonLoadout ;
+	_garrLoadouts = [_garrLoadouts, units _groupX] call A3A_fnc_addGarrisonLoadout ;
+	[_marker, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout ;
+	//
+	
 	spawner setVariable [_marker,2,true];
 	[_taskId, "outpostTask", "SUCCEEDED"] call A3A_fnc_taskSetState;
 	_nul = [-5,5,_position] remoteExec ["A3A_fnc_citySupportChange",2];

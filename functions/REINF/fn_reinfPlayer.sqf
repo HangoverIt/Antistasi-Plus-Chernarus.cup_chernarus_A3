@@ -40,73 +40,43 @@ if ((count units group player) + (count units stragglers) > 9) exitWith {["AI Re
 private "_unit";
 
 _loadout = rebelLoadouts get _typeUnit;
-
 _fullUnitGear = _loadout call A3A_fnc_reorgLoadoutUnit;
 
-	_emptyList = [];
-	{
+_emptyList = [];
+{
 	private "_number";
-	_number = [jna_dataList select (_x select 0 call jn_fnc_arsenal_itemType), _x select 0]call jn_fnc_arsenal_itemCount; 
+	_number = [jna_dataList select (_x select 0 call jn_fnc_arsenal_itemType), _x select 0] call jn_fnc_arsenal_itemCount; 
 	if (_number < ((2 * ((_x select 1) + 1))) && !(_number == -1)) then { _emptyList pushBack (_x select 0) }
-	} forEach _fullUnitGear;
-	
-	if (count _emptyList > 0) exitWith {
-		
-		equipUnit = false;
-		
-		private _weaps = [];
-		private _mags = [];
-		private _strings = [];
-		
-		{
-			_weaps = getText (configFile >> "CfgWeapons" >> _x >> "displayName");
-			_strings pushBack _weaps;
-			_mags = getText (configFile >> "CfgMagazines" >> _x >> "displayName");
-			_strings pushBack _mags;
-		} forEach _emptyList;
-		
-		_strings = _strings - [""];
-				
-		if (_typeUnit == SDKMedic) then {
-			titleText [format["<t color='#ff0000' size='2'>Recruit Squad<br/><t color='#ffffff' size='1.5'>The following gear has run too low for you to recruit this unit: <t color='#ffff00' size='1.5'>%1<br/><t color='#fffff' size='1.5'>Unarmed medic recruited instead. Use AI control to equip the unit from the arsenal.", _strings], "PLAIN DOWN", 1, true, true];
-			_unit = [group player, SDKMedic, position player, [], 0, "NONE"] call A3A_fnc_createUnit;
-			};
-		
-		if (_typeUnit == SDKEng) then {
-			titleText [format["<t color='#ff0000' size='2'>Recruit Squad<br/><t color='#ffffff' size='1.5'>The following gear has run too low for you to recruit this unit: <t color='#ffff00' size='1.5'>%1<br/><t color='#fffff' size='1.5'>Unarmed engineer recruited instead. Use AI control to equip the unit from the arsenal.", _strings], "PLAIN DOWN", 1, true, true];
-			_unit = [group player, SDKEng, position player, [], 0, "NONE"] call A3A_fnc_createUnit;
-			};
-		
-		if (_typeUnit == SDKExp) then {
-			titleText [format["<t color='#ff0000' size='2'>Recruit Squad<br/><t color='#ffffff' size='1.5'>The following gear has run too low for you to recruit this unit: <t color='#ffff00' size='1.5'>%1<br/><t color='#fffff' size='1.5'>Unarmed demolitionist recruited instead. Use AI control to equip the unit from the arsenal.", _strings], "PLAIN DOWN", 1, true, true];
-			_unit = [group player, SDKExp, position player, [], 0, "NONE"] call A3A_fnc_createUnit;
-			};
-			
-		if (_typeUnit in [SDKMil, SDKMG, SDKGL, SDKSniper, SDKATman]) then {	
-			_costs = server getVariable SDKMil;
-			titleText [format["<t color='#ff0000' size='2'>Recruit Squad<br/><t color='#ffffff' size='1.5'>The following gear has run too low for you to recruit this unit: <t color='#ffff00' size='1.5'>%1<br/><t color='#fffff' size='1.5'>Unarmed rifleman recruited instead. Use AI control to equip the unit from the arsenal.", _strings], "PLAIN DOWN", 1, true, true];
-			_unit = [group player, SDKMil, position player, [], 0, "NONE"] call A3A_fnc_createUnit;
-			};
-	
-	if (!isMultiPlayer) then {
-	_nul = [-1, -_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
+} forEach _fullUnitGear;
 
-		} else {
-
-	_nul = [-1, 0] remoteExec ["A3A_fnc_resourcesFIA",2];
-	[- _costs] call A3A_fnc_resourcesPlayer;
-	["AI Recruitment", "Soldier Recruited.<br/><br/>Remember: if you use the group menu to switch groups you will lose control of your recruited AI."] call A3A_fnc_customHint;
+equipUnit = true;
+	
+if (count _emptyList > 0) then {
+	
+	equipUnit = false;
+	
+	private _strings = [];
+	
+	{
+		_strings pushBack (getText (configFile >> "CfgWeapons" >> _x >> "displayName"));
+		_strings pushBack (getText (configFile >> "CfgMagazines" >> _x >> "displayName"));
+	} forEach _emptyList;
+	
+	_strings = _strings - [""];
+		
+	private _unitTypeName = switch(_typeUnit) do {
+		case SDKMedic: {"medic"};
+		case SDKEng:   {"engineer"};
+		case SDKExp:   {"demolitionist"} ;
+		default { _typeUnit = SDKMil;_costs = server getVariable SDKMil;"rifleman"} ;
 	};
-	
-	[_unit] spawn A3A_fnc_FIAinit;
-	_unit disableAI "AUTOCOMBAT";
-	sleep 1;
-	petrovsky directSay "SentGenReinforcementsArrived";
-		
+	titleText [format["<t color='#ff0000' size='2'>Recruit Squad<br/><t color='#ffffff' size='1.5'>The following gear has run too low for you to recruit this unit: <t color='#ffff00' size='1.5'>%1<br/><t color='#fffff' size='1.5'>Unarmed %2 recruited instead. Use AI control to equip the unit from the arsenal.", _strings,_unitTypeName], "PLAIN DOWN", 1, true, true];	
+}else{
+	// Deduct the loadout from the arsenal
+	{ [_x select 0 call jn_fnc_arsenal_itemType, _x select 0, _x select 1]call jn_fnc_arsenal_removeItem } forEach _fullUnitGear;
 };
 
 private _unit = [group player, _typeUnit, position player, [], 0, "NONE"] call A3A_fnc_createUnit;
-{ [_x select 0 call jn_fnc_arsenal_itemType, _x select 0, _x select 1]call jn_fnc_arsenal_removeItem } forEach _fullUnitGear;
 
 if (!isMultiPlayer) then {
 	_nul = [-1, - _costs] remoteExec ["A3A_fnc_resourcesFIA",2];

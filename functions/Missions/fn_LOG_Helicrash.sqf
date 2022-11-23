@@ -536,7 +536,7 @@ switch(true) do {
         [_taskId, "LOG", "CANCELED"] call A3A_fnc_taskSetState;
         [-300, _sideX] remoteExec ["A3A_fnc_timingCA",2];
     };
-    case(_box distance (getMarkerPos respawnTeamPlayer) < 25): {
+    case(_box distance (getMarkerPos respawnTeamPlayer) < 50): {
         [_taskId, "LOG", "SUCCEEDED"] call A3A_fnc_taskSetState;
 
         [0, 600] remoteExec ["A3A_fnc_resourcesFIA",2];

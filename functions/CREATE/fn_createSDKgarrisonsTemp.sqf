@@ -3,8 +3,7 @@
 _markerX = _this select 0;
 _typeX = _this select 1;
 _positionX = getMarkerPos _markerX;
-if (_typeX isEqualType "") then
-	{
+if (_typeX isEqualType "") then{
 	// Select a suitable group from the current garrison for this unit
 	_groups = if (_typeX == staticCrewTeamPlayer) then {[]} else {
 		allGroups select {
@@ -13,42 +12,36 @@ if (_typeX isEqualType "") then
 			and (side _x == teamPlayer)				// can happen with surrendered enemy garrison
 		};
 	};
-	_groupX = if (_groups isEqualTo []) then
-		{
+	_groupX = if (_groups isEqualTo []) then{
 		createGroup teamPlayer
-		}
-	else
-		{
+	}else{
 		_groups select 0;
-		};
+	};
 	_unit = [_groupX, _typeX, _positionX, [], 0, "NONE"] call A3A_fnc_createUnit;
 	[_unit,_markerX] call A3A_fnc_FIAinitBases;
 	if (_typeX == SDKMil) then { [_markerX] remoteExec ["A3A_fnc_updateRebelStatics", 2] };
-	if (_typeX == staticCrewTeamPlayer) then
-		{
+	if (_typeX == staticCrewTeamPlayer) then {
 		private _veh = SDKMortar createVehicle _positionX;
 		_nul=[_veh] execVM "scripts\UPSMON\MON_artillery_add.sqf";//TODO need delete UPSMON link
 		_unit assignAsGunner _veh;
 		_unit moveInGunner _veh;
 		[_veh, teamPlayer] call A3A_fnc_AIVEHinit;
-		};
-	if (_groups isEqualTo []) then
-		{
+	};
+	if (_groups isEqualTo []) then {
 		_nul = [leader _groupX, _markerX, "SAFE","SPAWNED","NOVEH2","NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
-		};
-	[_unit,_markerX] spawn
-		{
+	};
+	[_unit,_markerX] spawn {
 		private _unit = _this select 0;
 		private _markerX = _this select 1;
 		waitUntil {sleep 1; (spawner getVariable _markerX == 2)};
 		
-		if (alive _unit) then
-			{
+		if (alive _unit) then {
 			private _groupX = group _unit;
 			if ((_unit getVariable "unitType") == staticCrewTeamPlayer) then {deleteVehicle (vehicle _unit)};
-			_loadoutEnd = getUnitLoadout _unit; _garrLoadoutDespawn append [_loadoutEnd]; deleteVehicle _unit;
-			SDKgarrLoadouts setVariable [_markerX + "_loadouts", _garrLoadoutDespawn, true];
+			_garrisonData = [_markerX] call A3A_fnc_fetchGarrisonLoadout ;
+			_garrisonData = [_garrisonData, [_unit]] call A3A_fnc_addGarrisonLoadout ;
+			[_markerX, _garrisonData] call A3A_fnc_storeGarrisonLoadout ;
 			if (count units _groupX == 0) then {deleteGroup _groupX};
-			};
 		};
 	};
+};

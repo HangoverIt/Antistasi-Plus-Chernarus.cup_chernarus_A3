@@ -79,11 +79,11 @@ if (_exit) exitWith {};
 private _squad = [];
 
 if (_typeGroup in [SDKMGStatic, vehSDKAT, staticAAteamPlayer, SDKMortar, vehSDKLightArmed, vehSDKHeavyArmed]) then {
-            _squad append [staticCrewTeamPlayer, staticCrewTeamPlayer];
+	_squad append [staticCrewTeamPlayer, staticCrewTeamPlayer];
 };
 
 if (_typeGroup in [groupsSDKAT, groupsSDKSniper, groupsSDKCrew, groupsSDKmid, groupsSDKSquad, groupsSDKSquadEng, groupsSDKSquadSupp, groupsSDKSentry]) then {
-            _squad = +_typeGroup;
+	_squad = +_typeGroup;
 };
 
 _fullSquadGear = _squad call A3A_fnc_reorgLoadoutSquad;
