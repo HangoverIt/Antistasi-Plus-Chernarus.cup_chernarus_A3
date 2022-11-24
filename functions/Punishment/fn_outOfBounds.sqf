@@ -19,7 +19,7 @@ if !(hasInterface) exitWith {};
 if (player getVariable ["outOfBoundsInit", false]) exitWith {};
 player setVariable ["outOfBoundsInit", true];
 
-private _timeLeft = 30;
+private _timeLeft = 300;
 private _timerResetTimeOut = 0;
 while {alive player} do {
 	private _pos = getPos player select [0,2];
@@ -35,7 +35,7 @@ while {alive player} do {
 		};
 	} else {
 		if (_timerResetTimeOut == 0) then {
-			_timeLeft = 30;
+			_timeLeft = 300;
 		} else {
 			_timerResetTimeOut = _timerResetTimeOut -1;
 		};
