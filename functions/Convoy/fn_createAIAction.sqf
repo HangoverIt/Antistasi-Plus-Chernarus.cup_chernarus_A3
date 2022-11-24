@@ -330,7 +330,7 @@ if(_type == "airstrike") then
     					  if !(vehicle _x isKindOf "StaticWeapon") then {_bombType = "CLUSTER"}; //TODO test if vehicle _x isKindOf Static is not also vehicle _x != _x
     					};
     				};
-    			  if (_bombTypeX == "HE") exitWith {};
+    			  if (_bombType == "HE") exitWith {};
     			} forEach _enemies;
         };
         if (!_isMarker) then {airstrike pushBack _destinationPos};

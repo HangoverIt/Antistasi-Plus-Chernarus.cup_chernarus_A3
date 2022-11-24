@@ -17,8 +17,8 @@ if (spawner getVariable _base != 2 || {_base in forcedSpawn}) exitWith {false};
 //To far away for land convoy or not the same island
 if(!_isAirport && {(getMarkerPos _base) distance2D (getMarkerPos _target) > distanceForLandAttack || {!([_base, _target] call A3A_fnc_arePositionsConnected)}}) exitWith {false};
 
-//To far away for air convoy
-if(_isAirport && {(getMarkerPos _base) distance2D (getMarkerPos _target) > distanceForAirAttack}) exitWith {false};
+//To far away for air convoy. HangoverIt - fiddle this to add more distance for larger maps as some outposts never reinforce
+if(_isAirport && {(getMarkerPos _base) distance2D (getMarkerPos _target) > distanceForAirAttack + 5000}) exitWith {false};
 
 //Base/target combination is in killzones (other reinforcements or attacks failed recently)
 if (_target in (killZones getVariable [_base, []])) exitWith {false};
