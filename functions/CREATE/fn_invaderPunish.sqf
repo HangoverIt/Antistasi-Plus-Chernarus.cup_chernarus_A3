@@ -137,7 +137,8 @@ while {count _civilians < _numCiv} do
         private _civ = [_groupCivil, SDKUnarmed, _pos, [], 0, "NONE"] call A3A_fnc_createUnit;
         _civ forceAddUniform selectRandom (A3A_faction_civ getVariable "uniforms");
         _civ addHeadgear selectRandom (A3A_faction_civ getVariable "headgear");
-        [_civ, selectRandom (unlockedsniperrifles + unlockedmachineguns + unlockedshotguns + unlockedrifles + unlockedsmgs + unlockedhandguns), 5, 0] call BIS_fnc_addWeapon;
+        //[_civ, selectRandom (unlockedsniperrifles + unlockedmachineguns + unlockedshotguns + unlockedrifles + unlockedsmgs + unlockedhandguns), 5, 0] call BIS_fnc_addWeapon;
+		[_civ] call A3A_fnc_randomCivRifle ;
         _civ setSkill 0.5;
         _civilians pushBack _civ;
     };

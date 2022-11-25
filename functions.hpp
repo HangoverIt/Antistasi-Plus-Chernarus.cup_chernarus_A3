@@ -473,6 +473,7 @@ class A3A
         class launcherInfo {};
         class loot {};
         class randomRifle {};
+		class randomCivRifle {} ;
         class transfer {};
         class unlockEquipment {};
         class vehicleSort {};
