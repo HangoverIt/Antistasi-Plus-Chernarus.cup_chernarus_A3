@@ -64,9 +64,8 @@ private _antennasDeadPositions = [];
 ["dateX", date] call A3A_fnc_setStatVariable;
 
 // MB save the date since the last check for mines around HQ
-//private _dateLastMineCheck = garrison getVariable "DatesSinceLastBaseMineChecks";
-["DatesSinceLastBaseMineChecks", DatesSinceLastBaseMineChecks] call A3A_fnc_setStatVariable;
-diag_log format ["save: DatesSinceLastBaseMineChecks = %1", DatesSinceLastBaseMineChecks]; 
+["datesSinceLastBaseMineChecks", datesSinceLastBaseMineChecks] call A3A_fnc_setStatVariable;
+diag_log format ["save: datesSinceLastBaseMineChecks = %1", datesSinceLastBaseMineChecks]; 
 
 ["skillFIA", skillFIA] call A3A_fnc_setStatVariable;
 ["destroyedSites", destroyedSites] call A3A_fnc_setStatVariable;
