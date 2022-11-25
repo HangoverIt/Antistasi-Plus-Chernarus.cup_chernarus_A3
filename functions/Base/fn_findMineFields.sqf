@@ -19,7 +19,6 @@ while {true} do{
     sleep 300;
     // Simple code to reveal mines in a 1 km radius when an engineer is in the base
     // find all our bases
-    // (markersX - watchpostsFIA - roadblocksFIA - aapostsFIA - atpostsFIA - mortarpostsFIA - hmgpostsFIA) select {sidesX getVariable [_x,sideUnknown] == teamPlayer};
     private _markers = markersX select { sidesX getVariable [_x, sideUnknown] == teamPlayer};
 
     diag_log format ["MINECHECK: before loop: datesSinceLastBaseMineChecks = %1", datesSinceLastBaseMineChecks]; 
@@ -68,4 +67,5 @@ while {true} do{
 			}; 
 		} ;
     }forEach(_markers - watchpostsFIA - roadblocksFIA - aapostsFIA - atpostsFIA - mortarpostsFIA - hmgpostsFIA);
+
 };

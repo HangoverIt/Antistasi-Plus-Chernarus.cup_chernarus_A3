@@ -15,7 +15,6 @@ teamPlayer = side group petrovsky; 				// moved here because it must be initiali
 // This is populated when an engineer is recruited in fn_garrisonUpdate
 DatesSinceLastBaseMineChecks = createHashMap;
 
-
 //Disable VN music
 if (isClass (configFile/"CfgVehicles"/"vn_module_dynamicradiomusic_disable")) then {
     A3A_VN_MusicModule = (createGroup sideLogic) createUnit ["vn_module_dynamicradiomusic_disable", [worldSize, worldSize,0], [],0,"NONE"];
