@@ -1,6 +1,7 @@
 /*
 MB If an engineer is in the garrison reveal mines within a 1km radius of the base every 24 hours
 more work on this to come
+HangoverIt - updated 25th Nov 2022
 */
 
 waitUntil {sleep 1; !isNil "placementDone"};
