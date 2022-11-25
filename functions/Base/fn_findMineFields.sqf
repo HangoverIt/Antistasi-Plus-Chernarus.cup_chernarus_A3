@@ -9,10 +9,9 @@ waitUntil {sleep 1; placementDone};
 
 // check every day of game time, the dateToNumber function starts from month 1, day 1 so we set the day to 2 to get one day as an interval
 // This will only work as long as the year doesn't change, should be easy to adapt to take year into account though, if needed
-private _mineCheckIntervalAsNumber = dateToNumber [(date select 0), 1, 1, 0, 2];   // [(date select 0), 1, 2, 0, 0]
+private _mineCheckIntervalAsNumber = dateToNumber [(date select 0), 1, 2, 0, 0];   // [(date select 0), 1, 2, 0, 0]
 
-while {true} do
-{
+while {true} do {
     // run this every 2 minutes to ensure there is a large enough time gap between runs for 
     // dateToNumber to register a difference in the interval. this should avoid an intermittent
     // issue of mines being found instantly

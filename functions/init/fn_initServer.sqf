@@ -19,6 +19,12 @@ DatesSinceLastBaseMineChecks = createHashMap;
 publicVariable "DatesSinceLastBaseMineChecks";
 diag_log format ["initialise: DatesSinceLastBaseMineChecks = %1", DatesSinceLastBaseMineChecks]; 
 
+// Store the dates since the last check for mines. Key is _marker, value is the date since the last check
+// This is populated when an engineer is recruited in fn_garrisonUpdate
+DatesSinceLastBaseMineChecks = createHashMap;
+publicVariable "DatesSinceLastBaseMineChecks";
+diag_log format ["initialise: DatesSinceLastBaseMineChecks = %1", DatesSinceLastBaseMineChecks]; 
+
 //Disable VN music
 if (isClass (configFile/"CfgVehicles"/"vn_module_dynamicradiomusic_disable")) then {
     A3A_VN_MusicModule = (createGroup sideLogic) createUnit ["vn_module_dynamicradiomusic_disable", [worldSize, worldSize,0], [],0,"NONE"];
