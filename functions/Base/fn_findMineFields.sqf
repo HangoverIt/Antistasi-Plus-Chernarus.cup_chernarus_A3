@@ -16,7 +16,7 @@ while {true} do {
     // dateToNumber to register a difference in the interval. this should avoid an intermittent
     // issue of mines being found instantly
     diag_log "MINECHECK: starting mine check";
-    sleep 5;
+    sleep 300;
     // Simple code to reveal mines in a 1 km radius when an engineer is in the base
 
     // find all our bases
@@ -32,14 +32,14 @@ while {true} do {
         private _garrison = garrison getVariable [_currentMarker, []];
 		
 		// get date if available
-		private _lastCheckAsNumber = dateToNumber datesSinceLastBaseMineChecks get _currentMarker;
+		private _lastCheckAsNumber = dateToNumber (datesSinceLastBaseMineChecks get _currentMarker);
 
 		// Only do something if engineer is in garrison
 		if (SDKEng in _garrison) then {
 			// If no last check then this is a new engineer and we can start the work of detecting mines
 			if (isNil "_lastCheckAsNumber") then {
-				_lastCheckAsNumber = date ;
-				datesSinceLastBaseMineChecks set [_currentMarker, _lastCheckAsNumber];
+				_lastCheckAsNumber = dateToNumber date ;
+				datesSinceLastBaseMineChecks set [_currentMarker, date];
 				diag_log format ["MINECHECK: new engineer added: datesSinceLastBaseMineChecks = %1", datesSinceLastBaseMineChecks];
 			};
 			if (_currentDateAsNumber > (_lastCheckAsNumber + _mineCheckIntervalAsNumber)) then {
