@@ -10,8 +10,6 @@ flagX allowDamage false;
 vehicleBox allowDamage false;
 mapX allowDamage false;
 teamPlayer = side group petrovsky; 				// moved here because it must be initialized before accessing any saved vars
-DateSinceLastMineCheck = [date select 0, 1, 1, 0, 0];
-//garrison setVariable ["DateSinceLastMineCheck", [date select 0, 1, 1, 0, 0], true];
 
 // Store the dates since the last check for mines. Key is _marker, value is the date since the last check
 // This is populated when an engineer is recruited in fn_garrisonUpdate
