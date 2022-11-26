@@ -27,7 +27,7 @@ private _specialVarLoads = [
 	"traderDiscount", "supportPoints", "isTraderQuestCompleted", "traderPosition", "areOccupantsDefeated", "areInvadersDefeated",
 	"rebelLoadouts", "randomizeRebelLoadoutUniforms", 
 	"version", "HR_Garage",
-	"garrisonLoadouts, datesSinceLastBaseMineChecks"
+	"garrisonLoadouts", "datesSinceLastBaseMineChecks"
 ];
 
 private _varName = _this select 0;
@@ -521,7 +521,7 @@ if (_varName in _specialVarLoads) then {
 	};
 	
 	if (_varName == 'datesSinceLastBaseMineChecks') then {
-		datesSinceLastBaseMineChecks = createHashMapFromArray(_varValue) ;
+		datesSinceLastBaseMineChecks = _varValue ;
 	};
 } else {
 	diag_log format ["LOADDEBUG: Loading custom save variable %1 with value %2", _varName, _varValue];
