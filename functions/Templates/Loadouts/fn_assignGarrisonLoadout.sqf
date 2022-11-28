@@ -31,7 +31,7 @@ private _unitType = "";
 }forEach _garrisonData ;
 
 if (_useloadout isEqualTo _defaultLoadout) then {
-	diag_log format["WARNING: %3 - not able to assign a garrison loadout to %1 of type %2", _unit, _unit getVariable ["unitType", "UKN"], _fn] ;
+	diag_log format["WARNING: %3 - unable to assign a garrison loadout to %1 of type %2", _unit, _unit getVariable ["unitType", "UKN"], _fn] ;
 	_return = false ;
 };
 _unit setUnitLoadout _useloadout ; 

@@ -69,6 +69,9 @@ _garrison = _garrison + (garrison getVariable [_markerX,[]]);
 
 private _garrLoadouts = [_markerX] call A3A_fnc_fetchGarrisonLoadout;
 diag_log format["DEBUG: Retrieved %1 loadouts for spawned garrison %2", count _garrLoadouts, _markerX] ;
+{
+	diag_log format["DEBUG:    %1", _x] ;
+}forEach _garrLoadouts ;
 
 // Don't create these unless required
 private _groupStatics = grpNull;
