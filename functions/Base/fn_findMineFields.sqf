@@ -1,4 +1,5 @@
 /*
+<<<<<<< HEAD
 MB If an engineer is in the garrison reveal mines within a 1km radius of the base every 24 hours
 more work on this to come
 HangoverIt - updated 25th Nov 2022
@@ -17,7 +18,7 @@ while {true} do
     // dateToNumber to register a difference in the interval. this should avoid an intermittent
     // issue of mines being found instantly
     diag_log "MINECHECK: starting mine check";
-    sleep 5;
+    sleep 300;
     // Simple code to reveal mines in a 1 km radius when an engineer is in the base
 
     // find all our bases
