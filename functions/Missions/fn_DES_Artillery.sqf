@@ -282,5 +282,5 @@ _artilleryVeh removeAllEventHandlers "Fired";
 
 {[_x] spawn A3A_fnc_vehDespawner} forEach _vehicles;
 {[_x] spawn A3A_fnc_groupDespawner} forEach _groups;
-{deleteVehicle _x} forEach _props;
+[_props] spawn A3A_fnc_propDespawner;
 [3, format ["Destroy Artillery clean up complete."], _filename] call A3A_fnc_log;
