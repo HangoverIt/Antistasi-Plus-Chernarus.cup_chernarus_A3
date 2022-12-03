@@ -262,6 +262,7 @@ class A3A
         class updateCAMark {};
         class vehAvailable {};
         class VEHdespawner {};
+		class propDespawner {};
         class vehKilledOrCaptured {};
         class wavedCA {};
         class WPCreate {};
