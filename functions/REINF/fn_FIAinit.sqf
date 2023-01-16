@@ -39,15 +39,17 @@ if (player == leader _unit) then {
 		[_victim] spawn A3A_fnc_postmortem;
 		_killer = _this select 1;
 		arrayids pushBackUnique (name _victim);
-		if (side _killer == Occupants) then {
-			_nul = [0.25,0,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
-			[Occupants, -1, 30] remoteExec ["A3A_fnc_addAggression",2];
-		} else {
-			if (side _killer == Invaders) then {
-				[Invaders, -1, 30] remoteExec ["A3A_fnc_addAggression",2]
+		if (_killer isEqualType objNull) then {
+			if (side _killer == Occupants) then {
+				_nul = [0.25,0,getPos _victim] remoteExec ["A3A_fnc_citySupportChange",2];
+				[Occupants, -1, 30] remoteExec ["A3A_fnc_addAggression",2];
 			} else {
-				if (isPlayer _killer) then {
-					_killer addRating 1000;
+				if (side _killer == Invaders) then {
+					[Invaders, -1, 30] remoteExec ["A3A_fnc_addAggression",2]
+				} else {
+					if (isPlayer _killer) then {
+						_killer addRating 1000;
+					};
 				};
 			};
 		};
