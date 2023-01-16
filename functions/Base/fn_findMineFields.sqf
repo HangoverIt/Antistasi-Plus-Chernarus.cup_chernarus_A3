@@ -15,7 +15,7 @@ private _garrisionSearchRadius = 1000 ; // max distance an engineer will search 
 private _engineerRadiusSearch = 50; // max distance an engineer will search after finding a mine
 
 while {true} do{
-    // run this every 2 minutes to ensure there is a large enough time gap between runs for 
+    // run this every 5 minutes to ensure there is a large enough time gap between runs for 
     // dateToNumber to register a difference in the interval. this should avoid an intermittent
     // issue of mines being found instantly
 	if (sunOrMoon < 1) then {
@@ -50,7 +50,7 @@ while {true} do{
 			};
 			if (_currentDateAsNumber > (_lastCheckAsNumber + _mineCheckIntervalAsNumber)) then {
 				datesSinceLastBaseMineChecks set [_currentMarker, date];
-				diag_log format ["MINECHECK: Engineer has been out searching for mines around %1, record updated to %2", _currentMarker, datesSinceLastBaseMineChecks get _currentMarker];
+				diag_log format ["MINECHECK: Engineer has been out searching for mines around %1, record updated to %2", [_currentMarker] call A3A_fnc_localizar, datesSinceLastBaseMineChecks get _currentMarker];
 				
 				// seems to detect most kinds of mines and explosives
                 private _minesX = allmines select {((_x distance _markerPos) < _garrisionSearchRadius) && !(_x mineDetectedBy playerSide) && (mineActive _x)};
@@ -65,6 +65,8 @@ while {true} do{
 						{playerSide revealMine _x} forEach _otherDiscoveredMines ;
 						_engineersRemaining = _engineersRemaining - 1; // this engineer has completed discovery so remove from available count
 						diag_log format ["MINECHECK: %1 mines detected at location %2 by a garrisoned engineer. %3 engineers remaining to search", count _otherDiscoveredMines, getPos _foundMine, _engineersRemaining];
+						_mineChat = format ["An engineer garrisoned at %1 has found %2 mines", [_currentMarker] call A3A_fnc_localizar, count _otherDiscoveredMines];
+						[petrovsky,"sideChat",_mineChat] remoteExec ["A3A_fnc_commsMP",[teamPlayer,civilian]];
 					};
 					if (_engineersRemaining <= 0) exitWith {};
 				}forEach _minesX ;
