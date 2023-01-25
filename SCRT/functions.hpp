@@ -37,6 +37,7 @@ class SCRT
         class loot_removeActionLoot {};
         class loot_createLootCrate {};
         class loot_addLootCrateActions {};
+		class loot_enemyNear {};
 	};
 
     class Misc 

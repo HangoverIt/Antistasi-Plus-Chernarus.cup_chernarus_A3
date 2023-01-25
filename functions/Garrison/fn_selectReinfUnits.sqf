@@ -25,6 +25,11 @@ private _unitsSend = [];
 private _reinf = +([_target] call A3A_fnc_getRequested);
 private _side = sidesX getVariable [_base, sideUnknown];
 
+// DEBUG stuff
+{
+	diag_log format ["DEBUG: Base %1 requesting reinforcement line %2", _base, _x] ;
+}forEach _reinf ;
+
 private _maxRequested = [_reinf, false] call A3A_fnc_countGarrison;
 private _maxVehiclesNeeded = _maxRequested select 0;
 private _maxCargoSpaceNeeded = _maxRequested select 2;
@@ -41,7 +46,8 @@ while {_currentUnitCount < (_maxUnitSend - 2) && {_maxCargoSpaceNeeded+_maxVehic
     private _currentSelected = "";
     private _seatCount = 0;
     private _crewSeats = 0;
-
+	private _index = -1 ;
+	
     //Attempt to find suitable vehicle in requested list
     {
         private _vehicle = (_x select 0);
@@ -57,43 +63,30 @@ while {_currentUnitCount < (_maxUnitSend - 2) && {_maxCargoSpaceNeeded+_maxVehic
                 (((_currentUnitCount + _curCrewSeats) + 1) <= _maxUnitSend) &&     //Already send units + crew + 1 for vehicle <= available units
                 {_curSeatCount > _seatCount &&                                      //Can send more then the last select vehicle
                 {!_isAir ||	{_vehicle isKindOf "Air"}}}                         //Ensure air vehicle for air convoys
-            ) then
+            ) exitWith
             {
                 _currentSelected = _vehicle;
                 _seatCount = _curSeatCount;
                 _crewSeats = _curCrewSeats;
+				_index = _forEachIndex ;
             };
         };
     } forEach _reinf;
 
     //Delete vehicle if we selected one
-    if(_currentSelected != "") then
-    {
-        private _index = _reinf findIf {(_x select 0) == _currentSelected};
-        if(_index != -1) then
-        {
-            (_reinf select _index) set [0, ""];
-            _maxVehiclesNeeded = _maxVehiclesNeeded - 1;
-        }
-        else
-        {
-            [1, format ["Tried to delete reinf vehicle, but couldn't find it after selection, vehicle was %1!", _currentSelected], _fileName] call A3A_fnc_log;
-        };
-    };
+	if (_index >= 0) then {
+		(_reinf select _index) set [0, ""];
+        _maxVehiclesNeeded = _maxVehiclesNeeded - 1;
+	};
 
-    //No suitable vehicle found, usign different vehicle to reinforce
-    if(_currentSelected == "") then
-    {
-        //Calculate the amount of units that we still need to send against the amount of units we still have available after substracting driver and vehicle
+    //No suitable vehicle found, using different vehicle to reinforce
+    if(_currentSelected == "") then {
+        //Calculate the amount of units that we still need to send against the amount of units we still have available after subtracting driver and vehicle
         //Save whatever number is smaller
+		diag_log format ["DEBUG: calculating needed cargo space for new vehicle request. _maxCargoSpaceNeeded %1, _maxUnitSend %2, _currentUnitCount %3", _maxCargoSpaceNeeded, _maxUnitSend, _currentUnitCount] ;
         private _neededCargoSpace = _maxCargoSpaceNeeded min (_maxUnitSend - _currentUnitCount - 2);
 
-        if(_neededCargoSpace == 0) then
-        {
-            [1, "_neededCargoSpace is 0, something went really wrong!", _fileName] call A3A_fnc_log;
-        }
-        else
-        {
+        if(_neededCargoSpace > 0) then {
             [4, format ["No reinf vehicle found, selecting not needed transport vehicle, needs space for %1 passengers", _neededCargoSpace], _fileName] call A3A_fnc_log;
             if (_isAir) then
             {
@@ -131,6 +124,24 @@ while {_currentUnitCount < (_maxUnitSend - 2) && {_maxCargoSpaceNeeded+_maxVehic
             };
             _seatCount = [_currentSelected, true] call BIS_fnc_crewCount;
             _crewSeats = [_currentSelected, false] call BIS_fnc_crewCount;
+			// Need to change the vehicle reinforce slot to the one we are sending
+			_originalReinf = [_target] call A3A_fnc_getRequested;
+			_smallestCargo = 10000;
+			_smallestIdx = -1;
+			{
+				_veh = _x select 0;
+				if (_veh != "") then {
+					if ((count (_x select 2)) < _smallestCargo) then {
+						_smallestCargo = (count (_x select 2));
+						_smallestIdx = _forEachIndex ;
+					} ;
+				};
+			}forEach _originalReinf ;
+			if (_smallestIdx >= 0) then {
+				_crewMember = if(_side == Occupants) then {NATOCrew} else {CSATCrew};
+				_grpType = if (_neededCargoSpace >= 4) then {"GROUP"} else {"SQUAD"};
+				_originalReinf set [_smallestIdx, [_currentSelected, [_currentSelected, _crewMember] call A3A_fnc_getVehicleCrew, [_currentSelected, _grpType, _side] call A3A_fnc_selectGroupType]];
+			};	
         };
     };
 

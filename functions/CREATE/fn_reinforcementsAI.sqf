@@ -143,6 +143,7 @@ if (AAFpatrols < round (3 * _playerScale) and (random 4 < _playerScale)) then {
 	_reinfMarker sort true;
 	{
 		_target = (_x select 1);
+		diag_log format["DEBUG: calling createAIAction from %1 with reinforcement ratio %2", _x select 1, _x select 0];
 		[_target, "Reinforce", _side, [_canReinf]] remoteExec ["A3A_fnc_createAIAction", 2];
 		sleep 10;		// prevents convoys spawning on top of each other
 		//TODO add a feedback if something was send or not

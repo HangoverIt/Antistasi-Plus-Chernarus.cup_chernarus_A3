@@ -21,13 +21,13 @@ _lootActionID = [_vehicle,
 	"\a3\ui_f_orange\Data\CfgOrange\Missions\action_fia_ca.paa",
 	"\a3\ui_f_orange\Data\CfgOrange\Missions\action_fia_ca.paa",
 	"vehicle player == player && _this distance _target < 5",
-	"vehicle player == player && _caller distance _target < 5 && _caller distance (_caller findNearestEnemy _caller) > 100 && !(captive _caller)",
+	"vehicle player == player && _caller distance _target < 5 && !([_caller, _caller, 100] call SCRT_fnc_loot_enemyNear) && !(captive _caller)",
 	{},
 	{},
 	{
 		[_this select 0, 50] remoteExec ["SCRT_fnc_loot_gatherLoot", 2];
 	},
-	{if (_caller distance (_caller findNearestEnemy _caller) < 100) then {["Gather Scattered Loot", "You cannot gather loot while there are enemy units within 100m of your position."] call A3A_fnc_customHint};
+	{if ([_caller, _caller, 100] call SCRT_fnc_loot_enemyNear) then {["Gather Scattered Loot", "You cannot gather loot while there are enemy units within 100m of your position."] call A3A_fnc_customHint};
 	if (captive _caller) then {["Gather Scattered Loot", "You cannot loot whilst you are undercover."] call A3A_fnc_customHint}},
 	[],
 	8,

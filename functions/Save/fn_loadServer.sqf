@@ -21,6 +21,7 @@ if (isServer) then {
 	["antennas"] call A3A_fnc_getStatVariable;
 	["hr"] call A3A_fnc_getStatVariable;
 	["dateX"] call A3A_fnc_getStatVariable;
+	["datesSinceLastBaseMineChecks"] call A3A_fnc_getStatVariable;
 	["weather"] call A3A_fnc_getStatVariable;
 	["prestigeOPFOR"] call A3A_fnc_getStatVariable;
 	["prestigeBLUFOR"] call A3A_fnc_getStatVariable;
@@ -185,28 +186,7 @@ if (isServer) then {
 		diag_log "WurzelGarrison found, loading it!";
 		["wurzelGarrison"] call A3A_fnc_getStatVariable;
 	};
-
-	//JB limited weapons, load garrison loadouts
-	diag_log format["LOADDEBUG: reading garrison loadout %1", garrisonLoadouts] ;
-	{
-		_location = (_x#0) ;
-		diag_log format["LOADDEBUG: processing location %1", _location] ;
-		if (count _location >= 9) then {
-			_suffix = (_x#0) select [(count _location) - 9, 9];
-			if (_suffix == "_loadouts") then {
-				_location = _location select [0, (count _location) - 9] ;//strip suffix
-				diag_log format["LOADDEBUG: stripping _loadouts suffix to %1", _location] ;
-			};
-		};
-		if (_location select [0,4] != "cba_") then {
-			if !(_x#1 isEqualTo []) then {
-				diag_log format["LOADDEBUG: attempting to call storeGarrisonLoadout for location %1, data %2", _location, _x#1] ;
-				[_location, _x#1] call A3A_fnc_storeGarrisonLoadout ; // upgrade any old save data
-			};
-		};
-	} foreach garrisonLoadouts;
-	diag_log format["LOADDEBUG: Created %1 garrison loadouts with content %2", count garrisonLoadouts, garrisonLoadouts] ;
-
+	
     //Load state of testing timer
     ["testingTimerIsActive"] call A3A_fnc_getStatVariable;
 

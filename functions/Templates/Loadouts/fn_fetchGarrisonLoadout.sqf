@@ -12,4 +12,7 @@ params["_markerX"];
 
 _ret = SDKgarrLoadouts getVariable [_markerX,[]] ;
 if (isNil "_ret") then {_ret = [];};
+{
+	_x set[2,false] ; // clear the used flag when fetching a garrison
+}forEach _ret;
 _ret ;

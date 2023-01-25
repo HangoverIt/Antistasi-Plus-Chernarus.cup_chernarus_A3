@@ -21,10 +21,15 @@ if(_debug) then
   diag_log format ["GetGarrisonRatio: Calculating garrison strength now for %1!", _marker];
 };
 
+diag_log format["DEBUG: calling getGarrisonRatio for %1", _marker];
+diag_log format["DEBUG:    _garrison is %1", _garrison];
+diag_log format["DEBUG:    _neededReinf is %1", _neededReinf];
 _garrisonCount = [_garrison, true] call A3A_fnc_countGarrison;
 _reinfCount = [_neededReinf, true] call A3A_fnc_countGarrison;
 _allUnitsCount = _garrisonCount + _reinfCount;
 _preferredUnitsCount = _garrisonCount;
+diag_log format["DEBUG:    _garrison count is %1", _garrisonCount];
+diag_log format["DEBUG:    _neededReinf count is %1", _reinfCount];
 
 if(_debug) then
 {
@@ -36,5 +41,5 @@ if(_allUnitsCount > 0) then
 {
   _ratio = _preferredUnitsCount / _allUnitsCount;
 };
-
+diag_log format["DEBUG:    ratio for %1 is %2", _marker, _ratio];
 _ratio;

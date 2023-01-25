@@ -11,6 +11,10 @@ vehicleBox allowDamage false;
 mapX allowDamage false;
 teamPlayer = side group petrovsky; 				// moved here because it must be initialized before accessing any saved vars
 
+// Store the dates since the last check for mines. Key is _marker, value is the date since the last check
+// This is populated when an engineer is recruited in fn_garrisonUpdate
+DatesSinceLastBaseMineChecks = createHashMap;
+
 //Disable VN music
 if (isClass (configFile/"CfgVehicles"/"vn_module_dynamicradiomusic_disable")) then {
     A3A_VN_MusicModule = (createGroup sideLogic) createUnit ["vn_module_dynamicradiomusic_disable", [worldSize, worldSize,0], [],0,"NONE"];
@@ -202,6 +206,7 @@ distanceXs = [] spawn A3A_fnc_distance;
 [] spawn A3A_fnc_resourcecheck;
 [] call A3A_fnc_initSupportCooldowns;
 [] spawn A3A_fnc_aggressionUpdateLoop;
+[] spawn A3A_fnc_findMineFields;
 [] execVM "Scripts\fn_advancedTowingInit.sqf";
 
 //Start JB Missions. Is there a better place?

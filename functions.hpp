@@ -38,6 +38,7 @@ class A3A
         class addHC {};
         class addTimeForIdle {};
         class aggressionUpdateLoop {};
+        class findMineFields {};
         class AILoadInfo {};
         class airspaceControl {};
         class rebelAttack {};
@@ -261,6 +262,7 @@ class A3A
         class updateCAMark {};
         class vehAvailable {};
         class VEHdespawner {};
+		class propDespawner {};
         class vehKilledOrCaptured {};
         class wavedCA {};
         class WPCreate {};
@@ -473,6 +475,7 @@ class A3A
         class launcherInfo {};
         class loot {};
         class randomRifle {};
+		class randomCivRifle {} ;
         class transfer {};
         class unlockEquipment {};
         class vehicleSort {};

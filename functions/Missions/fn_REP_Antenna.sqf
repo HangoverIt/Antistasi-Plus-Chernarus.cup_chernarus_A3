@@ -92,5 +92,9 @@ if (dateToNumber date > _dateLimitNum) then
 waitUntil {sleep 1; (spawner getVariable _markerX == 2)};
 
 // could make these guys return home, too much work atm
-[_groupX] spawn A3A_fnc_groupDespawner;
-[_veh] spawn A3A_fnc_vehDespawner;
+if !(isNil "_groupX") then {
+	[_groupX] spawn A3A_fnc_groupDespawner;
+};
+if !(isNil "_veh") then {
+	[_veh] spawn A3A_fnc_vehDespawner;
+};
