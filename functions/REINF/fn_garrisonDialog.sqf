@@ -103,9 +103,6 @@ if (_typeX == "rem") then {
 	[_hr,_costs] remoteExec ["A3A_fnc_resourcesFIA",2];
 
 	//JB code to return gear to arsenal
-	_singleArray = [];
-	_doubleArray = [];
-	_tripleArray = [];
 	
 	_allSingle = []; 
 	_allDouble = [];
@@ -129,6 +126,10 @@ if (_typeX == "rem") then {
 		
 		_loadoutArray = _loadoutArray - [""];
 		
+		_singleArray = [];
+		_doubleArray = [];
+		_tripleArray = [];
+		
 		{
 			if (count _x == 2) then { _doubleArray pushBack _x };
 			if (count _x == 3) then { _tripleArray pushBack _x };
@@ -141,7 +142,6 @@ if (_typeX == "rem") then {
 		_allTriple append _tripleArray;	
 		
 	} forEach _garrLoadouts;
-
 
 	//single code
 

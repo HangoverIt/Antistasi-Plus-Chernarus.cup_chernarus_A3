@@ -86,7 +86,14 @@ if (_typeGroup in [groupsSDKAT, groupsSDKSniper, groupsSDKCrew, groupsSDKmid, gr
 	_squad = +_typeGroup;
 };
 
-_fullSquadGear = _squad call A3A_fnc_reorgLoadoutSquad;
+private ["_loadout"];
+private _squadLoadout = [];
+{
+_loadout = rebelLoadouts get _x;
+_squadLoadout pushBack _loadout;
+} forEach _squad;
+
+_fullSquadGear = _squadLoadout call A3A_fnc_reorgLoadoutSquad;
 
 	_emptyList = [];
 	{

@@ -80,7 +80,14 @@ if (outpostType == "WATCHPOST") then {
             _garrison append groupsSDKSniper;
 };
 
-_fullSquadGear = _garrison call A3A_fnc_reorgLoadoutSquad;
+private ["_loadout"];
+private _garrisonLoadout = [];
+{
+_loadout = rebelLoadouts get _x;
+_garrisonLoadout pushBack _loadout;
+} forEach _garrison;
+
+_fullSquadGear = _garrisonLoadout call A3A_fnc_reorgLoadoutSquad;
 
 	_emptyList = [];
 	{
