@@ -14,13 +14,9 @@
  * %RETURNS%
  */
 
-private ["_garrison", "_loadout", "_primary", "_secondary", "_handgun", "_uniform", "_backpack", "_headgear", "_facewear", "_binocular", "_items"];
+private ["_garrisonLoadout", "_loadout", "_primary", "_secondary", "_handgun", "_uniform", "_backpack", "_headgear", "_facewear", "_binocular", "_items"];
 
-_garrison = _this;
-
-_singleArray = [];
-_doubleArray = [];
-_tripleArray = [];
+_garrisonLoadout = _this;
 
 _allSingle = []; 
 _allDouble = [];
@@ -29,7 +25,7 @@ _allTriple = [];
 _loadout = [] ;
 
 { 
-	_loadout = rebelLoadouts get _x; 
+	_loadout = _x; 
 	if (isNil "_loadout") then {
 		// use another defined as backup
 		private _keys = keys rebelLoadouts;
@@ -66,6 +62,10 @@ _loadout = [] ;
 	
 	_loadoutArray = _loadoutArray - [""];
 	
+	_singleArray = [];
+	_doubleArray = [];
+	_tripleArray = [];
+	
 	{
 	if (count _x == 2) then { _doubleArray pushBack _x };
 	if (count _x == 3) then { _tripleArray pushBack _x }
@@ -77,7 +77,7 @@ _loadout = [] ;
 	_allDouble append _doubleArray;
 	_allTriple append _tripleArray;	
 	
-} forEach _garrison;
+} forEach _garrisonLoadout;
 
 //single code
 

@@ -5358,7 +5358,6 @@ class cfgHALsStore
 			ITEM(CUP_NVG_PVS7, 1250, (round random 20 + 10));
 			ITEM(CUP_NVG_GPNVG_black, 2000, (round random 10 + 10));
 			ITEM(CUP_NVG_GPNVG_green, 2000, (round random 10 + 10));
-			ITEM(Laserbatteries, 100, (round random 25 + 25));
 		};
 
 		class miscCup 

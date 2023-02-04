@@ -598,11 +598,11 @@ class aiManagement: SimpleMenuBigger
 		class r1Button: SimpleButton
 		{
 			idc = -1;
-			text = $STR_antistasi_dialogs_auto_rearm_title;
+			text = Transfer Units to Player;
 			x = 0.477 * safezoneW + safezoneX;
 			y = 0.29 * safezoneH + safezoneY;
 			tooltip = $STR_antistasi_dialogs_auto_rearm_tooltip;
-			action = "closeDialog 0; if (count groupselectedUnits player == 0) then {nul = (units group player) spawn A3A_fnc_rearmCall} else {nul = (groupselectedUnits player) spawn A3A_fnc_rearmCall};";
+			action = "closeDialog 0;if (count groupselectedUnits player > 0) then {nul = [groupselectedUnits player] execVM ""REINF\transferUnits.sqf""} else {if (count (hcSelected player) > 0) then {nul = [hcSelected player] execVM ""REINF\transferUnits.sqf""}}; if ((count groupselectedUnits player == 0) and (count hcSelected player == 0)) then {[""Transfer Units"", ""No units or squads selected""] call A3A_fnc_customHint;}";
 		};
 
 		class r2Button: SimpleButton
@@ -643,6 +643,41 @@ class aiManagement: SimpleMenuBigger
 			y = 0.682 * safezoneH + safezoneY;
 			tooltip = $STR_antistasi_dialogs_arty_high_command_transfer_tooltip;
 			action = "closeDialog 0;[] call SCRT_fnc_common_hcTransfer";
+		};
+	};
+};
+
+class transferQuery: SimpleMenuSmall
+{
+	idd=100;
+
+	class Controls
+	{
+		class title: SimpleTitle
+		{
+			idc = -1;
+			text = Confirm transfer units to selected player?;
+		};
+
+		class yesButton: SimpleButton
+		{
+			idc = 104;
+			text = $STR_antistasi_dialogs_generic_button_yes_text;
+			tooltip = $STR_antistasi_dialogs_generic_button_yes_tooltip;
+			x = 0.257187 * safezoneW + safezoneX;
+			y = 0.304 * safezoneH + safezoneY;
+			colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.376])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.125])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.043])",0.9};
+			action = "closeDialog 0; transferQuery = true;";
+		};
+		
+		class noButton: SimpleButton
+		{
+			idc = 105;
+			text = $STR_antistasi_dialogs_generic_button_no_text;
+			tooltip = $STR_antistasi_dialogs_generic_button_no_tooltip;
+			x = 0.477 * safezoneW + safezoneX;
+			y = 0.304 * safezoneH + safezoneY;
+			action = "closeDialog 0; transferQuery = nil;";
 		};
 	};
 };

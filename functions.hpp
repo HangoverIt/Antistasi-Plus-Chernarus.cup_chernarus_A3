@@ -30,7 +30,7 @@ class A3A
         class resourcecheck {};
         class tags {};
     };
-
+ 
     class Base
     {
         class addActionBreachVehicle {};
