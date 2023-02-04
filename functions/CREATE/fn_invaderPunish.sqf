@@ -9,6 +9,9 @@ params ["_attackDestination", "_attackOrigin"];
 
 private _fileName = "fn_invaderPunish";
 
+//Failsafe to abort attack if town not rebel - JB
+if (sidesX getVariable [_attackDestination, sideUnknown] != teamPlayer) exitWith {[2, format ["%1 is not a rebel town, aborting attack.", _attackDestination], _fileName, true] call A3A_fnc_log;};
+
 [
     2,
     format ["Launching CSAT Punish Against %1 from %2", _attackDestination, _attackOrigin],
@@ -39,6 +42,18 @@ private _taskId = "invaderPunish" + str A3A_taskCount;
 private _playerScale = call A3A_fnc_getPlayerScale;
 [_attackOrigin, (5 / _playerScale) + 10] call A3A_fnc_addTimeForIdle;        // Reserve airbase for this attack
 sleep (60*5 / _playerScale);
+
+// If during above sleep cycle, _attackDestination has changed back to occupants, abort mission, cancel task - JB
+if (sidesX getVariable [_attackDestination, sideUnknown] != teamPlayer) exitWith {
+	[2, format ["%1 is not a rebel town, aborting attack.", _attackDestination], _fileName, true] call A3A_fnc_log;
+	[_taskId, "invaderPunish", "CANCELED"] call A3A_fnc_taskSetState;
+	sleep 5;
+	[_taskId, "invaderPunish", 0] spawn A3A_fnc_taskDelete;
+	[5400, Invaders] remoteExec ["A3A_fnc_timingCA", 2];
+
+	bigAttackInProgress = false;
+	publicVariable "bigAttackInProgress";
+};
 
 private _reveal = [_posDestination, Invaders] call A3A_fnc_calculateSupportCallReveal;
 [_posDestination, 4, ["MORTAR"], Invaders, _reveal] remoteExec ["A3A_fnc_sendSupport", 2];
@@ -161,6 +176,37 @@ waitUntil {
     ({_x call A3A_fnc_canFight} count _soldiers < count _soldiers / 3)
     or (time > _missionMinTime and ({alive _x} count _civilians < count _civilians / 4))
     or (time > _missionExpireTime)
+    or (sidesX getVariable [_attackDestination, sideUnknown] != teamPlayer); // abort attack if town not rebel - JB
+};
+
+// if town captured by occupants during attack, abort attack and return to base
+if (sidesX getVariable [_attackDestination, sideUnknown] != teamPlayer) exitWith {
+	[2, format ["%1 is not a rebel town, aborting attack.", _attackDestination], _fileName, true] call A3A_fnc_log;
+	[_taskId, "invaderPunish", "CANCELED"] call A3A_fnc_taskSetState;
+	
+	// Add code from end of mission to tidy up - JB
+	sleep 5;
+	[_taskId, "invaderPunish", 0] spawn A3A_fnc_taskDelete;
+	[5400, Invaders] remoteExec ["A3A_fnc_timingCA", 2];
+
+	bigAttackInProgress = false;
+	publicVariable "bigAttackInProgress";
+
+	// Order remaining aggressor units back to base, hand them to the group despawner
+	{
+    	private _wp = _x addWaypoint [_posOrigin, 50];
+    	_wp setWaypointType "MOVE";
+    	_x setCurrentWaypoint _wp;
+    	[_x] spawn A3A_fnc_groupDespawner;
+	} forEach _groups;
+
+	{ [_x] spawn A3A_fnc_VEHdespawner } forEach _vehiclesX;
+	{ deleteVehicle _x } forEach _landingPads;
+
+	// When the city marker is despawned, get rid of the civilians
+	waitUntil {sleep 5; (spawner getVariable _attackDestination == 2)};
+	{deleteVehicle _x} forEach _civilians;
+	{deleteGroup _x} forEach _civGroups;
 };
 
 private _fnc_adjustNearCities = {
