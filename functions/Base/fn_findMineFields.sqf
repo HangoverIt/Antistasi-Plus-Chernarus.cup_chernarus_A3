@@ -53,7 +53,7 @@ while {true} do{
 				diag_log format ["MINECHECK: Engineer has been out searching for mines around %1, record updated to %2", [_currentMarker] call A3A_fnc_localizar, datesSinceLastBaseMineChecks get _currentMarker];
 				
 				// seems to detect most kinds of mines and explosives
-                private _minesX = allmines select {((_x distance _markerPos) < _garrisionSearchRadius) && !(_x mineDetectedBy playerSide) && (mineActive _x)};
+                private _minesX = allmines select {((_x distance _markerPos) < _garrisionSearchRadius) && !(_x mineDetectedBy teamPlayer) && (mineActive _x)};
 				private _engineersRemaining = _engineersInGarrison ; // Simulate search by number of engineers in garrison. They can each find a patch of mines
 				{
 					if (random 100 >= _chanceOfDiscovery) then {
@@ -62,7 +62,8 @@ while {true} do{
 						_otherDiscoveredMines = _minesX select {((_x distance _foundMine) < _engineerRadiusSearch) && (random 100 >= _chanceOfDiscovery)};
 						_otherDiscoveredMines pushBack _foundMine;
 						// Show all mines at location as though they are additionally discovered. Assume this is a single engineer and then goes home to report findings
-						{playerSide revealMine _x} forEach _otherDiscoveredMines ;
+						{teamPlayer revealMine _x} forEach _otherDiscoveredMines ;
+						//{[teamPlayer,_x] remoteExec ["revealMine",[teamPlayer,civilian]]} forEach _otherDiscoveredMines ;
 						_engineersRemaining = _engineersRemaining - 1; // this engineer has completed discovery so remove from available count
 						diag_log format ["MINECHECK: %1 mines detected at location %2 by a garrisoned engineer. %3 engineers remaining to search", count _otherDiscoveredMines, getPos _foundMine, _engineersRemaining];
 						_mineChat = format ["An engineer garrisoned at %1 has found %2 mines", [_currentMarker] call A3A_fnc_localizar, count _otherDiscoveredMines];
