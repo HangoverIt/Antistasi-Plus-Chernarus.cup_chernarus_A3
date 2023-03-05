@@ -26,6 +26,9 @@ _pos = position _road findEmptyPosition [1,30,"B_G_Van_01_transport_F"];
 _truckX = vehSDKBike createVehicle _pos;
 _groupX addVehicle _truckX;
 
+{
+    [_x] call A3A_fnc_FIAinit
+} forEach units _groupX;
 leader _groupX setBehaviour "SAFE";
 (units _groupX) orderGetIn true;
 theBoss hcSetGroup [_groupX];
