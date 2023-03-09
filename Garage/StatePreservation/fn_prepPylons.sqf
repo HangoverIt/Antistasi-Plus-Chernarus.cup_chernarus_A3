@@ -43,4 +43,4 @@ private _toRemove = [];
 } forEach _turrets;
 
 Trace_1("Removing pylon weapons: %1", _toRemove);
-{ _veh removeWeaponTurret _x } forEach _toRemove;
+if (typeOf _veh in ["CUP_B_Igla_AA_pod_CDF","CUP_O_Igla_AA_pod_RU","CUP_B_UAZ_AA_CDF","CUP_I_Datsun_AA","CUP_O_LR_AA_TKM"]) then {} else {{ _veh removeWeaponTurret _x } forEach _toRemove;};
