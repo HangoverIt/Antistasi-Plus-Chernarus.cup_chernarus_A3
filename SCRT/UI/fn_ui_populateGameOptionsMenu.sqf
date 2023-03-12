@@ -58,6 +58,10 @@ private _serverMembersText = [] call A3A_fnc_membersList;
 private _fiaTrainingText = format ["FIA Skill Level: %1", skillFIA];
 ((findDisplay 60000) displayCtrl 3102) ctrlSetText _fiaTrainingText;
 
+private _costs = 1000 + (1.5*(skillFIA *750));
+private _fiaTrainingCostText = format ["%1: $%2",localize "$STR_antistasi_dialogs_hq_button_train_ai_tooltip", _costs];
+((findDisplay 60000) displayCtrl 3103) ctrlSetTooltip  _fiaTrainingCostText;
+
 menuComplete = true;
 
 //Support menu is always first tab, the only workaround at the moment
