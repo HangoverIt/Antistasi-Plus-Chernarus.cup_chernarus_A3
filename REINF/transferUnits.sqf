@@ -30,8 +30,7 @@ if (!visibleMap) exitWith {};
 
 _positionTel = positionTel;
 
-_allPlayers = call BIS_fnc_listPlayers;
-_nearPlayers = (nearestObjects [_positionTel, ["man"], 50]) select {_x in _allPlayers};
+_nearPlayers = [50, _positionTel, teamPlayer] call SCRT_fnc_common_getNearPlayers;
 
 if (!((_thingX select 0) isEqualType grpNull) && (player in _nearPlayers)) then {_nearPlayers = _nearPlayers - [player]};
 
