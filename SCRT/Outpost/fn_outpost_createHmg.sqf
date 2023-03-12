@@ -35,6 +35,9 @@ _groupX addVehicle _truckX;
 //[_marker, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout ;
 //
 
+{
+    [_x] call A3A_fnc_FIAinit
+} forEach units _groupX;
 leader _groupX setBehaviour "SAFE";
 (units _groupX) orderGetIn true;
 theBoss hcSetGroup [_groupX];
