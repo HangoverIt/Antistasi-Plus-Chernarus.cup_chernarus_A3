@@ -32,10 +32,6 @@ _checkForPlayer = false;
 if ((!_esHC) and limitedFT) then {_checkForPlayer = true};
 _boss = leader _groupX;
 
-if (!(captive player) && (_checkForPlayer)) exitWith {
-  ["Fast Travel", "You cannot Fast Travel unless undercover."] call SCRT_fnc_misc_showDeniedActionHint;
-};
-
 if ((_boss != player) and (!_esHC)) then {_groupX = player};
 
 if (({isPlayer _x} count units _groupX > 1) and (_esHC)) exitWith {
@@ -93,6 +89,10 @@ if(fastTravelIndividualEnemyCheck) then {
 
 if (_isEnemiesNearby) exitWith {
 	["Fast Travel", "You cannot Fast Travel with enemies near the group"] call SCRT_fnc_misc_showDeniedActionHint;
+};
+
+if (!(captive player) && (_checkForPlayer)) exitWith {
+  ["Fast Travel", "You cannot Fast Travel unless undercover."] call SCRT_fnc_misc_showDeniedActionHint;
 };
 
 if(fastTravelIndividualEnemyCheck) then {
