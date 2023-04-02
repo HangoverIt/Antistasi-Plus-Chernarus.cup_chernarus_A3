@@ -91,6 +91,7 @@ for "_i" from 1 to _numVehicles do
         _typeGroup = [_typeAirVehicle,Invaders] call A3A_fnc_cargoSeats;
         _groupX = [_posOrigin, Invaders, _typeGroup, true, false] call A3A_fnc_spawnGroup;          // forced spawn
         {_x assignAsCargo _veh;_x moveInCargo _veh; _soldiers pushBack _x; [_x] call A3A_fnc_NATOinit; _x setVariable ["originX",_attackOrigin]} forEach units _groupX;
+		[leader _groupX, _attackDestination, "AWARE","SPAWNED","NOVEH2","NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
         _groups pushBack _groupX;
         //[_veh,"CSAT Air Transport"] spawn A3A_fnc_inmuneConvoy;
 
@@ -157,7 +158,7 @@ while {count _civilians < _numCiv} do
         _civ setSkill 0.5;
         _civilians pushBack _civ;
     };
-    [leader _groupCivil, _attackDestination, "AWARE","SPAWNED","NOVEH2"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
+    [leader _groupCivil, _attackDestination, "AWARE","SPAWNED","RANDOMA","NOVEH2","NOFOLLOW"] execVM "scripts\UPSMON.sqf";//TODO need delete UPSMON link
 };
 
 
