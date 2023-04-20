@@ -378,7 +378,7 @@ switch (true) do {
 		
 		(units _groupY) joinSilent _groupX;
 		
-		};	
+	};	
 		
 		{
 		[_x] call A3A_fnc_NATOinit;
@@ -393,10 +393,10 @@ switch (true) do {
 		
 		sleep 1800;
 		
-		_enemyForce = {side _x == _sideX} count nearestObjects [_polStn,["Man"],200];
-		_friendlyForce = {side _x == teamPlayer} count nearestObjects [_polStn,["Man"],200];
+		_enemyForce = {side _x == _sideX} count nearestObjects [_polStn,["Man"],100];
+		_friendlyForce = {side _x == teamPlayer} count nearestObjects [_polStn,["Man"],100];
 		
-		if (_enemyForce > _friendlyForce) then { [_polTask, "FAILED"] call BIS_fnc_taskSetState;
+		if (_enemyForce > (_friendlyForce + 5)) then { [_polTask, "FAILED"] call BIS_fnc_taskSetState;
 			[100,-100,_markerX] remoteExec ["A3A_fnc_citySupportChange",2]; 
 			[_sideX,_markerX] remoteExec ["A3A_fnc_markerChange",2];
 				
@@ -408,6 +408,7 @@ switch (true) do {
 			garrison setVariable [_markerX,[],true];
 				
 				} else { 
-			[_polTask, "SUCCEEDED"] call BIS_fnc_taskSetState}
+			[_polTask, "SUCCEEDED"] call BIS_fnc_taskSetState};
+			if ((getObjectTextures _banner) select 0 != "ca\data\flag_napa_co.paa") then {_banner setObjectTextureGlobal [0,"ca\data\flag_napa_co.paa"]};
 		};
 	};
