@@ -32,6 +32,10 @@ private _unitType = "";
 
 if (_useloadout isEqualTo _defaultLoadout) then {
 	diag_log format["WARNING: %3 - unable to assign a garrison loadout to %1 of type %2", _unit, _unit getVariable ["unitType", "UKN"], _fn] ;
+	if (_unit getVariable ["unitType", "UKN"] != "UKN") then {
+		// Something has happened to not know the loadout. Assign the custom type assuming this is representative of how the unit was saved
+		_useloadout = A3A_customUnitTypes getVariable [(_unit getVariable ["unitType", "UKN"]), []];
+	};
 	_return = false ;
 };
 _unit setUnitLoadout _useloadout ; 

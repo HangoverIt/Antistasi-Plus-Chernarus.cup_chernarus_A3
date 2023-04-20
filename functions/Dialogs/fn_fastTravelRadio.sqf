@@ -14,6 +14,7 @@ if (!isNil "isRallyPointPlaced" && {isRallyPointPlaced}) then {
 };
 
 _esHC = false;
+
 if !((vehicle player getVariable "SA_Tow_Ropes") isEqualTo objNull) exitWith {
 	["Fast Travel", "You cannot Fast Travel with your Tow Rope out or a Vehicle attached."] call SCRT_fnc_misc_showDeniedActionHint;
 };
@@ -88,6 +89,10 @@ if(fastTravelIndividualEnemyCheck) then {
 
 if (_isEnemiesNearby) exitWith {
 	["Fast Travel", "You cannot Fast Travel with enemies near the group"] call SCRT_fnc_misc_showDeniedActionHint;
+};
+
+if (!(captive player) && (_checkForPlayer)) exitWith {
+  ["Fast Travel", "You cannot Fast Travel unless undercover."] call SCRT_fnc_misc_showDeniedActionHint;
 };
 
 if(fastTravelIndividualEnemyCheck) then {

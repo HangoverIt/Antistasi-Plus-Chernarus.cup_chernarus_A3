@@ -28,7 +28,7 @@ if (surfaceIsWater _positionX) exitWith {
 	["Garrison", "This Garrison is still updating, please try again in a few seconds.", "FAIL"] call SCRT_fnc_ui_showDynamicTextMessage;
 };
 
-if ([_positionX, 500] call A3A_fnc_enemyNearCheck) exitWith {
+if ([_positionX, 300] call A3A_fnc_enemyNearCheck) exitWith {
 	["Garrison", "You cannot recruit with enemies near the zone.", "FAIL"] call SCRT_fnc_ui_showDynamicTextMessage;
 };
 
@@ -107,6 +107,9 @@ if (sidesX getVariable [_markerX,sideUnknown] == teamPlayer) then {
 		// HangoverIt - add loadout if garrison isn't spawned
 		private _garrLoadouts = [_markerX] call A3A_fnc_fetchGarrisonLoadout ;
 		_garrLoadouts = [_garrLoadouts, _typeX, _loadout] call A3A_fnc_addTypeGarrisonLoadout;
-		[_markerX, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout ;
+		_loadoutStored = [_markerX, _garrLoadouts] call A3A_fnc_storeGarrisonLoadout ;
+		if (_loadoutStored != count (garrison getVariable [_markerX, []])) then {
+			diag_log format["DEBUGLOADOUT: garrisonAdd has %1 in garrison and %2 loadouts stored. These do not match!", _loadoutStored, count (garrison getVariable [_markerX, []])];
+		};
 	};
 };
