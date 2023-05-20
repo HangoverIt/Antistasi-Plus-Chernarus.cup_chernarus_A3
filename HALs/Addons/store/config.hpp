@@ -3783,23 +3783,23 @@ class cfgHALsStore
 			displayName = "Handguns";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\handgun_ca.paa";
 
-			ITEM(CUP_hgun_Colt1911, 150, (round random 40 + 20));
-			ITEM(CUP_hgun_Mk23, 200, (round random 40 + 20));
+			ITEM(CUP_hgun_Colt1911, 75, (round random 20 + 20));
+			ITEM(CUP_hgun_Mk23, 100, (round random 20 + 20));
 
-			ITEM(CUP_hgun_Mac10, 225, (round random 40 + 20));
+			ITEM(CUP_hgun_Mac10, 125, (round random 10 + 20));
 
-			ITEM(CUP_hgun_Duty, 100, (round random 40 + 20));
-			ITEM(CUP_hgun_Phantom, 150, (round random 40 + 20));
+			ITEM(CUP_hgun_Duty, 50, (round random 20 + 20));
+			ITEM(CUP_hgun_Phantom, 75, (round random 20 + 20));
 
-			ITEM(CUP_hgun_Browning_HP, 150, (round random 40 + 20));
+			ITEM(CUP_hgun_Browning_HP, 75, (round random 20 + 20));
 
-			ITEM(CUP_hgun_Glock17, 200, (round random 40 + 20));
-			ITEM(CUP_hgun_Glock17_blk, 200, (round random 40 + 20));
-			ITEM(CUP_hgun_Glock17_tan, 200, (round random 40 + 20));
+			ITEM(CUP_hgun_Glock17, 100, (round random 20 + 20));
+			ITEM(CUP_hgun_Glock17_blk, 100, (round random 20 + 20));
+			ITEM(CUP_hgun_Glock17_tan, 100, (round random 20 + 20));
 
-			ITEM(CUP_hgun_Deagle, 600, (round random 20 + 20));
-			ITEM(CUP_hgun_PB6P9, 200, (round random 50 + 50));
-			ITEM(CUP_hgun_MP7, 750, (round random 20 + 10));
+			ITEM(CUP_hgun_Deagle, 400, (round random 10 + 10));
+			ITEM(CUP_hgun_PB6P9, 100, (round random 20 + 50));
+			ITEM(CUP_hgun_MP7, 600, (round random 10 + 10));
 		};
 
 		class smgCup 
@@ -3807,27 +3807,27 @@ class cfgHALsStore
 			displayName = "Submachine Guns";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\primaryWeapon_ca.paa";
 
-			ITEM(CUP_smg_PS90_olive, 300, (round random 40 + 20));
+			ITEM(CUP_smg_PS90_olive, 150, (round random 20 + 20));
 
-			ITEM(CUP_smg_Mac10, 225, (round random 40 + 20));
+			ITEM(CUP_smg_Mac10, 125, (round random 10 + 20));
 			
-			ITEM(CUP_smg_EVO, 700, (round random 20 + 20));
+			ITEM(CUP_smg_EVO, 500, (round random 10 + 10));
 
-			ITEM(CUP_smg_UZI, 500, (round random 40 + 20));
+			ITEM(CUP_smg_UZI, 250, (round random 40 + 20));
 			
-			ITEM(CUP_smg_bizon, 500, (round random 40 + 20));
+			ITEM(CUP_smg_bizon, 250, (round random 20 + 20));
 
-			ITEM(CUP_smg_vityaz_top_rail, 325, (round random 40 + 40));
+			ITEM(CUP_smg_vityaz_top_rail, 175, (round random 20 + 20));
 
-			ITEM(CUP_smg_MP5A5, 350, (round random 20 + 20));
+			ITEM(CUP_smg_MP5A5, 175, (round random 10 + 20));
 
-			ITEM(CUP_smg_MP7, 800, (round random 20 + 20));
-			ITEM(CUP_smg_MP7_woodland, 800, (round random 20 + 20));
+			ITEM(CUP_smg_MP7, 600, (round random 10 + 10));
+			ITEM(CUP_smg_MP7_woodland, 650, (round random 10 + 10));
 			
-			ITEM(CUP_arifle_AS_VAL_VFG, 1050, (round random 20 + 10));
-			ITEM(CUP_arifle_AS_VAL_flash, 1075, (round random 20 + 10));
-			ITEM(CUP_arifle_AS_VAL_VFG_top_rail, 1050, (round random 20 + 10));
-			ITEM(CUP_arifle_AS_VAL_flash_top, 1175, (round random 20 + 10));
+			ITEM(CUP_arifle_AS_VAL_VFG, 500, (round random 10 + 10));
+			ITEM(CUP_arifle_AS_VAL_flash, 500, (round random 10 + 10));
+			ITEM(CUP_arifle_AS_VAL_VFG_top_rail, 500, (round random 10 + 10));
+			ITEM(CUP_arifle_AS_VAL_flash_top, 500, (round random 10 + 10));
 		};
 
 		class launchersCup 
@@ -3849,9 +3849,9 @@ class cfgHALsStore
 			ITEM(CUP_launch_M136, 500, (round random 10 + 10));
 			ITEM(CUP_launch_RPG18, 150, (round random 25 + 25));
 
-			ITEM(CUP_launch_Igla, 1300, (round random 10 + 20));
-			ITEM(CUP_launch_FIM92Stinger, 1600, (round random 10 + 10));
-			ITEM(CUP_launch_Metis, 3200, (round random 5 + 5));
+			ITEM(CUP_launch_Igla, 600, (round random 10 + 20));
+			ITEM(CUP_launch_FIM92Stinger, 1200, (round random 10 + 10));
+			ITEM(CUP_launch_Metis, 2200, (round random 5 + 5));
 		};
 
 		class launcherMagazinesCup 
@@ -3860,55 +3860,55 @@ class cfgHALsStore
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\cargoMag_ca.paa";
 
 			class CUP_SMAW_Spotting {
-				price = 10;
+				price = 20;
 				stock = (round random 25 + 25);
 			};
 			class CUP_SMAW_HEDP_M {
-				price = 300;
+				price = 150;
 				stock = (round random 20 + 20);
 			};
 			class CUP_SMAW_HEAA_M {
-				price = 250;
+				price = 125;
 				stock = (round random 20 + 20);
 			};
 			class CUP_SMAW_NE_M {
-				price = 500;
+				price = 250;
 				stock = (round random 20 + 20);
 			};
 
 			class CUP_PG7V_M {
-				price = 100;
+				price = 50;
 				stock = (round random 20 + 40);
 			};
 			class CUP_PG7VL_M {
-				price = 150;
-				stock = (round random 20 + 40);
-			};
-			class CUP_OG7_M {
 				price = 75;
 				stock = (round random 20 + 40);
 			};
+			class CUP_OG7_M {
+				price = 50;
+				stock = (round random 20 + 40);
+			};
 			class CUP_PG7VR_M {
-				price = 300;
+				price = 150;
 				stock = (round random 20 + 20);
 			};
 			class CUP_TBG7V_M {
-				price = 450;
+				price = 225;
 				stock = (round random 20 + 10);
 			};
 
 			class CUP_MAAWS_HEAT_M {
-				price = 250;
+				price = 125;
 				stock = (round random 20 + 10);
 			};
 
 			class CUP_MAAWS_HEDP_M {
-				price = 350;
+				price = 175;
 				stock = (round random 20 + 10);
 			};
 
 			class CUP_AT13_M {
-				price = 600;
+				price = 300;
 				stock = (round random 20 + 10);
 			};
 		};
@@ -3918,14 +3918,14 @@ class cfgHALsStore
 			displayName = "Special Weapons";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\primaryWeapon_ca.paa";
 
-			ITEM(CUP_glaunch_M79, 350, (round random 10 + 5));
+			ITEM(CUP_glaunch_M79, 175, (round random 10 + 5));
 			
-			ITEM(CUP_glaunch_6G30, 800, (round random 20 + 10));
-			ITEM(CUP_glaunch_M32, 950, (round random 5 + 5));
+			ITEM(CUP_glaunch_6G30, 400, (round random 20 + 10));
+			ITEM(CUP_glaunch_M32, 500, (round random 5 + 5));
 
-			ITEM(CUP_sgun_M1014_Entry, 400, (round random 10 + 10));
-			ITEM(CUP_sgun_M1014_solidstock, 500, (round random 10 + 10));
-			ITEM(CUP_sgun_Saiga12K, 250, (round random 25 + 25));
+			ITEM(CUP_sgun_M1014_Entry, 200, (round random 10 + 10));
+			ITEM(CUP_sgun_M1014_solidstock, 250, (round random 10 + 10));
+			ITEM(CUP_sgun_Saiga12K, 175, (round random 25 + 25));
 		};
 
 		class sniperRiflesCup 
@@ -3933,47 +3933,47 @@ class cfgHALsStore
 			displayName = "DMRs, Sniper Rifles, Battle Rifles";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\primaryWeapon_ca.paa";
 
-			ITEM(CUP_srifle_Mosin_Nagant, 450, (round random 10 + 10));
+			ITEM(CUP_srifle_Mosin_Nagant, 225, (round random 10 + 10));
 			
-			ITEM(CUP_arifle_FNFAL5061_wooden, 1000, (round random 20 + 10));
-			ITEM(CUP_arifle_FNFAL5061_wooden_railed, 1250, (round random 10 + 10));
+			ITEM(CUP_arifle_FNFAL5061_wooden, 500, (round random 20 + 10));
+			ITEM(CUP_arifle_FNFAL5061_wooden_railed, 625, (round random 10 + 10));
 
-			ITEM(CUP_arifle_FNFAL_railed, 1500, (round random 10 + 5));
-			ITEM(CUP_arifle_FNFAL_railed_woodland, 1550, (round random 10 + 5));
+			ITEM(CUP_arifle_FNFAL_railed, 750, (round random 10 + 5));
+			ITEM(CUP_arifle_FNFAL_railed_woodland, 750, (round random 10 + 5));
 
-			ITEM(CUP_arifle_FNFAL5061_railed, 1600, (round random 10 + 5));
+			ITEM(CUP_arifle_FNFAL5061_railed, 800, (round random 10 + 5));
 
-			ITEM(CUP_arifle_G3A3_ris, 1500, (round random 10 + 5));
-			ITEM(CUP_arifle_G3A3_modern_ris, 1750, (round random 10 + 5));
-			ITEM(CUP_arifle_G3A3_modern_ris_black, 1750, (round random 10 + 5));
+			ITEM(CUP_arifle_G3A3_ris, 750, (round random 10 + 5));
+			ITEM(CUP_arifle_G3A3_modern_ris, 875, (round random 10 + 5));
+			ITEM(CUP_arifle_G3A3_modern_ris_black, 875, (round random 10 + 5));
 
-			ITEM(CUP_srifle_M24_wdl, 1250, (round random 5 + 5));
-			ITEM(CUP_srifle_M24_blk, 1200, (round random 5 + 5));
+			ITEM(CUP_srifle_M24_wdl, 625, (round random 5 + 5));
+			ITEM(CUP_srifle_M24_blk, 600, (round random 5 + 5));
 
-			ITEM(CUP_srifle_M40A3, 1350, (round random 5 + 5));
+			ITEM(CUP_srifle_M40A3, 675, (round random 5 + 5));
 
-			ITEM(CUP_srifle_AWM_wdl, 1700, (round random 10));
-			ITEM(CUP_srifle_AWM_blk, 1700, (round random 10));
+			ITEM(CUP_srifle_AWM_wdl, 850, (round random 10));
+			ITEM(CUP_srifle_AWM_blk, 850, (round random 10));
 
-			ITEM(CUP_srifle_SVD, 1250, (round random 10 + 40));
-			ITEM(CUP_srifle_SVD_wdl, 1350, (round random 10 + 20));
+			ITEM(CUP_srifle_SVD, 625, (round random 10 + 40));
+			ITEM(CUP_srifle_SVD_wdl, 625, (round random 10 + 20));
 
-			ITEM(CUP_srifle_RSASS_Black, 2100, (round random 5));
+			ITEM(CUP_srifle_RSASS_Black, 1000, (round random 5));
 
-			ITEM(CUP_srifle_m110_kac_black, 2100, (round random 5));
-			ITEM(CUP_srifle_M110_kac_woodland, 2200, (round random 5));
+			ITEM(CUP_srifle_m110_kac_black, 1050, (round random 5));
+			ITEM(CUP_srifle_M110_kac_woodland, 1100, (round random 5));
 
-			ITEM(CUP_arifle_DSA_SA58_OSW_M203, 2250, (round random 5));
-			ITEM(CUP_arifle_DSA_SA58_DMR, 2000, (round random 5));
-			ITEM(CUP_arifle_DSA_SA58_OSW, 1800, (round random 5));
-			ITEM(CUP_arifle_DSA_SA58_OSW_Woodland, 1850, (round random 5));
+			ITEM(CUP_arifle_DSA_SA58_OSW_M203, 1125, (round random 5));
+			ITEM(CUP_arifle_DSA_SA58_DMR, 1000, (round random 5));
+			ITEM(CUP_arifle_DSA_SA58_OSW, 900, (round random 5));
+			ITEM(CUP_arifle_DSA_SA58_OSW_Woodland, 925, (round random 5));
 
-			ITEM(CUP_srifle_M21, 1600, (round random 5 + 10));
-			ITEM(CUP_srifle_M14, 1400, (round random 10 + 10));
-			ITEM(CUP_srifle_M14_DMR, 2200, (round random 5));
+			ITEM(CUP_srifle_M21, 800, (round random 5 + 10));
+			ITEM(CUP_srifle_M14, 700, (round random 10 + 10));
+			ITEM(CUP_srifle_M14_DMR, 1100, (round random 5));
 
-			ITEM(CUP_srifle_M107_Pristine, 3200, (round random 2 + 2));
-			ITEM(CUP_srifle_M107_Woodland, 3500, (round random 1 + 1));
+			ITEM(CUP_srifle_M107_Pristine, 1600, (round random 2 + 4));
+			ITEM(CUP_srifle_M107_Woodland, 1750, (round random 1 + 2));
 
 		};
 
@@ -3982,38 +3982,38 @@ class cfgHALsStore
 			displayName = "Machine Guns";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\primaryWeapon_ca.paa";
 
-			ITEM(CUP_lmg_PKM, 1200, (round random 20 + 10));
-			ITEM(CUP_lmg_PKMN, 1450, (round random 20 + 10));
-			ITEM(CUP_lmg_PKM_B50_vfg, 1250, (round random 10 + 10));
-			ITEM(CUP_lmg_PKM_top_rail, 1600, (round random 10 + 10));
-			ITEM(CUP_lmg_PKM_top_rail_B50_vfg, 1650, (round random 10 + 10));
+			ITEM(CUP_lmg_PKM, 600, (round random 20 + 10));
+			ITEM(CUP_lmg_PKMN, 725, (round random 20 + 10));
+			ITEM(CUP_lmg_PKM_B50_vfg, 625, (round random 10 + 10));
+			ITEM(CUP_lmg_PKM_top_rail, 800, (round random 10 + 10));
+			ITEM(CUP_lmg_PKM_top_rail_B50_vfg, 825, (round random 10 + 10));
 
-			ITEM(CUP_lmg_M60, 1500, (round random 20 + 10));
+			ITEM(CUP_lmg_M60, 750, (round random 20 + 10));
 
-			ITEM(CUP_lmg_MG3, 1250, (round random 10 + 10));
-			ITEM(CUP_lmg_MG3_rail, 1600, (round random 10 + 10));
+			ITEM(CUP_lmg_MG3, 625, (round random 10 + 10));
+			ITEM(CUP_lmg_MG3_rail, 800, (round random 10 + 10));
 			
-			ITEM(CUP_lmg_M60E4, 1800, (round random 10 + 10));
-			ITEM(CUP_lmg_M60E4_wood, 1850, (round random 10 + 10));
+			ITEM(CUP_lmg_M60E4, 900, (round random 10 + 10));
+			ITEM(CUP_lmg_M60E4_wood, 925, (round random 10 + 10));
 			
-			ITEM(CUP_arifle_RPK74, 700, (round random 25 + 25));
-			ITEM(CUP_arifle_RPK74_45, 600, (round random 25 + 25));
+			ITEM(CUP_arifle_RPK74, 350, (round random 25 + 25));
+			ITEM(CUP_arifle_RPK74_45, 300, (round random 25 + 25));
 
-			ITEM(CUP_lmg_m249_pip1, 1400, (round random 10 + 10));
-			ITEM(CUP_lmg_m249_pip3, 1425, (round random 10 + 10));
-			ITEM(CUP_lmg_m249_pip4, 1450, (round random 10 + 10));
+			ITEM(CUP_lmg_m249_pip1, 700, (round random 10 + 10));
+			ITEM(CUP_lmg_m249_pip3, 725, (round random 10 + 10));
+			ITEM(CUP_lmg_m249_pip4, 750, (round random 10 + 10));
 
-			ITEM(CUP_lmg_m249_para_gl, 2000, (round random 10));
+			ITEM(CUP_lmg_m249_para_gl, 1000, (round random 10));
 
-			ITEM(CUP_lmg_FNMAG, 1900, (round random 10 + 5));
-			ITEM(CUP_lmg_FNMAG_RIS, 1950, (round random 10 + 5));
-			ITEM(CUP_lmg_FNMAG_RIS_modern, 2100, (round random 10 + 5));
+			ITEM(CUP_lmg_FNMAG, 950, (round random 10 + 5));
+			ITEM(CUP_lmg_FNMAG_RIS, 975, (round random 10 + 5));
+			ITEM(CUP_lmg_FNMAG_RIS_modern, 1050, (round random 10 + 5));
 
-			ITEM(CUP_lmg_M240_B, 2100, (round random 10 + 5));
-			ITEM(CUP_lmg_M240, 2100, (round random 10 + 5));
+			ITEM(CUP_lmg_M240_B, 1050, (round random 10 + 5));
+			ITEM(CUP_lmg_M240, 1050, (round random 10 + 5));
 
-			ITEM(CUP_lmg_Pecheneg, 1950, (round random 20 + 10));
-			ITEM(CUP_lmg_Pecheneg_woodland, 2000, (round random 20 + 10));
+			ITEM(CUP_lmg_Pecheneg, 975, (round random 20 + 10));
+			ITEM(CUP_lmg_Pecheneg_woodland, 1000, (round random 20 + 10));
 		};
 
 		class riflesCup 
@@ -4021,68 +4021,68 @@ class cfgHALsStore
 			displayName = "Assault Rifles";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\primaryWeapon_ca.paa";
 
-			ITEM(CUP_arifle_Fort221, 650, (round random 20 + 10));
-			ITEM(CUP_arifle_Fort222, 650, (round random 20 + 10));
+			ITEM(CUP_arifle_Fort221, 325, (round random 20 + 10));
+			ITEM(CUP_arifle_Fort222, 325, (round random 20 + 10));
 
-			ITEM(CUP_arifle_M16A2, 550, (round random 20 + 20));
-			ITEM(CUP_arifle_M16A2_GL, 700, (round random 10 + 10));
-			ITEM(CUP_arifle_M16A4_Base, 750, (round random 10 + 10));
-			ITEM(CUP_arifle_M16A4_GL, 900, (round random 10 + 5));
+			ITEM(CUP_arifle_M16A2, 275, (round random 20 + 20));
+			ITEM(CUP_arifle_M16A2_GL, 350, (round random 10 + 10));
+			ITEM(CUP_arifle_M16A4_Base, 375, (round random 10 + 10));
+			ITEM(CUP_arifle_M16A4_GL, 450, (round random 10 + 5));
 
-			ITEM(CUP_arifle_OTS14_GROZA, 700, (round random 20 + 20));
-			ITEM(CUP_arifle_OTS14_GROZA_GL, 950, (round random 20 + 20));
+			ITEM(CUP_arifle_OTS14_GROZA, 350, (round random 20 + 20));
+			ITEM(CUP_arifle_OTS14_GROZA_GL, 475, (round random 20 + 20));
 
-			ITEM(CUP_arifle_AKM, 450, (round random 30 + 40));
-			ITEM(CUP_arifle_AKM_GL, 600, (round random 20 + 20));
+			ITEM(CUP_arifle_AKM, 225, (round random 30 + 40));
+			ITEM(CUP_arifle_AKM_GL, 300, (round random 20 + 20));
 
-			ITEM(CUP_arifle_AK74, 500, (round random 30 + 40));
-			ITEM(CUP_arifle_AK74_GL, 650, (round random 20 + 20));
+			ITEM(CUP_arifle_AK74, 250, (round random 30 + 40));
+			ITEM(CUP_arifle_AK74_GL, 325, (round random 20 + 20));
 
-			ITEM(CUP_arifle_AKS74U, 350, (round random 30 + 40));
+			ITEM(CUP_arifle_AKS74U, 175, (round random 30 + 40));
 
-			ITEM(CUP_arifle_AK74M, 650, (round random 20 + 20));
-			ITEM(CUP_arifle_AK74M_camo, 700, (round random 20 + 10));
+			ITEM(CUP_arifle_AK74M, 325, (round random 20 + 20));
+			ITEM(CUP_arifle_AK74M_camo, 350, (round random 20 + 10));
 
-			ITEM(CUP_arifle_AK74M_GL, 800, (round random 10 + 20));
-			ITEM(CUP_arifle_AK74M_GL_camo, 850, (round random 10 + 10));
+			ITEM(CUP_arifle_AK74M_GL, 400, (round random 10 + 20));
+			ITEM(CUP_arifle_AK74M_GL_camo, 425, (round random 10 + 10));
 
-			ITEM(CUP_arifle_AKM_Early, 300, (round random 20 + 50));
-			ITEM(CUP_arifle_AKMS_Early, 300, (round random 20 + 50));
-			ITEM(CUP_arifle_AK74_Early, 350, (round random 20 + 40));
-			ITEM(CUP_arifle_AKS74_Early, 350, (round random 20 + 40));
+			ITEM(CUP_arifle_AKM_Early, 150, (round random 20 + 50));
+			ITEM(CUP_arifle_AKMS_Early, 150, (round random 20 + 50));
+			ITEM(CUP_arifle_AK74_Early, 175, (round random 20 + 40));
+			ITEM(CUP_arifle_AKS74_Early, 175, (round random 20 + 40));
 
-			ITEM(CUP_arifle_AUG_A1, 900, (round random 20 + 10));
+			ITEM(CUP_arifle_AUG_A1, 225, (round random 20 + 10));
 
-			ITEM(CUP_arifle_AK102, 800, (round random 20 + 20));
-			ITEM(CUP_arifle_AK102_top_rail, 850, (round random 20 + 20));
+			ITEM(CUP_arifle_AK102, 400, (round random 20 + 20));
+			ITEM(CUP_arifle_AK102_top_rail, 425, (round random 20 + 20));
 
-			ITEM(CUP_arifle_AK101, 900, (round random 20 + 20));
-			ITEM(CUP_arifle_AK101_top_rail, 950, (round random 20 + 20));
+			ITEM(CUP_arifle_AK101, 450, (round random 20 + 20));
+			ITEM(CUP_arifle_AK101_top_rail, 475, (round random 20 + 20));
 
-			ITEM(CUP_arifle_AK101_GL, 1100, (round random 10 + 20));
-			ITEM(CUP_arifle_AK101_GL_top_rail, 1150, (round random 10 + 20));
+			ITEM(CUP_arifle_AK101_GL, 550, (round random 10 + 20));
+			ITEM(CUP_arifle_AK101_GL_top_rail, 575, (round random 10 + 20));
 
-			ITEM(CUP_arifle_HK416_CQB_Black, 2000, (round random 10 + 10));
-			ITEM(CUP_arifle_HK416_CQB_Wood, 2050, (round random 10 + 10));
+			ITEM(CUP_arifle_HK416_CQB_Black, 1000, (round random 10 + 10));
+			ITEM(CUP_arifle_HK416_CQB_Wood, 1025, (round random 10 + 10));
 			
-			ITEM(CUP_arifle_HK416_CQB_AG36, 2250, (round random 5 + 10));
-			ITEM(CUP_arifle_HK416_CQB_AG36_Wood, 2275, (round random 5 + 10));
+			ITEM(CUP_arifle_HK416_CQB_AG36, 1125, (round random 5 + 10));
+			ITEM(CUP_arifle_HK416_CQB_AG36_Wood, 1150, (round random 5 + 10));
 
-			ITEM(CUP_arifle_HK416_Black, 2100, (round random 5 + 10));
-			ITEM(CUP_arifle_HK416_Wood, 2175, (round random 5 + 10));
+			ITEM(CUP_arifle_HK416_Black, 1050, (round random 5 + 10));
+			ITEM(CUP_arifle_HK416_Wood, 1075, (round random 5 + 10));
 
-			ITEM(CUP_arifle_HK416_AGL_Black, 2350, (round random 5 + 5));
-			ITEM(CUP_arifle_HK416_AGL_Wood, 2400, (round random 5 + 5)); 
+			ITEM(CUP_arifle_HK416_AGL_Black, 1175, (round random 5 + 5));
+			ITEM(CUP_arifle_HK416_AGL_Wood, 1200, (round random 5 + 5)); 
 
-			ITEM(CUP_CZ_BREN2_762_8, 3050, (round random 10));
-			ITEM(CUP_CZ_BREN2_762_14, 3250, (round random 10));
-			ITEM(CUP_CZ_BREN2_762_14_GL, 3500, (round random 10));
+			ITEM(CUP_CZ_BREN2_762_8, 1525, (round random 10));
+			ITEM(CUP_CZ_BREN2_762_14, 1625, (round random 10));
+			ITEM(CUP_CZ_BREN2_762_14_GL, 1750, (round random 10));
 
-			ITEM(CUP_arifle_HK417_12, 2500, (round random 5 + 5));
-			ITEM(CUP_arifle_HK417_12_Wood, 2600, (round random 5 + 5));
+			ITEM(CUP_arifle_HK417_12, 1250, (round random 5 + 5));
+			ITEM(CUP_arifle_HK417_12_Wood, 1300, (round random 5 + 5));
 
-			ITEM(CUP_arifle_HK417_12_AG36, 2750, (round random 5));
-			ITEM(CUP_arifle_HK417_12_AG36_Wood, 2850, (round random 5));
+			ITEM(CUP_arifle_HK417_12_AG36, 1375, (round random 5));
+			ITEM(CUP_arifle_HK417_12_AG36_Wood, 1425, (round random 5));
 		};
 
 		class magazinesCup 
@@ -4091,45 +4091,45 @@ class cfgHALsStore
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\cargoMag_ca.paa";
 
 			class Laserbatteries {
-				price = 200;
+				price = 100;
 				stock = (round random 20 + 20);
 			};
 
 			//m1014
 			class CUP_8Rnd_12Gauge_Slug {
-				price = 35;
+				price = 25;
 				stock = (round random 50 + 50);
 			};
 			class CUP_8Rnd_12Gauge_Pellets_No00_Buck {
-				price = 25;
+				price = 15;
 				stock = (round random 50 + 50);
 			};
 			class CUP_8Rnd_12Gauge_Pellets_No0_Buck {
-				price = 25;
+				price = 15;
 				stock = (round random 50 + 50);
 			};
 			class CUP_8Rnd_12Gauge_Pellets_No1_Buck {
-				price = 25;
+				price = 15;
 				stock = (round random 50 + 50);
 			};
 			class CUP_8Rnd_12Gauge_Pellets_No2_Buck {
-				price = 25;
+				price = 15;
 				stock = (round random 50 + 50);
 			};
 			class CUP_8Rnd_12Gauge_Pellets_No3_Buck {
-				price = 25;
+				price = 15;
 				stock = (round random 50 + 50);
 			};
 			class CUP_8Rnd_12Gauge_Pellets_No4_Buck {
-				price = 25;
+				price = 15;
 				stock = (round random 50 + 50);
 			};
 			class CUP_8Rnd_12Gauge_Pellets_No4_Bird {
-				price = 25;
+				price = 15;
 				stock = (round random 50 + 50);
 			};
 			class CUP_8Rnd_12Gauge_HE {
-				price = 300;
+				price = 150;
 				stock = (round random 20 + 20);
 			};
 
@@ -4174,19 +4174,19 @@ class cfgHALsStore
 			// Underbarrel
 			///////////////////////////////////////////////////////
 			class CUP_1Rnd_HE_GP25_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 100);
 			};
 			class CUP_IlumFlareGreen_GP25_M {
-				price = 15;
+				price = 10;
 				stock = (round random 100 + 100);
 			};
 			class CUP_IlumFlareWhite_GP25_M {
-				price = 15;
+				price = 10;
 				stock = (round random 100 + 100);
 			};
 			class CUP_IlumFlareRed_GP25_M {
-				price = 15;
+				price = 10;
 				stock = (round random 100 + 100);
 			};
 			class CUP_FlareWhite_GP25_M {
@@ -4206,24 +4206,24 @@ class cfgHALsStore
 				stock = (round random 100 + 100);
 			};
 			class CUP_1Rnd_SMOKE_GP25_M {
-				price = 25;
+				price = 20;
 				stock = (round random 100 + 100);
 			};
 			class CUP_1Rnd_SmokeRed_GP25_M {
-				price = 25;
+				price = 20;
 				stock = (round random 100 + 100);
 			};
 			class CUP_1Rnd_SmokeGreen_GP25_M {
-				price = 25;
+				price = 20;
 				stock = (round random 100 + 100);
 			};
 			class CUP_1Rnd_SmokeYellow_GP25_M {
-				price = 25;
+				price = 20;
 				stock = (round random 100 + 100);
 			};
 
 			class CUP_6Rnd_HE_GP25_M {
-				price = 150;
+				price = 100;
 				stock = (round random 50 + 50);
 			};
 
@@ -4261,101 +4261,101 @@ class cfgHALsStore
 			};
 
 			class CUP_6Rnd_HE_M203 {
-				price = 500;
+				price = 400;
 				stock = (round random 25 + 25);
 			};
 
 			class CUP_6Rnd_FlareWhite_M203 {
-				price = 300;
+				price = 200;
 				stock = (round random 25 + 25);
 			};
 			class CUP_6Rnd_FlareGreen_M203 {
-				price = 300;
+				price = 200;
 				stock = (round random 25 + 25);
 			};
 			class CUP_6Rnd_FlareRed_M203 {
-				price = 300;
+				price = 200;
 				stock = (round random 25 + 25);
 			};
 			class CUP_6Rnd_FlareYellow_M203 {
-				price = 300;
+				price = 200;
 				stock = (round random 25 + 25);
 			};
 			class CUP_6Rnd_Smoke_M203 {
-				price = 350;
+				price = 225;
 				stock = (round random 25 + 25);
 			};
 			class CUP_6Rnd_SmokeRed_M203 {
-				price = 350;
+				price = 225;
 				stock = (round random 25 + 25);
 			};
 			class CUP_6Rnd_SmokeGreen_M203 {
-				price = 350;
+				price = 225;
 				stock = (round random 25 + 25);
 			};
 			class CUP_6Rnd_SmokeYellow_M203 {
-				price = 350;
+				price = 225;
 				stock = (round random 25 + 25);
 			};
 
 			class CUP_1Rnd_HE_M203 {
-				price = 100;
+				price = 50;
 				stock = (round random 50 +50);
 			};
 			class CUP_1Rnd_HEDP_M203 {
-				price = 150;
+				price = 60;
 				stock = (round random 50 + 50);
 			};
 			class CUP_1Rnd_StarCluster_Red_M203 {
-				price = 75;
+				price = 40;
 				stock = (round random 50 + 50);
 			};
 			class CUP_1Rnd_StarCluster_Green_M203 {
-				price = 75;
+				price = 40;
 				stock = (round random 50 + 50);
 			};
 			class CUP_1Rnd_StarFlare_Red_M203 {
-				price = 50;
+				price = 25;
 				stock = (round random 50 + 50);
 			};
 			class CUP_1Rnd_StarFlare_Green_M203 {
-				price = 50;
+				price = 25;
 				stock = (round random 50 + 50);
 			};
 			class CUP_FlareWhite_M203 {
-				price = 50;
+				price = 25;
 				stock = (round random 50 + 50);
 			};
 			class CUP_FlareGreen_M203 {
-				price = 50;
+				price = 25;
 				stock = (round random 50 + 50);
 			};
 			class CUP_FlareRed_M203 {
-				price = 50;
+				price = 25;
 				stock = (round random 50 + 50);
 			};
 			class CUP_FlareYellow_M203 {
-				price = 50;
+				price = 25;
 				stock = (round random 50 + 50);
 			};
 			class CUP_1Rnd_Smoke_M203 {
-				price = 60;
+				price = 30;
 				stock = (round random 50 + 50);
 			};
 			class CUP_1Rnd_SmokeRed_M203 {
-				price = 60;
+				price = 30;
 				stock = (round random 50 + 50);
 			};
 			class CUP_1Rnd_SmokeGreen_M203 {
-				price = 60;
+				price = 30;
 				stock = (round random 50 + 50);
 			};
 			class CUP_1Rnd_SmokeYellow_M203 {
-				price = 60;
+				price = 30;
 				stock = (round random 50 + 50);
 			};
 			class CUP_1Rnd_StarFlare_White_M203 {
-				price = 75;
+				price = 50;
 				stock = (round random 50 + 50);
 			};
 
@@ -4363,67 +4363,67 @@ class cfgHALsStore
 			// Pistols, SMGs
 			///////////////////////////////////////////////////////
 			class CUP_30Rnd_9x19_MP5 {
-				price = 50;
+				price = 20;
 				stock = (round random 100 + 100);
 			};
 
 			class CUP_10Rnd_9x39_SP5_VSS_M {
-				price = 45;
+				price = 25;
 				stock = (round random 100 + 100);
 			};
 			class CUP_20Rnd_9x39_SP5_VSS_M {
-				price = 65;
+				price = 25;
 				stock = (round random 100 + 100);
 			};
 
 			class CUP_30Rnd_9x19AP_Vityaz {
-				price = 65;
+				price = 35;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_9x19_Vityaz {
-				price = 50;
+				price = 30;
 				stock = (round random 100 + 200);
 			};
 			class CUP_64Rnd_9x19_Bizon_M {
-				price = 100;
+				price = 50;
 				stock = (round random 100 + 200);
 			};
 			class CUP_64Rnd_Green_Tracer_9x19_Bizon_M {
-				price = 115;
+				price = 60;
 				stock = (round random 100 + 100);
 			};
 			class CUP_64Rnd_Red_Tracer_9x19_Bizon_M {
-				price = 115;
+				price = 60;
 				stock = (round random 100 + 100);
 			};
 			class CUP_64Rnd_White_Tracer_9x19_Bizon_M {
-				price = 115;
+				price = 60;
 				stock = (round random 100 + 100);
 			};
 			class CUP_64Rnd_Yellow_Tracer_9x19_Bizon_M {
-				price = 115;
+				price = 60;
 				stock = (round random 100 + 100);
 			};
 
 			class CUP_12Rnd_45ACP_mk23 {
-				price = 25;
+				price = 15;
 				stock = (round random 100 + 100);
 			};
 			class CUP_13Rnd_9x19_Browning_HP {
-				price = 25;
+				price = 15;
 				stock = (round random 100 + 100);
 			};
 			
 			class CUP_17Rnd_9x19_glock17 {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 100);
 			};
 			class CUP_18Rnd_9x19_Phantom {
-				price = 40;
+				price = 30;
 				stock = (round random 100 + 100);
 			};
 			class CUP_7Rnd_50AE_Deagle {
-				price = 80;
+				price = 50;
 				stock = (round random 100 + 100);
 			};
 			class CUP_8Rnd_9x18_Makarov_M {
@@ -4436,23 +4436,23 @@ class cfgHALsStore
 			};
 			
 			class CUP_20Rnd_46x30_MP7 {
-				price = 30;
+				price = 50;
 				stock = (round random 100 + 100);
 			};
 			class CUP_40Rnd_46x30_MP7 {
-				price = 60;
+				price = 75;
 				stock = (round random 100 + 100);
 			};
 			class CUP_40Rnd_46x30_MP7_Red_Tracer {
-				price = 70;
+				price = 80;
 				stock = (round random 100 + 100);
 			};
 			class CUP_40Rnd_46x30_MP7_Green_Tracer {
-				price = 70;
+				price = 80;
 				stock = (round random 100 + 100);
 			};
 			class CUP_40Rnd_46x30_MP7_Yellow_Tracer {
-				price = 70;
+				price = 80;
 				stock = (round random 100 + 100);
 			};
 
@@ -4461,285 +4461,285 @@ class cfgHALsStore
 			///////////////////////////////////////////////////////
 			
 			class CUP_20Rnd_9x39_SP5_GROZA_M {
-				price = 65;
+				price = 45;
 				stock = (round random 100 + 100);
 			};
 			
 			class CUP_30Rnd_545x39_Fort224_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 100);
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_545x39_Fort224_M {
-				price = 40;
+				price = 30;
 				stock = (round random 100 + 100);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_545x39_Fort224_M {
-				price = 40;
+				price = 30;
 				stock = (round random 100 + 100);
 			};
 			class CUP_30Rnd_TE1_White_Tracer_545x39_Fort224_M {
-				price = 40;
+				price = 30;
 				stock = (round random 100 + 100);
 			};
 			class CUP_30Rnd_TE1_Yellow_Tracer_545x39_Fort224_M {
-				price = 40;
+				price = 30;
 				stock = (round random 100 + 100);
 			};
 			class CUP_30Rnd_Subsonic_545x39_Fort224_M {
-				price = 50;
+				price = 40;
 				stock = (round random 100 + 100);
 			};
 
 			class CUP_30Rnd_762x39_AK47_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 400);
 			};
 			class CUP_30Rnd_762x39_AK47_bakelite_M {
-				price = 35;
+				price = 15;
 				stock = (round random 100 + 400);				
 			};
 			class CUP_30Rnd_Subsonic_762x39_AK47_M {
-				price = 45;
+				price = 25;
 				stock = (round random 100 + 200);				
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_762x39_AK47_bakelite_M {
-				price = 40;
+				price = 20;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_762x39_AK47_M {
-				price = 40;
+				price = 30;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_762x39_AK47_bakelite_M {
-				price = 40;
+				price = 20;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_762x39_AK47_M {
-				price = 40;
+				price = 30;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Yellow_Tracer_762x39_bakelite_AK47_M {
-				price = 40;
+				price = 20;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Yellow_Tracer_762x39_AK47_M {
-				price = 40;
+				price = 30;
 				stock = (round random 100 + 200);
 			};
 			
 			class CUP_30Rnd_545x39_AK_M {
-				price = 30;
+				price = 20;
 				stock = (round random 100 + 400);
 			};
 			class CUP_30Rnd_545x39_AK74M_M {
-				price = 30;
+				price = 20;
 				stock = (round random 100 + 300);
 			};
 			class CUP_30Rnd_545x39_AK74_plum_M {
-				price = 30;
+				price = 15;
 				stock = (round random 100 + 400);
 			};
 			class CUP_30Rnd_545x39_AK74M_camo_M {
-				price = 30;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_545x39_AK_camo_M {
-				price = 35;
+				price = 30;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_545x39_AK_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_545x39_AK74_plum_M {
-				price = 35;
+				price = 20;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_545x39_AK74M_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_545x39_AK_camo_M {
-				price = 35;
+				price = 30;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_545x39_AK_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_545x39_AK74_plum_M {
-				price = 35;
+				price = 20;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_545x39_AK74M_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_White_Tracer_545x39_AK_camo_M {
-				price = 35;
+				price = 30;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_White_Tracer_545x39_AK_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_White_Tracer_545x39_AK74_plum_M {
-				price = 35;
+				price = 20;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_White_Tracer_545x39_AK74M_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_556x45_AK {
-				price = 35;
+				price = 15;
 				stock = (round random 100 + 400);
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_556x45_AK {
-				price = 40;
+				price = 20;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_556x45_AK {
-				price = 40;
+				price = 20;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_TE1_Yellow_Tracer_556x45_AK {
-				price = 40;
+				price = 20;
 				stock = (round random 100 + 200);
 			};			
 			class CUP_30Rnd_Subsonic_545x39_AK_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_Subsonic_545x39_AK74M_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 			class CUP_30Rnd_Subsonic_545x39_AK74_plum_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 
 			class CUP_45Rnd_TE4_LRT4_Green_Tracer_545x39_RPK_M {
-				price = 40;
+				price = 25;
 				stock = (round random 100 + 300);
 			};
 			class CUP_45Rnd_TE4_LRT4_Green_Tracer_545x39_RPK74M_M {
-				price = 40;
+				price = 25;
 				stock = (round random 100 + 200);
 			};
 			class CUP_60Rnd_545x39_AK74M_M {
-				price = 50;
+				price = 30;
 				stock = (round random 100 + 200);
 			};
 			class CUP_60Rnd_TE1_Green_Tracer_545x39_AK74M_M {
-				price = 50;
+				price = 35;
 				stock = (round random 100 + 100);
 			};
 			class CUP_60Rnd_TE1_White_Tracer_545x39_AK74M_M {
-				price = 50;
+				price = 35;
 				stock = (round random 100 + 100);
 			};
 			class CUP_60Rnd_TE1_Red_Tracer_545x39_AK74M_M {
-				price = 50;
+				price = 35;
 				stock = (round random 100 + 100);
 			};
 			class CUP_60Rnd_TE1_Yellow_Tracer_545x39_AK74M_M {
-				price = 50;
+				price = 35;
 				stock = (round random 100 + 100);
 			
 			};
 			
 			class CUP_30Rnd_556x45_AUG {
-				price = 50;
+				price = 40;
 				stock = (round random 100 + 100);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_556x45_AUG {
-				price = 60;
+				price = 45;
 				stock = (round random 100 + 100);
 			};
 			class CUP_30Rnd_TE1_Yellow_Tracer_556x45_AUG {
-				price = 60;
+				price = 45;
 				stock = (round random 100 + 100);
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_556x45_AUG {
-				price = 60;
+				price = 45;
 				stock = (round random 100 + 100);
 			};
 
 			class CUP_30Rnd_762x39_CZ807 {
-				price = 100;
+				price = 60;
 				stock = (round random 50 + 50);
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_762x39_CZ807 {
-				price = 125;
+				price = 75;
 				stock = (round random 50 + 50);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_762x39_CZ807 {
-				price = 125;
+				price = 75;
 				stock = (round random 50 + 50);
 			};
 			class CUP_30Rnd_TE1_Yellow_Tracer_762x39_CZ807 {
-				price = 125;
+				price = 75;
 				stock = (round random 50 + 50);
 			};
 
 			class CUP_30Rnd_556x45_Emag {
-				price = 75;
+				price = 50;
 				stock = (round random 50 + 100);
 			};
 			class CUP_30Rnd_556x45_EMAG_Olive {
-				price = 80;
+				price = 60;
 				stock = (round random 50 + 50);
 			};
 			class CUP_30Rnd_556x45_Emag_Tracer_Green {
-				price = 100;
+				price = 60;
 				stock = (round random 50 + 50);
 			};
 			class CUP_30Rnd_556x45_Emag_Tracer_Red {
-				price = 100;
+				price = 60;
 				stock = (round random 50 + 50);
 			};
 			class CUP_30Rnd_556x45_Emag_Tracer_Yellow {
-				price = 100;
+				price = 60;
 				stock = (round random 50 + 50);
 			};
 			
 			class CUP_20Rnd_762x51_HK417 {
-				price = 75;
+				price = 50;
 				stock = (round random 50 + 100);
 			};
 			class CUP_20Rnd_762x51_HK417_Camo_Wood {
-				price = 80;
+				price = 60;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Green_Tracer_762x51_HK417 {
-				price = 100;
+				price = 60;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Red_Tracer_762x51_HK417 {
-				price = 100;
+				price = 60;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Yellow_Tracer_762x51_HK417 {
-				price = 100;
+				price = 60;
 				stock = (round random 50 + 50);
 			};
 
 			class CUP_30Rnd_556x45_Stanag {
-				price = 45;
+				price = 35;
 				stock = (round random 50 + 200);
 			};
 			class CUP_30Rnd_556x45_Stanag_Tracer_Green {
-				price = 50;
+				price = 40;
 				stock = (round random 50 + 100);
 			};
 			class CUP_30Rnd_556x45_Stanag_Tracer_Red {
-				price = 50;
+				price = 40;
 				stock = (round random 50 + 100);
 			};
 			class CUP_30Rnd_556x45_Stanag_Tracer_Yellow {
-				price = 50;
+				price = 40;
 				stock = (round random 50 + 100);
 			};
 
@@ -4747,137 +4747,137 @@ class cfgHALsStore
 			// DMRs, Sniper Rifles
 			///////////////////////////////////////////////////////
 			class CUP_20Rnd_762x51_DMR {
-				price = 175;
-				stock = (round random 50 + 50);
-			};
-			class CUP_20Rnd_TE1_Yellow_Tracer_762x51_DMR {
-				price = 200;
-				stock = (round random 50 + 50);
-			};
-			class CUP_20Rnd_TE1_Red_Tracer_762x51_DMR {
-				price = 200;
-				stock = (round random 50 + 50);
-			};
-			class CUP_20Rnd_TE1_Green_Tracer_762x51_DMR {
-				price = 200;
-				stock = (round random 50 + 50);
-			};
-			class CUP_20Rnd_TE1_White_Tracer_762x51_DMR {
-				price = 200;
-				stock = (round random 50 + 50);
-			};
-
-			class CUP_5Rnd_762x51_M24 {
 				price = 75;
 				stock = (round random 50 + 50);
 			};
-
-			class CUP_5Rnd_762x54_Mosin_M {
-				price = 60;
-				stock = (round random 100 + 100);
+			class CUP_20Rnd_TE1_Yellow_Tracer_762x51_DMR {
+				price = 100;
+				stock = (round random 50 + 50);
 			};
-
-			class CUP_5Rnd_86x70_L115A1 {
+			class CUP_20Rnd_TE1_Red_Tracer_762x51_DMR {
+				price = 100;
+				stock = (round random 50 + 50);
+			};
+			class CUP_20Rnd_TE1_Green_Tracer_762x51_DMR {
+				price = 100;
+				stock = (round random 50 + 50);
+			};
+			class CUP_20Rnd_TE1_White_Tracer_762x51_DMR {
 				price = 100;
 				stock = (round random 50 + 50);
 			};
 
+			class CUP_5Rnd_762x51_M24 {
+				price = 50;
+				stock = (round random 50 + 50);
+			};
+
+			class CUP_5Rnd_762x54_Mosin_M {
+				price = 40;
+				stock = (round random 100 + 100);
+			};
+
+			class CUP_5Rnd_86x70_L115A1 {
+				price = 60;
+				stock = (round random 50 + 50);
+			};
+
 			class CUP_20Rnd_762x51_G3 {
-				price = 175;
+				price = 80;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Red_Tracer_762x51_G3 {
-				price = 200;
+				price = 100;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Green_Tracer_762x51_G3 {
-				price = 200;
+				price = 100;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Yellow_Tracer_762x51_G3 {
-				price = 200;
+				price = 100;
 				stock = (round random 50 + 50);
 			};
 
 
 			class CUP_20Rnd_762x51_B_M110 {
-				price = 175;
+				price = 100;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_White_Tracer_762x51_M110 {
-				price = 200;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Green_Tracer_762x51_M110 {
-				price = 200;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Red_Tracer_762x51_M110 {
-				price = 200;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Yellow_Tracer_762x51_M110 {
-				price = 200;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 
 			class CUP_20Rnd_762x51_FNFAL_M {
-				price = 175;
+				price = 100;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Yellow_Tracer_762x51_FNFAL_M {
-				price = 200;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Red_Tracer_762x51_FNFAL_M {
-				price = 200;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Green_Tracer_762x51_FNFAL_M {
-				price = 200;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			
 			class CUP_10Rnd_762x54_SVD_M {
-				price = 75;
+				price = 50;
 				stock = (round random 100 + 100);
 			};
 			
 			class CUP_20Rnd_762x51_FNFAL_Woodland_M {
-				price = 175;
+				price = 100;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Yellow_Tracer_762x51_FNFAL_Woodland_M {
-				price = 200;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Red_Tracer_762x51_FNFAL_Woodland_M {
-				price = 200;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_20Rnd_TE1_Green_Tracer_762x51_FNFAL_Woodland_M {
-				price = 200;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_30Rnd_762x51_FNFAL_M {
-				price = 250;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_30Rnd_TE1_Yellow_Tracer_762x51_FNFAL_M {
-				price = 275;
+				price = 150;
 				stock = (round random 50 + 50);
 			};
 			class CUP_30Rnd_TE1_Red_Tracer_762x51_FNFAL_M {
-				price = 275;
+				price = 150;
 				stock = (round random 50 + 50);
 			};
 			class CUP_30Rnd_TE1_Green_Tracer_762x51_FNFAL_M {
-				price = 275;
+				price = 150;
 				stock = (round random 50 + 50);
 			};
 
 			class CUP_10Rnd_127x99_M107 {
-				price = 400;
+				price = 200;
 				stock = (round random 25 + 40);
 			};
 			
@@ -4886,87 +4886,87 @@ class cfgHALsStore
 			///////////////////////////////////////////////////////
 			
 			class CUP_200Rnd_TE4_Red_Tracer_556x45_M249 {
-				price = 225;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_200Rnd_TE4_Yellow_Tracer_556x45_M249 {
-				price = 225;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_200Rnd_TE4_Green_Tracer_556x45_M249 {
-				price = 225;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_200Rnd_TE1_Red_Tracer_556x45_M249 {
-				price = 225;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_200Rnd_TE4_Green_Tracer_556x45_M249_Pouch {
-				price = 225;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_200Rnd_TE4_Red_Tracer_556x45_M249_Pouch {
-				price = 225;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_200Rnd_TE4_Yellow_Tracer_556x45_M249_Pouch {
-				price = 225;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_200Rnd_TE1_Red_Tracer_556x45_M249_Pouch {
-				price = 225;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 
 			class CUP_100Rnd_TE4_LRT4_762x54_PK_Tracer_Green_M {
-				price = 100;
+				price = 60;
 				stock = (round random 100 + 100);
 			};
 			class CUP_100Rnd_TE4_LRT4_762x54_PK_Tracer_Red_M {
-				price = 1000;
+				price = 60;
 				stock = (round random 100 + 100);
 			};
 			class CUP_100Rnd_TE4_LRT4_762x54_PK_Tracer_Yellow_M {
-				price = 100;
+				price = 60;
 				stock = (round random 100 + 100);
 			};
 
 			class CUP_100Rnd_TE4_LRT4_White_Tracer_762x51_Belt_M {
-				price = 300;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_100Rnd_TE4_LRT4_Red_Tracer_762x51_Belt_M {
-				price = 325;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_100Rnd_TE4_LRT4_Green_Tracer_762x51_Belt_M {
-				price = 325;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			class CUP_100Rnd_TE4_LRT4_Yellow_Tracer_762x51_Belt_M {
-				price = 325;
+				price = 125;
 				stock = (round random 50 + 50);
 			};
 			
 			class CUP_120Rnd_TE4_LRT4_Green_Tracer_762x51_Belt_M {
-				price = 350;
+				price = 150;
 				stock = (round random 50 + 50);
 			};
 			class CUP_120Rnd_TE4_LRT4_Red_Tracer_762x51_Belt_M {
-				price = 375;
+				price = 175;
 				stock = (round random 50 + 50);
 			};
 			class CUP_120Rnd_TE4_LRT4_Yellow_Tracer_762x51_Belt_M {
-				price = 375;
+				price = 175;
 				stock = (round random 50 + 50);
 			};
 
 			class CUP_75Rnd_TE4_LRT4_Green_Tracer_762x39_RPK_M {
-				price = 75;
+				price = 50;
 				stock = (round random 100 + 200);
 			};
 			class CUP_75Rnd_TE4_LRT4_Green_Tracer_545x39_RPK_M {
-				price = 60;
+				price = 35;
 				stock = (round random 100 + 200);
 			};
 
@@ -4980,28 +4980,28 @@ class cfgHALsStore
 			///////////////////////////////////////////////////////
 			
 			class CUP_6Rnd_B_Beneli_74Pellets {
-				price = 30;
+				price = 20;
 				stock = (round random 50 + 50);
 			};
 			class CUP_6Rnd_B_Benelli_74Slug {
-				price = 45;
+				price = 25;
 				stock = (round random 50 + 50);
 			};
 
 			class CUP_20Rnd_B_Saiga12_74Slug_M {
-				price = 30;
+				price = 20;
 				stock = (round random 100 + 100);
 			};
 			class CUP_8Rnd_B_Saiga12_74Pellets_M {
-				price = 20;
+				price = 10;
 				stock = (round random 100 + 100);
 			};
 			class CUP_8Rnd_B_Saiga12_74Slug_M {
-				price = 20;
+				price = 10;
 				stock = (round random 100 + 100);
 			};
 			class CUP_20Rnd_B_Saiga12_74Pellets_M {
-				price = 35;
+				price = 25;
 				stock = (round random 100 + 100);
 			};
 		};
@@ -5011,13 +5011,13 @@ class cfgHALsStore
 			displayName = "Underbarrel Accessories";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\itemBipod_ca.paa";
 			
-			ITEM(CUP_bipod_FNFAL, 100, (round random 25 + 25));
-			ITEM(CUP_bipod_Harris_1A2_L_BLK, 100, (round random 25 + 25));
-			ITEM(CUP_bipod_VLTOR_Modpod_black, 100, (round random 50 + 50));
-			ITEM(CUP_bipod_VLTOR_Modpod_od, 100, (round random 50 + 50));
-			ITEM(CUP_bipod_Sa58, 100, (round random 25 + 25));
-			ITEM(CUP_bipod_G3, 100, (round random 25 + 25));
-			ITEM(CUP_bipod_G3SG1, 100, (round random 25 + 25));
+			ITEM(CUP_bipod_FNFAL, 50, (round random 25 + 25));
+			ITEM(CUP_bipod_Harris_1A2_L_BLK, 50, (round random 25 + 25));
+			ITEM(CUP_bipod_VLTOR_Modpod_black, 50, (round random 50 + 50));
+			ITEM(CUP_bipod_VLTOR_Modpod_od, 50, (round random 50 + 50));
+			ITEM(CUP_bipod_Sa58, 50, (round random 25 + 25));
+			ITEM(CUP_bipod_G3, 50, (round random 25 + 25));
+			ITEM(CUP_bipod_G3SG1, 50, (round random 25 + 25));
 		};
 
 		class pointersCup 
@@ -5025,21 +5025,21 @@ class cfgHALsStore
 			displayName = "Pointer Accessories";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\itemAcc_ca.paa";
 
-			ITEM(CUP_acc_ANPEQ_15_Black, 100, (round random 25 + 25));
-			ITEM(CUP_acc_ANPEQ_15_OD, 100, (round random 25 + 25));
-			ITEM(CUP_acc_ANPEQ_15_OD_Top, 100, (round random 25 + 25));
-			ITEM(CUP_acc_ANPEQ_15_Black_Top, 100, (round random 25 + 25));
-			ITEM(CUP_acc_ANPEQ_15_Flashlight_Black_L, 150, (round random 25 + 25));
-			ITEM(CUP_acc_ANPEQ_15_Flashlight_OD_L, 150, (round random 25 + 25));
-			ITEM(CUP_acc_ANPEQ_15_Top_Flashlight_Black_L, 150, (round random 25 + 25));
-			ITEM(CUP_acc_ANPEQ_15_Top_Flashlight_OD_L, 150, (round random 25 + 25));
+			ITEM(CUP_acc_ANPEQ_15_Black, 50, (round random 25 + 25));
+			ITEM(CUP_acc_ANPEQ_15_OD, 50, (round random 25 + 25));
+			ITEM(CUP_acc_ANPEQ_15_OD_Top, 50, (round random 25 + 25));
+			ITEM(CUP_acc_ANPEQ_15_Black_Top, 50, (round random 25 + 25));
+			ITEM(CUP_acc_ANPEQ_15_Flashlight_Black_L, 75, (round random 25 + 25));
+			ITEM(CUP_acc_ANPEQ_15_Flashlight_OD_L, 75, (round random 25 + 25));
+			ITEM(CUP_acc_ANPEQ_15_Top_Flashlight_Black_L, 75, (round random 25 + 25));
+			ITEM(CUP_acc_ANPEQ_15_Top_Flashlight_OD_L, 75, (round random 25 + 25));
 
-			ITEM(CUP_acc_Flashlight, 50, (round random 100 + 100));
-			ITEM(CUP_acc_Flashlight_wdl, 50, (round random 50 + 50));
+			ITEM(CUP_acc_Flashlight, 25, (round random 100 + 100));
+			ITEM(CUP_acc_Flashlight_wdl, 25, (round random 50 + 50));
 			
-			ITEM(CUP_acc_CZ_M3X, 75, (round random 25 + 25));
-			ITEM(CUP_acc_Glock17_Flashlight, 50, (round random 25 + 25));
-			ITEM(CUP_acc_MLPLS_Laser, 75, (round random 25 + 25));
+			ITEM(CUP_acc_CZ_M3X, 50, (round random 25 + 25));
+			ITEM(CUP_acc_Glock17_Flashlight, 25, (round random 25 + 25));
+			ITEM(CUP_acc_MLPLS_Laser, 50, (round random 25 + 25));
 		};
 
 		class muzzlesCup 
@@ -5047,40 +5047,40 @@ class cfgHALsStore
 			displayName = "Muzzle Accessories";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\itemMuzzle_ca.paa";
 
-			ITEM(CUP_muzzle_PB6P9, 75, (round random 25 + 25));
-			ITEM(CUP_muzzle_snds_mk23, 125, (round random 10 + 20));
-			ITEM(CUP_muzzle_mfsup_Suppressor_Mac10, 125, (round random 10 + 20));
+			ITEM(CUP_muzzle_PB6P9, 50, (round random 25 + 25));
+			ITEM(CUP_muzzle_snds_mk23, 75, (round random 10 + 20));
+			ITEM(CUP_muzzle_mfsup_Suppressor_Mac10, 75, (round random 10 + 20));
 			
-			ITEM(CUP_muzzle_snds_MP5, 150, (round random 10 + 10));
-			ITEM(CUP_muzzle_snds_UZI, 150, (round random 10 + 10));
-			ITEM(CUP_muzzle_snds_MP7, 200, (round random 10 + 5));
+			ITEM(CUP_muzzle_snds_MP5, 100, (round random 10 + 10));
+			ITEM(CUP_muzzle_snds_UZI, 100, (round random 10 + 10));
+			ITEM(CUP_muzzle_snds_MP7, 150, (round random 10 + 5));
 
-			ITEM(CUP_muzzle_snds_KZRZP_AK545, 150, (round random 20 + 40));
-			ITEM(CUP_muzzle_snds_KZRZP_AK545_woodland, 150, (round random 25 + 25));
+			ITEM(CUP_muzzle_snds_KZRZP_AK545, 75, (round random 20 + 40));
+			ITEM(CUP_muzzle_snds_KZRZP_AK545_woodland, 80, (round random 25 + 25));
 			
-			ITEM(CUP_muzzle_snds_KZRZP_AK762, 150, (round random 20 + 40));
-			ITEM(CUP_muzzle_snds_KZRZP_AK762_woodland, 150, (round random 25 + 25));
+			ITEM(CUP_muzzle_snds_KZRZP_AK762, 75, (round random 20 + 40));
+			ITEM(CUP_muzzle_snds_KZRZP_AK762_woodland, 80, (round random 25 + 25));
 
-			ITEM(CUP_muzzle_PBS4, 150, (round random 25 + 25));
+			ITEM(CUP_muzzle_PBS4, 75, (round random 25 + 25));
 			
-			ITEM(CUP_muzzle_TGPA, 150, (round random 25 + 25));
-			ITEM(CUP_muzzle_TGPA_woodland, 150, (round random 25 + 25));
+			ITEM(CUP_muzzle_TGPA, 75, (round random 25 + 25));
+			ITEM(CUP_muzzle_TGPA_woodland, 75, (round random 25 + 25));
 
-			ITEM(CUP_muzzle_snds_68SPC, 200, (round random 25 + 25));
-			ITEM(CUP_muzzle_snds_groza, 200, (round random 25 + 25));
+			ITEM(CUP_muzzle_snds_68SPC, 100, (round random 25 + 25));
+			ITEM(CUP_muzzle_snds_groza, 100, (round random 25 + 25));
 
-			ITEM(CUP_muzzle_Bizon, 150, (round random 25 + 25));
-			ITEM(CUP_muzzle_snds_AWM, 400, (round random 5 + 10));
+			ITEM(CUP_muzzle_Bizon, 75, (round random 25 + 25));
+			ITEM(CUP_muzzle_snds_AWM, 200, (round random 5 + 10));
 			
-			ITEM(CUP_muzzle_snds_M14, 300, (round random 5 + 10));
-			ITEM(CUP_muzzle_snds_socom762rc, 300, (round random 5 + 10));
-			ITEM(CUP_muzzle_mfsup_Suppressor_M107_Black, 750, 2);
-			ITEM(CUP_muzzle_mfsup_Suppressor_M107_Woodland, 800, 1);
+			ITEM(CUP_muzzle_snds_M14, 150, (round random 5 + 10));
+			ITEM(CUP_muzzle_snds_socom762rc, 200, (round random 5 + 10));
+			ITEM(CUP_muzzle_mfsup_Suppressor_M107_Black, 400, 2);
+			ITEM(CUP_muzzle_mfsup_Suppressor_M107_Woodland, 450, 1);
 
-			ITEM(CUP_muzzle_snds_KZRZP_SVD, 300, (round random 10 + 20));
-			ITEM(CUP_muzzle_snds_KZRZP_SVD_woodland, 300, (round random 10 + 20));
+			ITEM(CUP_muzzle_snds_KZRZP_SVD, 150, (round random 10 + 20));
+			ITEM(CUP_muzzle_snds_KZRZP_SVD_woodland, 150, (round random 10 + 20));
 
-			ITEM(CUP_muzzle_snds_SR3M, 250, (round random 10 + 5));
+			ITEM(CUP_muzzle_snds_SR3M, 125, (round random 10 + 5));
 		};
 
 		class opticsCup 
@@ -5089,257 +5089,257 @@ class cfgHALsStore
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\itemOptic_ca.paa";
 
 			class CUP_optic_artel_m14 {
-				price = 300;
+				price = 150;
 				stock = (round random 10 + 5);
 			};
 
 			class CUP_optic_PEM {
-				price = 100;
+				price = 50;
 				stock = (round random 10 + 10);
 			};
 
 			class CUP_optic_GrozaScope {
-				price = 300;
+				price = 150;
 				stock = (round random 10 + 10);
 			};
 
 			class CUP_optic_1p63 {
-				price = 200;
+				price = 100;
 				stock = (round random 25 + 50);
 			};
 			class CUP_optic_Kobra {
-				price = 150;
+				price = 75;
 				stock = (round random 25 + 50);
 			};
 			class CUP_optic_ekp_8_02 {
-				price = 150;
+				price = 75;
 				stock = (round random 25 + 50);
 			};
 			class CUP_optic_PechenegScope {
-				price = 600;
+				price = 200;
 				stock = (round random 25 + 25);
 			};
 			class CUP_optic_PSO_1_1 {
-				price = 500;
+				price = 150;
 				stock = (round random 25 + 25);
 			};
 		class CUP_optic_PSO_1 {
-				price = 500;
+				price = 150;
 				stock = (round random 25 + 25);
 			};
 			class CUP_optic_PSO_1_AK {
-				price = 500;
+				price = 150;
 				stock = (round random 25 + 25);
 			};
 			class CUP_optic_PSO_3 {
-				price = 800;
+				price = 250;
 				stock = (round random 25 + 25);
 			};
 			class CUP_optic_GOSHAWK {
-				price = 2500;
+				price = 1500;
 				stock = (round random 5 + 5);
 			};
 			
 			class CUP_optic_AC11704_Black {
-				price = 250;
+				price = 150;
 				stock = (round random 10 + 10);
 			};
 			class CUP_optic_AC11704_OD {
-				price = 250;
+				price = 175;
 				stock = (round random 10 + 10);
 			};
 
 			class CUP_optic_CompM2_low {
-				price = 300;
+				price = 150;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_CompM2_low_OD {
-				price = 300;
+				price = 150;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_AIMM_M68_BLK {
-				price = 450;
+				price = 250;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_AIMM_M68_OD {
-				price = 450;
+				price = 250;
 				stock = (round random 20 + 20);
 			};
 
 			class CUP_optic_SB_11_4x20_PM {
-				price = 1000;
+				price = 500;
 				stock = (round random 10 + 10);
 			};
 			class CUP_optic_SB_11_4x20_PM_od {
-				price = 1000;
+				price = 500;
 				stock = (round random 10 + 10);
 			};
 			class CUP_optic_SB_3_12x50_PMII {
-				price = 1600;
+				price = 800;
 				stock = (round random 10 + 5);
 			};
 
 			class CUP_optic_ACOG2 {
-				price = 550;
+				price = 350;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_TrijiconRx01_black {
-				price = 200;
+				price = 100;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_TrijiconRx01_od {
-				price = 200;
+				price = 10;
 				stock = (round random 20 + 20);
 			};
 
 			class CUP_optic_CompM4 {
-				price = 200;
+				price = 100;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_AIMM_COMPM4_BLK {
-				price = 450;
+				price = 250;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_MicroT1 {
-				price = 200;
+				price = 100;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_MicroT1_low {
-				price = 200;
+				price = 100;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_MicroT1_low_OD {
-				price = 200;
+				price = 100;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_MicroT1_OD {
-				price = 200;
+				price = 100;
 				stock = (round random 20 + 20);
 			};
 			
 			class CUP_optic_AN_PVS_4 {
-				price = 1800;
+				price = 800;
 				stock = (round random 5 + 1);
 			};
 			class CUP_optic_AN_PVS_4_M14 {
-				price = 2000;
+				price = 1000;
 				stock = (round random 5 + 1);
 			};
 			class CUP_optic_AN_PVS_4_M16 {
-				price = 2000;
+				price = 1000;
 				stock = (round random 5 + 1);
 			};
 
 			class CUP_optic_Elcan_SpecterDR_black {
-				price = 600;
+				price = 300;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_Elcan_SpecterDR_od {
-				price = 600;
+				price = 300;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_Elcan_SpecterDR_RMR_black {
-				price = 750;
+				price = 550;
 				stock = (round random 20 + 20);
 			};
 				class CUP_optic_Elcan_SpecterDR_RMR_od {
-				price = 750;
+				price = 450;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_Elcan {
-				price = 750;
+				price = 450;
 				stock = (round random 20 + 20);
 			};
 				class CUP_optic_Elcan_OD {
-				price = 750;
+				price = 450;
 				stock = (round random 20 + 20);
 			};
 
 			class CUP_optic_HensoldtZO {
-				price = 500;
+				price = 300;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_HensoldtZO_hex {
-				price = 500;
+				price = 300;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_HensoldtZO_od {
-				price = 500;
+				price = 300;
 				stock = 100;
 			};
 			class CUP_optic_HensoldtZO_low {
-				price = 500;
+				price = 300;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_HensoldtZO_low_hex {
-				price = 500;
+				price = 300;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_HensoldtZO_low_od {
-				price = 500;
+				price = 300;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_HensoldtZO_RDS {
-				price = 650;
+				price = 350;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_HensoldtZO_RDS_hex {
-				price = 650;
+				price = 350;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_HensoldtZO_RDS_od {
-				price = 650;
+				price = 350;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_HensoldtZO_low_RDS {
-				price = 650;
+				price = 350;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_HensoldtZO_low_RDS_hex {
-				price = 650;
+				price = 350;
 				stock = (round random 20 + 20);
 			};
 			class CUP_optic_HensoldtZO_low_RDS_od {
-				price = 650;
+				price = 350;
 				stock = (round random 20 + 20);
 			};
 			
 			class CUP_optic_LeupoldMk4 {
-				price = 1200;
+				price = 600;
 				stock = (round random 10 + 10);
 			};
 			class CUP_optic_LeupoldMk4_10x40_LRT_Woodland {
-				price = 1200;
+				price = 600;
 				stock = (round random 10 + 10);
 			};
 			class CUP_optic_LeupoldMk4_25x50_LRT {
-				price = 2000;
+				price = 1000;
 				stock = (round random 10 + 5);
 			};
 			class CUP_optic_LeupoldMk4_25x50_LRT_WOODLAND {
-				price = 2000;
+				price = 1000;
 				stock = (round random 10 + 5);
 			};
 			class CUP_optic_LeupoldMk4_CQ_T {
-				price = 400;
+				price = 200;
 				stock = (round random 20 + 20);
 			};
 
 			class CUP_optic_Leupold_VX3 {
-				price = 1600;
+				price = 800;
 				stock = (round random 10 + 10);
 			};
 			
 			class CUP_optic_AN_PAS_13c1 {
-				price = 3200;
+				price = 1600;
 				stock = (round random 1 + 1);
 			};
 			class CUP_optic_AN_PVS_10_black {
-				price = 2750;
+				price = 1250;
 				stock = (round random 2 + 2);
 			};	
 			class CUP_optic_AN_PVS_10_od {
-				price = 2800;
+				price = 1500;
 				stock = (round random 2 + 1);
 			};				
 		};
@@ -5349,15 +5349,15 @@ class cfgHALsStore
 			displayName = "Navigation";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\compass_ca.paa";
 
-			ITEM(ItemGPS, 300, (round random 25 + 25));
+			ITEM(ItemGPS, 200, (round random 25 + 25));
 			ITEM(ItemRadio, 50, (round random 50 + 50));
-			ITEM(CUP_Vector21Nite, 600, (round random 20 + 10));
-			ITEM(CUP_SOFLAM, 2000, (round random 10 + 5));
-			ITEM(CUP_LRTV, 1500, (round random 10 + 10));
-			ITEM(CUP_NVG_1PN138, 1500, (round random 20 + 20));
-			ITEM(CUP_NVG_PVS7, 1250, (round random 20 + 10));
-			ITEM(CUP_NVG_GPNVG_black, 2000, (round random 10 + 10));
-			ITEM(CUP_NVG_GPNVG_green, 2000, (round random 10 + 10));
+			ITEM(CUP_Vector21Nite, 300, (round random 20 + 10));
+			ITEM(CUP_SOFLAM, 1000, (round random 10 + 5));
+			ITEM(CUP_LRTV, 750, (round random 10 + 10));
+			ITEM(CUP_NVG_1PN138, 750, (round random 20 + 20));
+			ITEM(CUP_NVG_PVS7, 650, (round random 20 + 10));
+			ITEM(CUP_NVG_GPNVG_black, 1000, (round random 10 + 10));
+			ITEM(CUP_NVG_GPNVG_green, 1000, (round random 10 + 10));
 		};
 
 		class miscCup 
@@ -5365,28 +5365,28 @@ class cfgHALsStore
 			displayName = "Misc";
 			picture = "a3\ui_f\data\gui\Rsc\RscDisplayArsenal\backpack_ca.paa";
 
-			ITEM(B_Bergen_dgtl_F, 400, (round random 20 + 10));
-			ITEM(B_Bergen_hex_F, 400, (round random 20 + 10));
-			ITEM(B_Bergen_mcamo_F, 400, (round random 20 + 10));
-			ITEM(B_Bergen_tna_F, 400, (round random 20 + 10));
-			ITEM(CUP_O_RUS_Patrol_bag_BeigeDigital, 150, (round random 25 + 25));
-			ITEM(CUP_O_RUS_Patrol_bag_BeigeDigital_Shovel, 150, (round random 25 + 25));
-			ITEM(CUP_O_RUS_Patrol_bag_Green, 150, (round random 25 + 25));
-			ITEM(CUP_O_RUS_Patrol_bag_Green_Shovel, 150, (round random 25 + 25));
-			ITEM(CUP_O_RUS_Patrol_bag_Summer, 150, (round random 25 + 25));
-			ITEM(CUP_O_RUS_Patrol_bag_Summer_Shovel, 150, (round random 25 + 25));
-			ITEM(CUP_B_AlicePack_Khaki, 100, (round random 25 + 25));
-			ITEM(CUP_B_AlicePack_OD, 100, (round random 25 + 25));
+			ITEM(B_Bergen_dgtl_F, 200, (round random 20 + 10));
+			ITEM(B_Bergen_hex_F, 200, (round random 20 + 10));
+			ITEM(B_Bergen_mcamo_F, 200, (round random 20 + 10));
+			ITEM(B_Bergen_tna_F, 200, (round random 20 + 10));
+			ITEM(CUP_O_RUS_Patrol_bag_BeigeDigital, 50, (round random 25 + 25));
+			ITEM(CUP_O_RUS_Patrol_bag_BeigeDigital_Shovel, 50, (round random 25 + 25));
+			ITEM(CUP_O_RUS_Patrol_bag_Green, 50, (round random 25 + 25));
+			ITEM(CUP_O_RUS_Patrol_bag_Green_Shovel, 50, (round random 25 + 25));
+			ITEM(CUP_O_RUS_Patrol_bag_Summer, 50, (round random 25 + 25));
+			ITEM(CUP_O_RUS_Patrol_bag_Summer_Shovel, 50, (round random 25 + 25));
+			ITEM(CUP_B_AlicePack_Khaki, 25, (round random 25 + 25));
+			ITEM(CUP_B_AlicePack_OD, 25, (round random 25 + 25));
 
-			ITEM(U_I_FullGhillie_lsh, 750, (round random 25 + 25));
-			ITEM(U_I_FullGhillie_ard, 750, (round random 25 + 25));
-			ITEM(U_I_FullGhillie_sard, 750, (round random 25 + 25));
+			ITEM(U_I_FullGhillie_lsh, 450, (round random 25 + 25));
+			ITEM(U_I_FullGhillie_ard, 450, (round random 25 + 25));
+			ITEM(U_I_FullGhillie_sard, 450, (round random 25 + 25));
 
-			ITEM(CUP_HandGrenade_RGD5, 50, (round random 50 + 50));
-			ITEM(ClaymoreDirectionalMine_Remote_Mag, 300, (round random 25 + 25));
-			ITEM(DemoCharge_Remote_Mag, 250, (round random 25 + 25));
-			ITEM(SatchelCharge_Remote_Mag, 500, (round random 25 + 25));
-			ITEM(APERSMine_Range_Mag, 200, (round random 25 + 25));
+			ITEM(CUP_HandGrenade_RGD5, 20, (round random 50 + 50));
+			ITEM(ClaymoreDirectionalMine_Remote_Mag, 200, (round random 25 + 25));
+			ITEM(DemoCharge_Remote_Mag, 150, (round random 25 + 25));
+			ITEM(SatchelCharge_Remote_Mag, 300, (round random 25 + 25));
+			ITEM(APERSMine_Range_Mag, 100, (round random 25 + 25));
 			ITEM(APERSBoundingMine_Range_Mag, 150, (round random 25 + 25));
 			ITEM(APERSTripMine_Wire_Mag, 100, (round random 25 + 25));
 			ITEM(CUP_MineE_M, 100, (round random 50 + 50));
@@ -5397,9 +5397,9 @@ class cfgHALsStore
 
 			ITEM(I_UavTerminal, 800, (round random 10 + 10));
 			
-			ITEM(FirstAidKit, 20, (round random 100 + 200));
-			ITEM(Medikit, 100, (round random 50 + 50));
-			ITEM(ToolKit, 100, (round random 50 + 50));
+			ITEM(FirstAidKit, 15, (round random 100 + 200));
+			ITEM(Medikit, 75, (round random 50 + 50));
+			ITEM(ToolKit, 75, (round random 50 + 50));
 		};
 
 		///////////////////////////////////////////////////////
