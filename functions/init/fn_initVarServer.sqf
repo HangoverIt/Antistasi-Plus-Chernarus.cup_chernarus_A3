@@ -913,7 +913,7 @@ timer setVariable [vehCSATMRLS,5,true];
 server setVariable [civBike, 100, true];
 server setVariable [civCar,400,true];
 server setVariable [civTruck,700,true];
-server setVariable [civHeli, 15000,true];
+server setVariable [civHeli, 25000,true];
 server setVariable [civBoat,200,true];
 
 server setVariable [vehSDKLightUnarmed,250,true];
@@ -932,67 +932,133 @@ server setVariable [SDKMortar, 1600, true];
 {server setVariable [_x,750,true]} forEach [SDKMGStatic,vehSDKBoat,vehSDKRepair];
 
 //black market costs
-{server setVariable [_x,1750,true]} forEach shop_UAV;
-{server setVariable [_x,6000,true]} forEach shop_AA;
-{server setVariable [_x,4500,true]} forEach shop_MRAP;
-{server setVariable [_x,8000,true]} forEach shop_wheel_apc;
+{server setVariable [_x,2750,true]} forEach shop_UAV;
+
 {server setVariable [_x,9500,true]} forEach shop_track_apc;
+
+if (!(shop_AA isEqualTo [])) then {
+	private _firstAA = shop_AA select 0;
+	if (!isNil "_firstAA") then {
+		server setVariable [_firstAA, 5000, true];
+	};
+
+	private _secondAA = shop_AA select 1;
+	if (!isNil "_secondAA") then {
+		server setVariable [_secondAA, 12000, true];
+	};
+
+	private _thirdAA = shop_AA select 2;
+	if (!isNil "_thirdAA") then {
+		server setVariable [_thirdAA, 16000, true];
+	};
+};
+
+if (!(shop_MRAP isEqualTo [])) then {
+	private _firstMRAP = shop_MRAP select 0;
+	if (!isNil "_firstMRAP") then {
+		server setVariable [_firstMRAP, 6000, true];
+	};
+
+	private _secondMRAP = shop_MRAP select 1;
+	if (!isNil "_secondMRAP") then {
+		server setVariable [_secondMRAP, 8000, true];
+	};
+
+	private _thirdMRAP = shop_MRAP select 2;
+	if (!isNil "_thirdMRAP") then {
+		server setVariable [_thirdMRAP, 10000, true];
+	};
+};
+
+if (!(shop_wheel_apc isEqualTo [])) then {
+	private _firstwheel_apc = shop_wheel_apc select 0;
+	if (!isNil "_firstwheel_apc") then {
+		server setVariable [_firstwheel_apc, 7500, true];
+	};
+
+	private _secondwheel_apc = shop_wheel_apc select 1;
+	if (!isNil "_secondwheel_apc") then {
+		server setVariable [_secondwheel_apc, 10000, true];
+	};
+
+	private _thirdwheel_apc = shop_wheel_apc select 2;
+	if (!isNil "_thirdwheel_apc") then {
+		server setVariable [_thirdwheel_apc, 12000, true];
+	};
+};
+
+if (!(shop_track_apc isEqualTo [])) then {
+	private _firsttrack_apc = shop_track_apc select 0;
+	if (!isNil "_firsttrack_apc") then {
+		server setVariable [_firsttrack_apc, 8500, true];
+	};
+
+	private _secondtrack_apc = shop_wheel_apc select 1;
+	if (!isNil "_secondtrack_apc") then {
+		server setVariable [_secondtrack_apc, 12000, true];
+	};
+
+	private _thirdtrack_apc = shop_wheel_apc select 2;
+	if (!isNil "_thirdtrack_apc") then {
+		server setVariable [_thirdtrack_apc, 12500, true];
+	};
+};
 
 if (!(shop_heli isEqualTo [])) then {
 	private _firstHeli = shop_heli select 0;
 	if (!isNil "_firstHeli") then {
-		server setVariable [_firstHeli, 22500, true];
+		server setVariable [_firstHeli, 44000, true];
 	};
 
 	private _secondHeli = shop_heli select 1;
 	if (!isNil "_secondHeli") then {
-		server setVariable [_secondHeli, 30000, true];
+		server setVariable [_secondHeli, 60000, true];
 	};
 
 	private _thirdHeli = shop_heli select 2;
 	if (!isNil "_thirdHeli") then {
-		server setVariable [_thirdHeli, 38000, true];
+		server setVariable [_thirdHeli, 80000, true];
 	};
 };
 
 if (!(shop_plane isEqualTo [])) then {
 	private _firstPlane = shop_plane select 0;
 	if (!isNil "_firstPlane") then {
-		server setVariable [_firstPlane, 10500, true];
+		server setVariable [_firstPlane, 22500, true];
 	};
 
 	private _secondPlane = shop_plane select 1;
 	if (!isNil "_secondPlane") then {
-		server setVariable [_secondPlane, 36000, true];
+		server setVariable [_secondPlane, 84000, true];
 	};
 
 	private _thirdPlane = shop_plane select 2;
 	if (!isNil "_thirdPlane") then {
-		server setVariable [_thirdPlane, 42000, true];
+		server setVariable [_thirdPlane, 90000, true];
 	};
 };
 
 if (!(shop_tank isEqualTo [])) then {
 	private _firstTank = shop_tank select 0;
 	if (!isNil "_firstTank") then {
-		server setVariable [_firstTank, 12500, true];
+		server setVariable [_firstTank, 32000, true];
 	};
 
 	private _secondTank = shop_tank select 1;
 	if (!isNil "_secondTank") then {
-		server setVariable [_secondTank, 16000, true];
+		server setVariable [_secondTank, 48000, true];
 	};
 
 	private _thirdTank = shop_tank select 2;
 	if (!isNil "_thirdTank") then {
-		server setVariable [_thirdTank, 25000, true];
+		server setVariable [_thirdTank, 88000, true];
 	};
 };
 
 if (!(additionalShopArtillery isEqualTo [])) then {
 	if (A3A_hasCup) then {
-		server setVariable [(additionalShopArtillery select 0), 5000, true];
-		server setVariable [(additionalShopArtillery select 1), 12000, true];
+		server setVariable [(additionalShopArtillery select 0), 3000, true];
+		server setVariable [(additionalShopArtillery select 1), 10000, true];
 		server setVariable [(additionalShopArtillery select 2), 20000, true];
 	};
 	if (A3A_has3CBFactions) then {
@@ -1002,13 +1068,23 @@ if (!(additionalShopArtillery isEqualTo [])) then {
 	};
 };
 
-{server setVariable [_x,1500,true]} forEach additionalShopLight;
-{server setVariable [_x,5000,true]} forEach additionalShopAtgmVehicles;
-{server setVariable [_x,7500,true]} forEach additionalShopManpadsVehicles;
+{server setVariable [_x,4000,true]} forEach additionalShopLight;
+
+if (!(additionalShopAtgmVehicles isEqualTo [])) then {
+	server setVariable [(additionalShopAtgmVehicles select 0), 5000, true];
+	server setVariable [(additionalShopAtgmVehicles select 1), 8000, true];
+	server setVariable [(additionalShopAtgmVehicles select 2), 12000, true];
+};
+
+if (!(additionalShopManpadsVehicles isEqualTo [])) then {
+	server setVariable [(additionalShopManpadsVehicles select 0), 6000, true];
+	server setVariable [(additionalShopManpadsVehicles select 1), 16000, true];
+	server setVariable [(additionalShopManpadsVehicles select 2), 20000, true];
+};
 
 //technicals cost
 if(A3A_hasCup) then {
-	server setVariable [vehSDKLightUnarmedArmored, 400, true];
+	server setVariable [vehSDKLightUnarmedArmored, 1000, true];
 	server setVariable [technicalArmoredBtr, 3250, true];
 	server setVariable [technicalArmoredAa, 3000, true];
 	server setVariable [technicalArmoredSpg, 3000, true];
