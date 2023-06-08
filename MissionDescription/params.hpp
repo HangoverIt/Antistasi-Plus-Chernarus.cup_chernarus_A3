@@ -51,7 +51,7 @@ class Params
         title = "Game Mode - Do NOT change this mid mission";
         values[] = {9999,1,2,3,4};
         texts[] = {"Load From Save (Default - Reb vs Gov vs Inv)","Reb vs Gov vs Inv","Reb vs Gov & Inv","Reb vs Gov", "Reb vs Inv"};
-        default = 2;
+        default = 1;
     };
     class autoSave
     {
