@@ -92,12 +92,15 @@ _unit disableAI "AUTOCOMBAT";
 //Map Markers
 [_unit] spawn {
 	params ["_unit"];
-	while {alive _unit} do {
+	while {(alive _unit) && ((units group _unit) findIf {_x == player} != -1)} do {
 		waitUntil {sleep 0.5; visibleMap || {visibleGPS || {isMenuOpen}}};
-		while {visibleMap || {visibleGPS || {isMenuOpen}}} do {
+		while {(visibleMap || {visibleGPS || {isMenuOpen}}) && ((units group _unit) findIf {_x == player} != -1) && !(player getVariable ["incapacitated", false])} do {
 			private _unitDir = getDir _unit;
 			private _unitMarker = createMarkerLocal [format["unitMarker_%1", random 1000], position _unit];
-			if (_unit getVariable ["incapacitated",false]) then {_unitMarker setMarkerColorLocal "colorRed"; _unitMarker setMarkerTypeLocal "plp_icon_cross"; _unitMarker setMarkerSizeLocal [0.5, 0.5]} else {_unitMarker setMarkerColorLocal "colorGUER"; _unitMarker setMarkerTypeLocal "mil_triangle"; _unitMarker setMarkerDirLocal _unitDir; _unitMarker setMarkerSizeLocal [0.5, 1];};
+			_unitMarker setMarkerTypeLocal "mil_triangle";
+			_unitMarker setMarkerDirLocal _unitDir;
+			_unitMarker setMarkerSizeLocal [0.5, 1];
+			if (_unit getVariable ["incapacitated",false]) then {_unitMarker setMarkerColorLocal "colorRed"} else {_unitMarker setMarkerColorLocal "colorGUER"};
 			_unitMarker setMarkerTextLocal format ["%1", name _unit];
 			_unitMarker setMarkerAlphaLocal 1;
 			sleep 0.5;

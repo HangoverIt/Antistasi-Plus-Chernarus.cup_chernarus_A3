@@ -94,3 +94,25 @@ if (_groupX isEqualType grpNull) then {deleteGroup _groupX};
 ["Transfer Units", format ["Transferring units to %1.", _name]] call A3A_fnc_customHint;
 
 if (visibleMap) then {openMap false};
+
+//Map markers
+{
+	[_x,_selectedPlayer] spawn {
+		params ["_unit", "_player"];
+		while {(alive _unit) && ((units group _unit) findIf {_x == _player} != -1)} do {
+			waitUntil {sleep 0.5; visibleMap || {visibleGPS || {isMenuOpen}}};
+			while {(visibleMap || {visibleGPS || {isMenuOpen}}) && ((units group _unit) findIf {_x == _player} != -1) && !(player getVariable ["incapacitated", false])} do {
+				private _unitDir = getDir _unit;
+				private _unitMarker = createMarkerLocal [format["unitMarker_%1", random 1000], position _unit];
+				_unitMarker setMarkerTypeLocal "mil_triangle";
+				_unitMarker setMarkerDirLocal _unitDir;
+				_unitMarker setMarkerSizeLocal [0.5, 1];
+				if (_unit getVariable ["incapacitated",false]) then {_unitMarker setMarkerColorLocal "colorRed"} else {_unitMarker setMarkerColorLocal "colorGUER"};
+				_unitMarker setMarkerTextLocal format ["%1", name _unit];
+				_unitMarker setMarkerAlphaLocal 1;
+				sleep 0.5;
+				deleteMarkerLocal _unitMarker;
+			};
+		};
+	};
+} forEach _unitsX;
